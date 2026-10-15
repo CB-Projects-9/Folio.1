@@ -1,6 +1,6 @@
 // Supabase settings for log-in. Supplied by the owner.
-// Use only the project URL and the PUBLIC anon key here. Never a secret or service key.
+// Use only the project URL and the PUBLIC (publishable) key here. Never a secret or service key.
 window.FOLIO_CONFIG = {
-  supabaseUrl: '',      // [ADD: Supabase project URL]
-  supabaseAnonKey: ''   // [ADD: Supabase public anon key]
+  supabaseUrl: 'https://hkgletvwbcwtoblcevmd.supabase.co',
+  supabaseAnonKey: 'sb_publishable_uP7LFqwPxLAxI7YTLK7yUw_VsOgFlpR'
 };

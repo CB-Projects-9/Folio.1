@@ -63,7 +63,7 @@ All pages are plain .html files at the top of the folder.
 - After log-in, go to index.html.
 - Log out appears on every page except login.html and returns the visitor to login.html.
 - All links are relative.
-- Only the Supabase project URL and the public anon key are used in the browser code. They are supplied by the owner and are never replaced with a secret key.
+- Only the Supabase project URL and the public (publishable) key are used in the browser code, in js/config.js. They were supplied by the owner and are never replaced with a secret key.
 
 ## How photos and captions are stored
 - Photos, captions, and trip groupings are stored only in the visitor's own browser (IndexedDB), on their own device.
@@ -101,7 +101,6 @@ Never invent facts, dimensions, dates, or names that the owner has not given. As
 ## Open questions for the owner
 - The welcome headline and any supporting line for index.html.
 - The wording for about.html.
-- The Supabase project URL and public anon key.
 - Which of the owner's photos go on the welcome screen, if any.
 - The share image to use when a link is texted.
 - Whether the slideshow should download as a file (and in what format) or only play and print. Until decided, it only plays and prints.
