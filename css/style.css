@@ -171,7 +171,7 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
 }
 .lede { color: var(--soft-brown); margin: 16px 0 24px; }
 .print-wide { margin: 0 auto 64px; max-width: 880px; }
-.print-wide .ph { aspect-ratio: 16 / 9; }
+.print-wide img { width: 100%; height: auto; }
 
 .recent { background: var(--sand); padding: 64px 0; margin-bottom: -64px; }
 .recent h2 { margin-bottom: 24px; }

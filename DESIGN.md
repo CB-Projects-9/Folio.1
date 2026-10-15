@@ -5,6 +5,7 @@ Folio is a private travel journal that feels like a well-made photo album. A vis
 
 ## References
 No outside references were named. The direction comes from the person's own words: soft, warm, inviting, professional, and photo-first. The borrowed system is the old photo album: mounted prints with soft borders, paper and clay tones, and a quiet interface that lets the pictures lead. No names, logos, text, images, or fonts are copied from anywhere.
+- Collage layout: the owner shared a printed family photo-collage card as a layout reference. Only the general idea is borrowed (a tight mosaic of straight photos in mixed sizes around a plain panel for the title). None of its text, photos, fonts or ornaments are copied.
 
 ## Mood
 - Feels like: warm, nostalgic, crafted.
@@ -35,7 +36,7 @@ Free Google Fonts only: Lora and Poppins.
 
 ## Layout and grid
 - Calm, structured frame across the whole site: one centered content column, maximum width 1100px, with 16px side gutters on phones and 32px on desktop.
-- Looser scrapbook feel only inside the trip and export views.
+- Looser scrapbook feel only inside the trip, export and example views.
 - Pacing is balanced: comfortable space between sections, never cramped and never empty.
 - Spacing scale: 8, 16, 24, 40, 64 pixels.
 - Welcome page (index.html) and Trips page scroll. The export flow moves in separate steps. Other pages stay short with minimal scrolling.
@@ -45,10 +46,10 @@ Free Google Fonts only: Lora and Poppins.
 ## Image treatment
 - Photos keep their natural colour. No filters.
 - Every photo sits like a mounted print: thin border in #D8C7AE, a small margin of warm off-white around the image, and a soft, low shadow.
-- Outside the trip and export views, photos sit straight.
-- Inside the trip and export views, photos sit on the page like prints dropped on a table: rotated slightly (between minus 3 and plus 3 degrees), in slightly different sizes. The rotation is set once per photo and does not change on reload.
+- Outside the trip, export and example views, photos sit straight.
+- Inside the trip view and the scrapbook example views, photos sit on the page like prints dropped on a table: rotated slightly (between minus 3 and plus 3 degrees), in slightly different sizes. The rotation is set once per photo and does not change on reload.
 - Captions sit below the print in Poppins light, soft brown. Captions are optional, and no empty caption space is shown.
-- Where there is no photo yet, show a plain grey box labelled [ADD: image of ...].
+- Where there is no photo yet, show a plain grey box labelled [ADD: image of ...]. The welcome page and Trips page no longer need one: the welcome collage and the example trips fill those spaces.
 - Every image has alt text.
 
 ## Movement
@@ -67,7 +68,7 @@ This is the front door, so it is kept as short as possible.
 - No pop-ups, no banners, no forced extra steps.
 
 ## Menu and buttons
-- Menu: a thin bar in warm off-white at the top of every page except login.html. FOLIO wordmark on the left (links to index.html). Links: Home, Trips, About, Account.
+- Menu: a thin bar in warm off-white at the top of every page except login.html. FOLIO wordmark on the left (links to index.html). Links: Home, Trips, About. (Account was removed at the owner's request.)
 - On desktop the links sit together on the right of the bar, with Log out at the far right end, set apart by a thin vertical line in #D8C7AE. The current page's link is terracotta.
 - On phones, the links fold into a simple menu button that opens a short list. Maximum five items.
 - Primary button: terracotta (#A24B30) fill, cream text, 4px corner radius, generous padding, soft lift on hover.
@@ -83,11 +84,41 @@ This is the front door, so it is kept as short as possible.
 - Where text has not been supplied by the owner, use plain functional wording only (for example, "Add photos") and do not invent taglines or stories.
 
 ## The welcome page (index.html)
-- Welcome area: the headline, supporting line and Start a trip button are stacked in the centre of the column, with comfortable space above (64px).
-- Below it, one wide mounted print (16:9, up to 880px wide), centred.
-- Recent trips sit on a full-width sand band (#E4D3BA) with 64px of space above and below. The section heading "Recent trips" is on the left.
+- Welcome area: the headline "For the people back home", the supporting line, and the Start a trip button are stacked in the centre of the column, with comfortable space above (64px).
+- Below it, one wide mounted print (up to 880px wide), centred, holding the welcome collage. The print takes the collage's own shape. The collage follows the Collage style below and shows the Japan example trip.
+- Trips sit on a full-width sand band (#E4D3BA) with 64px of space above and below. The section heading is on the left: "Example trips" while the visitor has no trips, "Recent trips" once they do.
 - Each trip is an off-white tile: thin #D8C7AE border, 8px margin around the cover photo, soft low shadow, then the trip title (small heading style) and photo count (caption style) below. Tiles lift slightly on hover.
-- The See all link sits at the bottom right of the band, in dark brown, underlined.
+- The See all link sits at the bottom right of the band, in dark brown, underlined. It shows only when the visitor has their own trips.
+
+## Collage style
+- A tight mosaic, like a printed photo card: photos sit straight (no rotation, no individual mounts or shadows), edge to edge in a grid, separated by thin cream (#F6EFE3) gutters, with a matching cream border around the whole collage.
+- Photos come in mixed sizes: some tall (two rows high), some wide (two columns wide), some small (one cell). Each photo fills its tile and is cropped from the centre.
+- One tile, near the middle, is a plain warm off-white (#FBF7F0) panel with no photo. It holds the trip name in Lora caps with wide letter spacing (dark brown), a short thin clay (#C9A98A) rule, and the trip's line below in Poppins light (soft brown), all centred. If there is no line, the panel shows the trip name only.
+- Welcome collage grid (4 columns by 3 rows, six photos and the panel):
+  - Row 1: tall photo, small photo, wide photo.
+  - Row 2: (tall photo continues), title panel two columns wide, tall photo.
+  - Row 3: wide photo, small photo, (tall photo continues).
+- The export collage (export.html) uses the same style, and its grid adapts to the trip:
+  - 4 columns for 6 or more photos, 3 columns for 3 to 5 photos, 2 columns for 1 or 2 photos.
+  - Tall (portrait) photos get tall tiles and wide (landscape) photos get wide tiles where they fit; the rest get single tiles. Photos keep the trip's order, reading left to right, top to bottom.
+  - The title panel is two columns wide, in the second row (the first row when there are 3 or fewer photos), as near the middle as the grid allows. It shows the trip title. It also holds a trip line once trips have one (see SPEC.md).
+  - Any gap left in the grid is filled by stretching a neighbouring photo, so there are no empty holes.
+  - A photo's caption, if written, sits in a thin warm off-white strip along the bottom of its tile, in Poppins light, soft brown, on one line (shortened with "…" if too long).
+
+## Example trips
+- Example tiles look like normal trip tiles, with one addition: a small "Example" label in Poppins 13px, dark brown on warm off-white with a thin #D8C7AE border and 4px radius, sitting on the top-left corner of the cover photo.
+- The same tiles appear on the Trips page in place of the empty-state grey box until the visitor creates a trip.
+
+## The example view (example.html)
+- Page head: the trip title (h1), the trip line below it in soft brown, then a quiet note in a warm off-white box with a thin border: "This is an example. Start a trip to make your own." with the Start a trip button (the one primary button on this screen).
+- Scrapbook examples (Mexico, Oregon): the photos sit in the same scrapbook layout as trip.html, rotated slightly and in slightly different sizes, with no editing controls. Rotation and size are fixed per photo so they never change between visits.
+- Slideshow example (Japan): the same slideshow as the export preview, with Previous, Play and Next buttons (secondary style) and a "3 of 10" counter. It does not start on its own; the visitor presses Play. Cross-fade about 1.2 seconds.
+- A Back to trips link sits at the bottom of the page.
+
+## The about page (about.html)
+- One reading column, about 640px wide, with the four sections in order: How Folio works, Where your photos are kept, Why Folio, Where it is going.
+- Section headings use the h2 style. Body text in Poppins 15px.
+- Why Folio is written in the first person, in the owner's own words, with no name.
 
 ## Never rules
 1. Never cover the page with pop-ups, cookie banners, or overlays.
