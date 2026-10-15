@@ -218,6 +218,19 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
   overflow-wrap: anywhere;
 }
 .trip-count { display: block; margin: 0 8px; font-size: 13px; font-weight: 300; color: var(--soft-brown); }
+.trip-card { position: relative; }
+.example-tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 0 8px;
+  font-size: 13px;
+  line-height: 24px;
+  color: var(--brown);
+  background: var(--offwhite);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
 
 /* Log-in page */
 .login {

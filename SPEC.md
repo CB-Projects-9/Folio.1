@@ -32,7 +32,7 @@ All pages are plain .html files at the top of the folder.
 - Purpose: all of the visitor's trips.
 - Content: trip cards in a grid, each showing the trip title, a cover photo (the first photo by default), and the photo count. A Start a trip button sits at the top.
 - Clicking a card opens that trip (trip.html with the trip identified in the address).
-- If the visitor has no trips yet, the three example trips are shown instead (no grey placeholder box). Once the visitor creates a trip, the examples are removed from this page.
+- If the visitor has no trips yet, the three example trips are shown instead (no grey placeholder box), under the line "You have no trips yet. These examples show what Folio can make." Once the visitor creates a trip, the examples and the line are removed from this page.
 
 ### example.html (view-only example trips)
 - Purpose: show a new visitor what Folio can make, before they start their own trip.

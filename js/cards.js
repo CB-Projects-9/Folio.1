@@ -1,10 +1,31 @@
-// Builds one trip tile (used on the home and Trips pages).
-window.tripCard = function (trip, cover) {
+// Builds trip tiles (used on the home and Trips pages).
+function makeTile(href, cover, title, photoCount, isExample) {
   var li = document.createElement('li');
   var a = document.createElement('a');
   a.className = 'trip-card';
-  a.href = 'trip.html?id=' + encodeURIComponent(trip.id);
+  a.href = href;
 
+  if (isExample) {
+    var tag = document.createElement('span');
+    tag.className = 'example-tag';
+    tag.textContent = 'Example';
+    a.append(tag);
+  }
+
+  var name = document.createElement('span');
+  name.className = 'trip-title';
+  name.textContent = title;
+
+  var count = document.createElement('span');
+  count.className = 'trip-count';
+  count.textContent = photoCount + (photoCount === 1 ? ' photo' : ' photos');
+
+  a.append(cover, name, count);
+  li.append(a);
+  return li;
+}
+
+window.tripCard = function (trip, cover) {
   var pic;
   if (cover) {
     pic = document.createElement('img');
@@ -16,30 +37,33 @@ window.tripCard = function (trip, cover) {
     pic.className = 'ph';
     pic.textContent = 'No photos yet';
   }
-
-  var title = document.createElement('span');
-  title.className = 'trip-title';
-  title.textContent = trip.title;
-
-  var count = document.createElement('span');
-  count.className = 'trip-count';
-  var n = trip.photoIds.length;
-  count.textContent = n + (n === 1 ? ' photo' : ' photos');
-
-  a.append(pic, title, count);
-  li.append(a);
-  return li;
+  return makeTile('trip.html?id=' + encodeURIComponent(trip.id), pic, trip.title, trip.photoIds.length, false);
 };
 
-// Fills a list with trip tiles, or shows the empty message. Returns the number of trips.
+window.exampleCard = function (example) {
+  var pic = document.createElement('img');
+  pic.className = 'cover';
+  pic.src = exampleImage(example, example.photos[0]);
+  pic.alt = 'Cover photo for the ' + example.title + ' example';
+  return makeTile('example.html?trip=' + example.id, pic, example.title, example.photos.length, true);
+};
+
+// Fills the list with the visitor's trips, or with the example trips while they have none.
+// Returns the number of the visitor's own trips.
 window.showTrips = async function (limit) {
   var trips = await FolioStore.listTrips();
   var list = document.getElementById('trip-list');
+  var empty = document.getElementById('trip-empty');
+  if (!trips.length) {
+    FOLIO_EXAMPLES.forEach(function (example) { list.append(exampleCard(example)); });
+    if (empty) empty.hidden = false;
+    return 0;
+  }
   var shown = limit ? trips.slice(0, limit) : trips;
   for (var trip of shown) {
     var cover = trip.photoIds.length ? await FolioStore.getPhoto(trip.photoIds[0]) : null;
     list.append(tripCard(trip, cover));
   }
-  document.getElementById('trip-empty').hidden = trips.length > 0;
+  if (empty) empty.hidden = true;
   return trips.length;
 };
