@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Folio</title>
+  <meta name="description" content="Your travel journal. Start a trip and turn your photos into a keepsake.">
+  <meta property="og:title" content="Folio">
+  <meta property="og:description" content="Your travel journal. Start a trip and turn your photos into a keepsake.">
+  <!-- Share image (og:image): to be supplied by the owner. See SPEC.md, Open questions. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+</head>
+<body>
+  <header class="bar">
+    <nav class="bar-inner" aria-label="Main">
+      <a class="wordmark" href="index.html">FOLIO</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+      <ul id="menu" class="menu">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="trips.html">Trips</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="account.html">Account</a></li>
+        <li class="logout"><a href="login.html" data-logout>Log out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="welcome">
+        <h1>[ADD: welcome headline]</h1>
+        <p class="lede">[ADD: supporting line]</p>
+        <a class="btn btn-primary" href="trip.html">Start a trip</a>
+      </section>
+
+      <figure class="print print-wide">
+        <div class="ph" role="img" aria-label="Placeholder for a welcome photo">[ADD: image of a welcome photo]</div>
+      </figure>
+    </div>
+
+    <section class="recent" aria-labelledby="recent-title">
+      <div class="wrap">
+        <h2 id="recent-title">Recent trips</h2>
+        <ul class="trip-grid" id="trip-list"></ul>
+        <div class="empty" id="trip-empty" hidden>
+          <p>You have no trips yet.</p>
+          <div class="print"><div class="ph" role="img" aria-label="Placeholder for a trip photo">[ADD: image of a trip photo]</div></div>
+        </div>
+        <p class="see-all" id="see-all" hidden><a href="trips.html">See all</a></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/store.js"></script>
+  <script src="js/cards.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

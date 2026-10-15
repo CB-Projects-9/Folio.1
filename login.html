@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Folio · Log in</title>
+  <meta name="description" content="Log in to your Folio travel journal.">
+  <meta property="og:title" content="Folio · Log in">
+  <meta property="og:description" content="Log in to your Folio travel journal.">
+  <!-- Share image (og:image): to be supplied by the owner. See SPEC.md, Open questions. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js" data-page="login"></script>
+</head>
+<body>
+  <main class="login">
+    <h1 class="login-name">FOLIO</h1>
+    <p class="notice" id="notice" role="status" hidden></p>
+    <form id="login-form" novalidate>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" aria-describedby="email-error">
+        <p class="error" id="email-error" hidden></p>
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" aria-describedby="password-error">
+        <p class="error" id="password-error" hidden></p>
+      </div>
+      <button class="btn btn-primary" type="submit" id="submit">Log in</button>
+    </form>
+    <p class="toggle"><button class="text-btn" type="button" id="toggle">New here? Sign up</button></p>
+  </main>
+
+  <script src="js/login.js"></script>
+</body>
+</html>

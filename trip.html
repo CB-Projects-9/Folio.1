@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Folio · Trip</title>
+  <meta name="description" content="Add photos and captions to a trip.">
+  <meta property="og:title" content="Folio · Trip">
+  <meta property="og:description" content="Add photos and captions to a trip.">
+  <!-- Share image (og:image): to be supplied by the owner. See SPEC.md, Open questions. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+</head>
+<body>
+  <header class="bar">
+    <nav class="bar-inner" aria-label="Main">
+      <a class="wordmark" href="index.html">FOLIO</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+      <ul id="menu" class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="trips.html" aria-current="page">Trips</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="account.html">Account</a></li>
+        <li class="logout"><a href="login.html" data-logout>Log out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <p class="page-head" id="not-found" hidden>This trip could not be found. <a href="trips.html">See all trips</a></p>
+    <div id="trip-view" hidden>
+      <div class="page-head">
+        <label class="visually-hidden" for="trip-title">Trip title</label>
+        <input class="title-input" id="trip-title" maxlength="80" autocomplete="off">
+        <p class="caption" id="photo-count"></p>
+        <div class="trip-actions"><a class="btn btn-primary" id="export-link" href="export.html">Make a slideshow or collage</a></div>
+      </div>
+
+      <div class="dropzone" id="dropzone">
+        <p>Drop photos here</p>
+        <button class="btn btn-secondary" type="button" id="choose">Choose photos</button>
+        <input id="file-input" type="file" accept="image/*" multiple hidden>
+        <p class="caption" id="adding" role="status"></p>
+        <p class="error" id="add-error" hidden></p>
+      </div>
+
+      <ul class="scrapbook" id="scrapbook"></ul>
+    </div>
+  </main>
+
+  <script src="js/store.js"></script>
+  <script src="js/trip.js"></script>
+</body>
+</html>

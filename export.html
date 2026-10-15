@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Folio · Export</title>
+  <meta name="description" content="Turn a trip into a slideshow or collage to keep and share.">
+  <meta property="og:title" content="Folio · Export">
+  <meta property="og:description" content="Turn a trip into a slideshow or collage to keep and share.">
+  <!-- Share image (og:image): to be supplied by the owner. See SPEC.md, Open questions. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+</head>
+<body>
+  <header class="bar">
+    <nav class="bar-inner" aria-label="Main">
+      <a class="wordmark" href="index.html">FOLIO</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+      <ul id="menu" class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="trips.html" aria-current="page">Trips</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="account.html">Account</a></li>
+        <li class="logout"><a href="login.html" data-logout>Log out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <div class="page-head">
+      <h1>Export</h1>
+      <p class="lede" id="trip-name"></p>
+    </div>
+    <p class="no-print" id="problem" hidden></p>
+
+    <div id="export-view" hidden>
+      <ol class="steps">
+        <li data-step="1">1. Choose</li>
+        <li data-step="2">2. Preview</li>
+        <li data-step="3">3. Download or print</li>
+      </ol>
+
+      <section class="no-print" data-panel="1" aria-labelledby="choose-title">
+        <h2 id="choose-title">Choose a layout</h2>
+        <div class="choices" role="radiogroup" aria-labelledby="choose-title" style="margin-top:24px">
+          <label class="choice"><input type="radio" name="layout" value="slideshow" checked>Slideshow<span class="caption">One photo at a time, with a slow fade. Plays here and prints one photo per page.</span></label>
+          <label class="choice"><input type="radio" name="layout" value="collage">Collage<span class="caption">All the photos together as one image. Downloads and prints.</span></label>
+        </div>
+        <div class="step-nav">
+          <button class="btn btn-primary" type="button" data-go="2">Next</button>
+          <a class="text-btn" id="back-link" href="trips.html">Back to trip</a>
+        </div>
+      </section>
+
+      <section class="no-print" data-panel="2" aria-labelledby="preview-title" hidden>
+        <h2 id="preview-title" style="margin-bottom:24px">Preview</h2>
+        <div id="preview"></div>
+        <div class="step-nav">
+          <button class="btn btn-primary" type="button" data-go="3">Next</button>
+          <button class="btn btn-secondary" type="button" data-go="1">Back</button>
+        </div>
+      </section>
+
+      <section class="no-print" data-panel="3" aria-labelledby="final-title" hidden>
+        <h2 id="final-title">Download or print</h2>
+        <p class="helper" id="final-help"></p>
+        <div class="step-nav">
+          <button class="btn btn-primary" type="button" id="main-action"></button>
+          <button class="btn btn-secondary" type="button" id="print-collage" hidden>Print</button>
+          <button class="btn btn-secondary" type="button" data-go="2">Back</button>
+        </div>
+      </section>
+    </div>
+
+    <div class="print-only" id="print-area"></div>
+  </main>
+
+  <script src="js/store.js"></script>
+  <script src="js/export.js"></script>
+</body>
+</html>

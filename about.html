@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Folio · About</title>
+  <meta name="description" content="How Folio works and where your photos are kept.">
+  <meta property="og:title" content="Folio · About">
+  <meta property="og:description" content="How Folio works and where your photos are kept.">
+  <!-- Share image (og:image): to be supplied by the owner. See SPEC.md, Open questions. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+</head>
+<body>
+  <header class="bar">
+    <nav class="bar-inner" aria-label="Main">
+      <a class="wordmark" href="index.html">FOLIO</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+      <ul id="menu" class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="trips.html">Trips</a></li>
+        <li><a href="about.html" aria-current="page">About</a></li>
+        <li><a href="account.html">Account</a></li>
+        <li class="logout"><a href="login.html" data-logout>Log out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <div class="page-head"><h1>About</h1></div>
+    <div class="prose">
+      <h2>How Folio works</h2>
+      <p>Start a trip, add photos, and add a short caption to any photo if you like. When you are ready, turn the trip into a slideshow or a collage to download, print, or share.</p>
+      <h2>Where your photos are kept</h2>
+      <p>Your photos and captions are saved only in this browser, on this device. They are not uploaded anywhere.</p>
+      <p>If you clear this browser's data, your photos and captions are erased. To keep a backup, download or print an export of each trip.</p>
+      <p>Your trips do not appear on your other devices or browsers.</p>
+    </div>
+  </main>
+
+
+</body>
+</html>

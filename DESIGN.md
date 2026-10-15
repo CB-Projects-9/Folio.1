@@ -1,0 +1,97 @@
+# DESIGN.md
+
+## Concept
+Folio is a private travel journal that feels like a well-made photo album. A visitor drops in photos from a trip, and Folio turns them into a keepsake slideshow or collage they can download, print, and share.
+
+## References
+No outside references were named. The direction comes from the person's own words: soft, warm, inviting, professional, and photo-first. The borrowed system is the old photo album: mounted prints with soft borders, paper and clay tones, and a quiet interface that lets the pictures lead. No names, logos, text, images, or fonts are copied from anywhere.
+
+## Mood
+- Feels like: warm, nostalgic, crafted.
+- Must never feel like: generic, cluttered, cold or corporate.
+
+## Colour palette
+- Cream paper, #F6EFE3: main page background.
+- Warm off-white, #FBF7F0: cards, the log-in form area, print mounts, and the menu bar.
+- Sand, #E4D3BA: section backgrounds, drop zones, and quiet dividers.
+- Clay, #C9A98A: borders, hover states, and small decorative marks.
+- Terracotta, #A24B30: buttons, links, and the single accent on each page. Use it sparingly.
+- Terracotta light, #C46B4B: hover and focus states for buttons only. Never use it for text.
+- Dark brown, #3B2A21: all headings and body text.
+- Soft brown, #6B5648: captions, helper text, and secondary labels.
+- Border tone, #D8C7AE: thin print borders and input outlines.
+- Text on cream must always have strong contrast. Use dark brown or soft brown, never clay or sand, for any text.
+
+## Typefaces
+Free Google Fonts only: Lora and Poppins.
+- Headings: Lora, all caps, weight 500, letter spacing about 0.12em.
+  - Page title (h1): 28px on phones, 36px on desktop.
+  - Section heading (h2): 20px on phones, 24px on desktop.
+  - Small heading (h3): 16px, letter spacing 0.14em.
+- Body text: Poppins, weight 300 or 400, 15px, line height 1.7.
+- Captions and helper text: Poppins, weight 300, 13px, in soft brown.
+- Buttons and menu links: Poppins, weight 400, 14px. Menu links are not in caps.
+- Volume sits between quiet and medium. Text stays small and light with plenty of space so the photos carry the page.
+
+## Layout and grid
+- Calm, structured frame across the whole site: one centered content column, maximum width 1100px, with 16px side gutters on phones and 32px on desktop.
+- Looser scrapbook feel only inside the trip and export views.
+- Pacing is balanced: comfortable space between sections, never cramped and never empty.
+- Spacing scale: 8, 16, 24, 40, 64 pixels.
+- Welcome page (index.html) and Trips page scroll. The export flow moves in separate steps. Other pages stay short with minimal scrolling.
+- Trip cards sit in a grid: one column on phones, two on tablets, three on desktop.
+- Everything must work on a phone first.
+
+## Image treatment
+- Photos keep their natural colour. No filters.
+- Every photo sits like a mounted print: thin border in #D8C7AE, a small margin of warm off-white around the image, and a soft, low shadow.
+- Outside the trip and export views, photos sit straight.
+- Inside the trip and export views, photos sit on the page like prints dropped on a table: rotated slightly (between minus 3 and plus 3 degrees), in slightly different sizes. The rotation is set once per photo and does not change on reload.
+- Captions sit below the print in Poppins light, soft brown. Captions are optional, and no empty caption space is shown.
+- Where there is no photo yet, show a plain grey box labelled [ADD: image of ...].
+- Every image has alt text.
+
+## Movement
+- Subtle only: gentle fades when a page or section appears (about 300ms) and a soft lift on photo hover (about 2px up, slightly deeper shadow).
+- The exported slideshow may use a slow cross-fade between photos (about 1.2 seconds). Each photo stays on screen for about 4 seconds (provisional, to be confirmed by the owner).
+- No auto-playing music or video. No heavy animation.
+- Respect the visitor's reduced motion setting by turning movement off.
+
+## The log-in page (login.html)
+This is the front door, so it is kept as short as possible.
+- Mostly empty cream page. Nothing else appears: no menu, no extra links, no photos.
+- The name FOLIO sits near the top center in Lora caps with wide letter spacing, large for this page (40px).
+- Below it, a quiet form: email, password, and one terracotta button.
+- Sign up and log in share one page. A small text toggle under the button switches between them ("New here? Sign up" and "Have an account? Log in"). The button label changes to match.
+- Errors appear in plain words directly under the field, in dark brown with a small terracotta mark, never in a pop-up.
+- No pop-ups, no banners, no forced extra steps.
+
+## Menu and buttons
+- Menu: a thin bar in warm off-white at the top of every page except login.html. FOLIO wordmark on the left (links to index.html). Links: Home, Trips, About, Account.
+- On desktop the links sit together on the right of the bar, with Log out at the far right end, set apart by a thin vertical line in #D8C7AE. The current page's link is terracotta.
+- On phones, the links fold into a simple menu button that opens a short list. Maximum five items.
+- Primary button: terracotta (#A24B30) fill, cream text, 4px corner radius, generous padding, soft lift on hover.
+- Secondary button: transparent with a 1px terracotta outline and terracotta text.
+- Buttons are at least 44px tall for easy tapping.
+- The one big call to action on the welcome page is the button labelled Start a trip.
+- Never show more than one primary button per screen.
+
+## Tone of voice
+- Warm, plain, and brief, like a note written on the back of a print.
+- Speak to the visitor directly and kindly. Short sentences.
+- No marketing language, no exclamation marks, no jargon.
+- Where text has not been supplied by the owner, use plain functional wording only (for example, "Add photos") and do not invent taglines or stories.
+
+## The welcome page (index.html)
+- Welcome area: the headline, supporting line and Start a trip button are stacked in the centre of the column, with comfortable space above (64px).
+- Below it, one wide mounted print (16:9, up to 880px wide), centred.
+- Recent trips sit on a full-width sand band (#E4D3BA) with 64px of space above and below. The section heading "Recent trips" is on the left.
+- Each trip is an off-white tile: thin #D8C7AE border, 8px margin around the cover photo, soft low shadow, then the trip title (small heading style) and photo count (caption style) below. Tiles lift slightly on hover.
+- The See all link sits at the bottom right of the band, in dark brown, underlined.
+
+## Never rules
+1. Never cover the page with pop-ups, cookie banners, or overlays.
+2. Never auto-play music or video.
+3. Never crowd the menu or the screen with buttons and options.
+4. Never force an extra step before the simple thing (the log-in page stays to email, password, one button).
+5. Never use a stock-photo or template look: no generic hero banners, no icon-heavy feature grids, no cold corporate blues or greys.
