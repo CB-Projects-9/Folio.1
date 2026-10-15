@@ -136,91 +136,155 @@
   }
 
   // ---- Collage ----
-  function wrapText(ctx, text, maxWidth) {
-    var words = text.split(/\s+/);
-    var lines = [];
-    var line = '';
-    words.forEach(function (w) {
-      var test = line ? line + ' ' + w : w;
-      if (ctx.measureText(test).width > maxWidth && line) {
-        lines.push(line);
-        line = w;
-      } else {
-        line = test;
-      }
+  // A tight mosaic of straight photos in mixed sizes around a title panel (DESIGN.md, Collage style).
+
+  // Tall photos span two rows and wide photos two columns, alternating so the sizes stay mixed.
+  function photoShapes() {
+    var tall = 0, wide = 0;
+    return photos.map(function (p) {
+      if (p.height > p.width * 1.2) return tall++ % 2 === 0 ? 'tall' : 'small';
+      if (p.width > p.height * 1.2) return wide++ % 2 === 0 ? 'wide' : 'small';
+      return 'small';
     });
-    if (line) lines.push(line);
-    return lines.slice(0, 2);
+  }
+
+  // Places the title panel and each photo on a grid of cells, then fills any holes.
+  function planMosaic(shapes) {
+    var n = shapes.length;
+    var cols = n <= 2 ? 2 : n <= 5 ? 3 : 4;
+    var grid = [];
+    var tiles = [];
+
+    function at(r, c) { return grid[r] ? grid[r][c] : undefined; }
+    function free(r, c) { return c >= 0 && c < cols && r >= 0 && at(r, c) === undefined; }
+    function mark(t) {
+      for (var r = t.r; r < t.r + t.h; r++) {
+        grid[r] = grid[r] || [];
+        for (var c = t.c; c < t.c + t.w; c++) grid[r][c] = t;
+      }
+    }
+    function put(t, r, c, w, h) {
+      t.r = r; t.c = c; t.w = w; t.h = h;
+      tiles.push(t);
+      mark(t);
+    }
+
+    put({ panel: true }, n <= 3 ? 0 : 1, Math.floor((cols - 2) / 2), 2, 1);
+
+    shapes.forEach(function (shape, i) {
+      var r = 0, c = 0;
+      while (!free(r, c)) {
+        c++;
+        if (c >= cols) { c = 0; r++; }
+      }
+      var t = { photo: i };
+      if (shape === 'wide' && free(r, c + 1)) put(t, r, c, 2, 1);
+      else if (shape === 'tall' && free(r + 1, c)) put(t, r, c, 1, 2);
+      else put(t, r, c, 1, 1);
+    });
+
+    var rows = grid.length;
+    function allFree(r0, r1, c0, c1) {
+      for (var r = r0; r <= r1; r++) for (var c = c0; c <= c1; c++) if (!free(r, c)) return false;
+      return true;
+    }
+    // Stretch a neighbouring tile into each hole: from above, the left, the right, or below.
+    function fill(r, c) {
+      var t = at(r - 1, c);
+      if (t && t.r + t.h === r && allFree(r, r, t.c, t.c + t.w - 1)) { t.h++; mark(t); return true; }
+      t = at(r, c - 1);
+      if (t && t.c + t.w === c && allFree(t.r, t.r + t.h - 1, c, c)) { t.w++; mark(t); return true; }
+      t = at(r, c + 1);
+      if (t && t.c === c + 1 && allFree(t.r, t.r + t.h - 1, c, c)) { t.c--; t.w++; mark(t); return true; }
+      t = at(r + 1, c);
+      if (t && t.r === r + 1 && allFree(r, r, t.c, t.c + t.w - 1)) { t.r--; t.h++; mark(t); return true; }
+      return false;
+    }
+    var changed = true;
+    while (changed) {
+      changed = false;
+      for (var r = 0; r < rows; r++) {
+        for (var c = 0; c < cols; c++) {
+          if (free(r, c) && fill(r, c)) changed = true;
+        }
+      }
+    }
+    return { cols: cols, rows: rows, tiles: tiles };
+  }
+
+  // Shrinks text until it fits the width, then shortens it with "…" if it still does not.
+  function fitText(ctx, text, maxWidth) {
+    if (ctx.measureText(text).width <= maxWidth) return text;
+    while (text.length > 1 && ctx.measureText(text + '…').width > maxWidth) text = text.slice(0, -1);
+    return text.trim() + '…';
   }
 
   async function buildCollage() {
     if (collageBlob) return;
-    try { await document.fonts.load('300 28px Poppins'); } catch (e) { /* fall back to system font */ }
+    try {
+      await document.fonts.load('500 64px Lora');
+      await document.fonts.load('300 28px Poppins');
+    } catch (e) { /* fall back to system fonts */ }
 
-    var W = 2400, pad = 100, gap = 70, mount = 18, capSize = 28, capLine = 40;
-    var n = photos.length;
-    var cols = n === 1 ? 1 : n <= 4 ? 2 : n <= 9 ? 3 : 4;
-    var cellW = (W - pad * 2 - gap * (cols - 1)) / cols;
+    var plan = planMosaic(photoShapes());
+    var W = 2400, gap = 20;
+    var cellW = (W - gap * (plan.cols + 1)) / plan.cols;
+    var rowH = Math.round(cellW * 0.72);
+    var H = gap + plan.rows * (rowH + gap);
     var bitmaps = await Promise.all(photos.map(function (p) { return createImageBitmap(p.blob); }));
-
-    var measure = document.createElement('canvas').getContext('2d');
-    measure.font = '300 ' + capSize + 'px Poppins, sans-serif';
-
-    // Work out each print's size and each row's height first.
-    var items = photos.map(function (p, i) {
-      var printW = cellW * p.size;
-      var imgW = printW - mount * 2;
-      var imgH = Math.min(imgW * (p.height / p.width), cellW * 1.2);
-      imgW = imgH * (p.width / p.height);
-      var lines = p.caption ? wrapText(measure, p.caption, cellW) : [];
-      return { p: p, bmp: bitmaps[i], imgW: imgW, imgH: imgH, w: imgW + mount * 2, h: imgH + mount * 2, lines: lines };
-    });
-    var rows = [];
-    for (var r = 0; r < n; r += cols) rows.push(items.slice(r, r + cols));
-    var rowH = rows.map(function (row) {
-      return Math.max.apply(null, row.map(function (it) {
-        return it.h + (it.lines.length ? 24 + it.lines.length * capLine : 0);
-      }));
-    });
-    var H = pad * 2 + rowH.reduce(function (a, b) { return a + b; }, 0) + gap * (rows.length - 1);
 
     var canvas = document.createElement('canvas');
     canvas.width = W;
-    canvas.height = Math.round(H);
+    canvas.height = H;
     var ctx = canvas.getContext('2d');
     ctx.fillStyle = '#F6EFE3';
     ctx.fillRect(0, 0, W, H);
 
-    var y = pad;
-    rows.forEach(function (row, ri) {
-      row.forEach(function (it, ci) {
-        var cx = pad + ci * (cellW + gap) + cellW / 2;
-        var cy = y + it.h / 2;
-        ctx.save();
-        ctx.translate(cx, cy);
-        ctx.rotate(it.p.rot * Math.PI / 180);
-        ctx.shadowColor = 'rgba(59, 42, 33, 0.12)';
-        ctx.shadowBlur = 16;
-        ctx.shadowOffsetY = 4;
-        ctx.fillStyle = '#FBF7F0';
-        ctx.fillRect(-it.w / 2, -it.h / 2, it.w, it.h);
-        ctx.shadowColor = 'transparent';
-        ctx.strokeStyle = '#D8C7AE';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(-it.w / 2, -it.h / 2, it.w, it.h);
-        ctx.drawImage(it.bmp, -it.imgW / 2, -it.imgH / 2, it.imgW, it.imgH);
-        ctx.restore();
+    plan.tiles.forEach(function (t) {
+      var x = gap + t.c * (cellW + gap);
+      var y = gap + t.r * (rowH + gap);
+      var w = t.w * cellW + (t.w - 1) * gap;
+      var h = t.h * rowH + (t.h - 1) * gap;
 
-        if (it.lines.length) {
-          ctx.fillStyle = '#6B5648';
-          ctx.font = measure.font;
-          ctx.textAlign = 'center';
-          it.lines.forEach(function (line, li) {
-            ctx.fillText(line, cx, y + it.h + 24 + capSize + li * capLine);
-          });
+      if (t.panel) {
+        ctx.fillStyle = '#FBF7F0';
+        ctx.fillRect(x, y, w, h);
+        var size = Math.round(rowH * 0.2);
+        ctx.font = '500 ' + size + 'px Lora, serif';
+        ctx.letterSpacing = Math.round(size * 0.2) + 'px';
+        var title = trip.title.toUpperCase();
+        while (size > 24 && ctx.measureText(title).width > w * 0.85) {
+          size -= 2;
+          ctx.font = '500 ' + size + 'px Lora, serif';
+          ctx.letterSpacing = Math.round(size * 0.2) + 'px';
         }
-      });
-      y += rowH[ri] + gap;
+        title = fitText(ctx, title, w * 0.85);
+        ctx.fillStyle = '#3B2A21';
+        ctx.textAlign = 'center';
+        // Letter spacing adds space after the last letter too, so nudge right by half of it.
+        ctx.fillText(title, x + w / 2 + size * 0.1, y + h / 2);
+        ctx.letterSpacing = '0px';
+        ctx.fillStyle = '#C9A98A';
+        ctx.fillRect(x + w / 2 - size * 0.45, y + h / 2 + size * 0.5, size * 0.9, Math.max(2, size * 0.03));
+        return;
+      }
+
+      if (t.photo === undefined) return;
+      var b = bitmaps[t.photo];
+      var scale = Math.max(w / b.width, h / b.height);
+      var sw = w / scale, sh = h / scale;
+      ctx.drawImage(b, (b.width - sw) / 2, (b.height - sh) / 2, sw, sh, x, y, w, h);
+
+      var caption = photos[t.photo].caption;
+      if (caption) {
+        var strip = Math.round(rowH * 0.14);
+        ctx.fillStyle = '#FBF7F0';
+        ctx.fillRect(x, y + h - strip, w, strip);
+        ctx.font = '300 ' + Math.round(strip * 0.45) + 'px Poppins, sans-serif';
+        ctx.fillStyle = '#6B5648';
+        ctx.textAlign = 'left';
+        ctx.fillText(fitText(ctx, caption, w - strip), x + strip / 2, y + h - strip * 0.36);
+      }
     });
 
     collageBlob = await new Promise(function (resolve) { canvas.toBlob(resolve, 'image/jpeg', 0.9); });
