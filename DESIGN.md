@@ -5,6 +5,7 @@ Folio is a private travel journal that feels like a well-made photo album. A vis
 
 ## References
 No outside references were named. The direction comes from the person's own words: soft, warm, inviting, professional, and photo-first. The borrowed system is the old photo album: mounted prints with soft borders, paper and clay tones, and a quiet interface that lets the pictures lead. No names, logos, text, images, or fonts are copied from anywhere.
+- Pile-of-prints collage (Oregon example): the owner shared a photo of overlapping instant-film prints as a layout reference. Only the general idea is borrowed (bordered prints piled and overlapping, some running off the edges). None of its photos, people or styling are copied.
 - Collage layout: the owner shared a printed family photo-collage card as a layout reference. Only the general idea is borrowed (a tight mosaic of straight photos in mixed sizes around a plain panel for the title). None of its text, photos, fonts or ornaments are copied.
 
 ## Mood
@@ -47,7 +48,7 @@ Free Google Fonts only: Lora and Poppins.
 - Photos keep their natural colour. No filters.
 - Every photo sits like a mounted print: thin border in #D8C7AE, a small margin of warm off-white around the image, and a soft, low shadow.
 - Outside the trip, export and example views, photos sit straight.
-- Inside the trip view and the scrapbook example views, photos sit on the page like prints dropped on a table: rotated slightly (between minus 3 and plus 3 degrees), in slightly different sizes. The rotation is set once per photo and does not change on reload.
+- Inside the trip view, photos sit on the page like prints dropped on a table: rotated slightly (between minus 3 and plus 3 degrees), in slightly different sizes. The rotation is set once per photo and does not change on reload.
 - Captions sit below the print in Poppins light, soft brown. Captions are optional, and no empty caption space is shown.
 - Where there is no photo yet, show a plain grey box labelled [ADD: image of ...]. The welcome page and Trips page no longer need one: the welcome collage and the example trips fill those spaces.
 - Every image has alt text.
@@ -55,6 +56,7 @@ Free Google Fonts only: Lora and Poppins.
 ## Movement
 - Subtle only: gentle fades when a page or section appears (about 300ms) and a soft lift on photo hover (about 2px up, slightly deeper shadow).
 - The exported slideshow may use a slow cross-fade between photos (about 1.2 seconds). Each photo stays on screen for about 4 seconds (provisional, to be confirmed by the owner).
+- The Mexico example slideshow is a video: 2.5 seconds per photo, with each photo dissolving into the next over about 1 second (inside its 2.5 seconds). It has no sound and only plays when the visitor presses play.
 - No auto-playing music or video. No heavy animation.
 - Respect the visitor's reduced motion setting by turning movement off.
 
@@ -105,14 +107,22 @@ This is the front door, so it is kept as short as possible.
   - Any gap left in the grid is filled by stretching a neighbouring photo, so there are no empty holes.
   - A photo's caption, if written, sits in a thin warm off-white strip along the bottom of its tile, in Poppins light, soft brown, on one line (shortened with "…" if too long).
 
+## Pile-of-prints collage (Oregon example)
+- A tall (2:3) image covered edge to edge with overlapping photo prints on a cream (#F6EFE3) background, like prints piled on a table. Some prints run off the edges.
+- Each print has an even warm off-white (#FBF7F0) border, a thin #D8C7AE outline and a soft shadow. Photos fill their print and are cropped from the centre.
+- Prints are large (seven photos fill the whole image) and tilted slightly, between minus 3 and plus 3 degrees, set once and never changed.
+- A title card sits in the centre, on top of the pile, and is the largest card so it does not get lost. It is a plain off-white print with no photo and three centred lines stacked vertically: OREGON (Lora caps, wide letter spacing, largest), 2026 (Poppins, dark brown, wide letter spacing), a short clay rule, then "These were real mountains" (Poppins light, soft brown).
+
 ## Example trips
 - Example tiles look like normal trip tiles, with one addition: a small "Example" label in Poppins 13px, dark brown on warm off-white with a thin #D8C7AE border and 4px radius, sitting on the top-left corner of the cover photo.
+- The Japan and Oregon tile covers are their whole collage images, shown uncropped (fitted inside the cover area on a cream background), so it reads as the same collage as on the home page.
 - The same tiles appear on the Trips page in place of the empty-state grey box until the visitor creates a trip.
 
 ## The example view (example.html)
 - Page head: the trip title (h1), the trip line below it in soft brown, then a quiet note in a warm off-white box with a thin border: "This is an example. Start a trip to make your own." with the Start a trip button (the one primary button on this screen).
-- Scrapbook examples (Mexico, Oregon): the photos sit in the same scrapbook layout as trip.html, rotated slightly and in slightly different sizes, with no editing controls. Rotation and size are fixed per photo so they never change between visits.
-- Slideshow example (Japan): the same slideshow as the export preview, with Previous, Play and Next buttons (secondary style) and a "3 of 10" counter. It does not start on its own; the visitor presses Play. Cross-fade about 1.2 seconds.
+- Collage example (Oregon): the pile-of-prints collage shown large, as one mounted print the full width of the content column (up to 640px wide on desktop, because it is tall), centred, so it matches the Oregon tile.
+- Slideshow example (Mexico): the slideshow video in one mounted print the full width of the content column, with the browser's normal video controls. Before it plays it shows IMG_3522 (the Mexico cover). Frames are 4:3 on a cream background, each photo fitted whole (not cropped) and centred.
+- Collage example (Japan): the welcome collage shown large, as one mounted print the full width of the content column, so it matches the home page and the Japan tile.
 - A Back to trips link sits at the bottom of the page.
 
 ## The about page (about.html)

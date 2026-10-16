@@ -42,9 +42,15 @@ window.tripCard = function (trip, cover) {
 
 window.exampleCard = function (example) {
   var pic = document.createElement('img');
-  pic.className = 'cover';
-  pic.src = exampleImage(example, example.photos[0]);
-  pic.alt = 'Cover photo for the ' + example.title + ' example';
+  if (example.collage) {
+    pic.className = 'cover cover-fit';
+    pic.src = example.collage;
+    pic.alt = 'Cover for the ' + example.title + ' example: ' + example.collageAlt;
+  } else {
+    pic.className = 'cover';
+    pic.src = exampleImage(example, example.cover || example.photos[0]);
+    pic.alt = 'Cover photo for the ' + example.title + ' example';
+  }
   return makeTile('example.html?trip=' + example.id, pic, example.title, example.photos.length, true);
 };
 

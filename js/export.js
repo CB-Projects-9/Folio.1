@@ -1,6 +1,5 @@
 // Export a trip in three steps: choose, preview, download or print (SPEC.md, export.html).
 (async function () {
-  var SLIDE_SECONDS = 4; // provisional, see DESIGN.md, Movement
 
   var user = await Folio.ready;
   await FolioStore.open(user);
@@ -34,7 +33,6 @@
   var finalHelp = document.getElementById('final-help');
   var collageBlob = null;
   var collageUrl = null;
-  var timer = null;
 
   document.getElementById('export-view').hidden = false;
   document.getElementById('back-link').href = tripUrl;
@@ -70,69 +68,16 @@
   });
 
   // ---- Slideshow ----
+  var slideshow = null;
+
   function buildSlideshow() {
-    var box = document.createElement('div');
-    box.className = 'slideshow';
-    box.setAttribute('aria-roledescription', 'slideshow');
-    photos.forEach(function (p, i) {
-      var fig = document.createElement('figure');
-      fig.className = 'slide' + (i === 0 ? ' on' : '');
-      var img = document.createElement('img');
-      img.src = urls[i];
-      img.alt = altFor(p, i);
-      fig.append(img);
-      if (p.caption) {
-        var cap = document.createElement('figcaption');
-        cap.className = 'caption';
-        cap.textContent = p.caption;
-        fig.append(cap);
-      }
-      box.append(fig);
-    });
-
-    var controls = document.createElement('div');
-    controls.className = 'slide-controls';
-    var prev = makeBtn('Previous');
-    var play = makeBtn('Play');
-    var next = makeBtn('Next photo');
-    var where = document.createElement('span');
-    where.className = 'caption';
-    where.setAttribute('aria-live', 'polite');
-    controls.append(prev, play, next, where);
-
-    var index = 0;
-    function show(i) {
-      index = (i + photos.length) % photos.length;
-      box.querySelectorAll('.slide').forEach(function (s, k) { s.classList.toggle('on', k === index); });
-      where.textContent = (index + 1) + ' of ' + photos.length;
-    }
-    prev.addEventListener('click', function () { show(index - 1); });
-    next.addEventListener('click', function () { show(index + 1); });
-    play.addEventListener('click', function () {
-      if (timer) {
-        stopShow();
-      } else {
-        timer = setInterval(function () { show(index + 1); }, SLIDE_SECONDS * 1000);
-        play.textContent = 'Pause';
-      }
-    });
-    stopShow = function () {
-      clearInterval(timer);
-      timer = null;
-      play.textContent = 'Play';
-    };
-    show(0);
-    preview.replaceChildren(box, controls);
+    slideshow = makeSlideshow(preview, photos.map(function (p, i) {
+      return { src: urls[i], alt: altFor(p, i), caption: p.caption };
+    }));
   }
 
-  function stopShow() {}
-
-  function makeBtn(label) {
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'btn btn-secondary';
-    b.textContent = label;
-    return b;
+  function stopShow() {
+    if (slideshow) slideshow.stop();
   }
 
   // ---- Collage ----

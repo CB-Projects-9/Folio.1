@@ -152,6 +152,7 @@ img { max-width: 100%; display: block; }
   aspect-ratio: 4 / 3;
 }
 .cover { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.cover-fit { object-fit: contain; background: var(--cream); }
 
 /* Page frame */
 main { animation: fade 300ms ease-out; padding-bottom: 64px; }
@@ -313,6 +314,31 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
 .scrap img { width: 100%; height: auto; }
 .scrap .caption-input { margin-top: 8px; font-size: 13px; font-weight: 300; min-height: 40px; padding: 4px 8px; }
 .scrap-tools { display: flex; justify-content: space-between; flex-wrap: wrap; }
+
+/* Example view */
+.example-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  margin-top: 24px;
+  padding: 16px 24px;
+  background: var(--offwhite);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.example-note p { margin: 0; }
+#example-collage.collage-tall { max-width: 640px; margin: 0 auto; }
+#example-video video { display: block; width: 100%; height: auto; background: var(--cream); }
+.back-link { margin: 40px 0 0; }
+.back-link a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
+  color: var(--brown);
+  text-underline-offset: 4px;
+}
 
 /* Export */
 .steps { list-style: none; margin: 0 0 24px; padding: 0; display: flex; gap: 24px; font-size: 13px; color: var(--soft-brown); }

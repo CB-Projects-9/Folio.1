@@ -74,12 +74,16 @@ Three built-in, view-only examples made from the owner's photos. They are the sa
 
 | Example | Address | Layout | Trip line (owner's words, lightly edited) | Photos (in order) |
 |---|---|---|---|---|
-| Japan | example.html?trip=japan | Slideshow | Five weeks on the other side of the world, and memories that will last forever. | IMG_4809, IMG_5208, IMG_5574, IMG_5577, IMG_5976, IMG_5997, IMG_6016, IMG_6408, IMG_6569, IMG_6613 |
-| Mexico | example.html?trip=mexico | Scrapbook | Only a four-hour flight from home, and it felt like another world: stunning sunsets, magnificent buildings and unforgettable people. | IMG_3210, IMG_3487, IMG_3507, IMG_3522, IMG_3533, IMG_3540, IMG_3563, IMG_3577 |
-| Oregon | example.html?trip=oregon | Scrapbook | These were real mountains. Who said America wasn't gorgeous? | IMG_1268, IMG_1501, IMG_3039, IMG_3042, IMG_3105, IMG_3803, IMG_4124 |
+| Japan | example.html?trip=japan | Collage | Five weeks on the other side of the world, and memories that will last forever. | IMG_5574, IMG_4809, IMG_6613, IMG_5208, IMG_6569, IMG_5997 (the six photos in the welcome collage) |
+| Mexico | example.html?trip=mexico | Slideshow (video) | Only a four-hour flight from home, and it felt like another world: stunning sunsets, magnificent buildings and unforgettable people. | IMG_3210, IMG_3487, IMG_3507, IMG_3522, IMG_3533, IMG_3540, IMG_3563, IMG_3577 |
+| Oregon | example.html?trip=oregon | Collage (pile of prints) | These were real mountains. Who said America wasn't gorgeous? | IMG_1268, IMG_1501, IMG_3039, IMG_3042, IMG_3105, IMG_3803, IMG_4124 |
 
-- Example cards show the trip title, the first photo as the cover, the photo count, and a small Example label.
-- The photos have no individual captions (none supplied). Alt text names the trip, for example "Photo 3 of 10 from the Japan example".
+- Example cards show the trip title, a cover, the photo count, and a small Example label. The Mexico cover is IMG_3522 (chosen by the owner). The Oregon cover is its collage image (images/oregon-collage.jpg). The Japan cover is the welcome collage itself (images/welcome-collage.jpg), so the home page collage, the Japan tile and the Japan example page all show the same image.
+- The Japan example page shows that same collage, large.
+- The Oregon example page shows its pile-of-prints collage (DESIGN.md), large: the seven Oregon photos plus a centred title card reading "Oregon", "2026", "These were real mountains". The year 2026 was given by the owner. The page line above it stays as in the table.
+- The Mexico example page plays a slideshow video file, images/mexico-slideshow.mp4 (MP4, silent, 4:3, about 20 seconds): the eight Mexico photos in order, 2.5 seconds each, each dissolving into the next. It is made once from the owner's photos and is larger than 500 KB (the owner has agreed). It does not play until the visitor presses play.
+- The visitor's own slideshow on export.html is unchanged for now (plays on the page, prints, no video download).
+- The photos have no individual captions (none supplied). Alt text names the trip, for example "Photo 3 of 8 from the Mexico example".
 - Welcome collage photos (all from the Japan example): tall IMG_5574 and IMG_5208; wide IMG_6613 and IMG_6569; small IMG_5997 and IMG_4809.
 
 ## The log-in gate
@@ -107,7 +111,7 @@ Never invent facts, dimensions, dates, or names that the owner has not given. As
 - Plain HTML, CSS, and JavaScript files only. No frameworks, no npm, no build step.
 - Supabase is loaded from its CDN script tag.
 - index.html sits at the top of the folder.
-- Structure: HTML pages at the top level, a css folder (one shared style.css), a js folder (config.js holds the Supabase project URL and publishable key; auth.js runs the log-in gate and menu; store.js handles browser storage; examples.js lists the example trips; one script per page), and an images folder.
+- Structure: HTML pages at the top level, a css folder (one shared style.css), a js folder (config.js holds the Supabase project URL and publishable key; auth.js runs the log-in gate and menu; store.js handles browser storage; examples.js lists the example trips; slideshow.js is the slideshow shared by export.html and example.html; one script per page), and an images folder.
 - It must work on a phone.
 - It is published from GitHub to Vercel.
 - Fonts: Lora and Poppins from Google Fonts, as described in DESIGN.md.

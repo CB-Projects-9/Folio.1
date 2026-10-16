@@ -1,7 +1,7 @@
 // Tiny local preview server (no npm). Serves the project folder on port 5500.
 const http = require('http'), fs = require('fs'), path = require('path');
 const root = path.join(__dirname, '..');
-const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.svg': 'image/svg+xml' };
+const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.svg': 'image/svg+xml', '.mp4': 'video/mp4' };
 http.createServer((req, res) => {
   let p = decodeURIComponent(req.url.split('?')[0]);
   if (p.endsWith('/')) p += 'index.html';

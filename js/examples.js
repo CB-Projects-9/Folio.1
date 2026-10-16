@@ -1,31 +1,37 @@
 // Built-in, view-only example trips made from the owner's photos (SPEC.md, Example trips).
 // They are the same for every visitor and are never stored in the browser.
-// rot and size are fixed per photo so the scrapbook looks the same on every visit.
 window.FOLIO_EXAMPLES = [
   {
     id: 'japan',
     title: 'Japan',
-    layout: 'slideshow',
+    layout: 'collage',
     line: 'Five weeks on the other side of the world, and memories that will last forever.',
-    photos: ['IMG_4809', 'IMG_5208', 'IMG_5574', 'IMG_5577', 'IMG_5976', 'IMG_5997', 'IMG_6016', 'IMG_6408', 'IMG_6569', 'IMG_6613']
+    photos: ['IMG_5574', 'IMG_4809', 'IMG_6613', 'IMG_5208', 'IMG_6569', 'IMG_5997'],
+    // The same collage as the home page, so the tile, the home page and the example all match.
+    collage: 'images/welcome-collage.jpg',
+    collageAlt: 'A collage of the Japan trip: six photos around a panel reading Japan, including a golden temple among pine trees, a glass tower under storm clouds, a street lit with neon signs and a room full of glowing lanterns.'
   },
   {
     id: 'mexico',
     title: 'Mexico',
-    layout: 'scrapbook',
+    layout: 'video',
     line: 'Only a four-hour flight from home, and it felt like another world: stunning sunsets, magnificent buildings and unforgettable people.',
     photos: ['IMG_3210', 'IMG_3487', 'IMG_3507', 'IMG_3522', 'IMG_3533', 'IMG_3540', 'IMG_3563', 'IMG_3577'],
-    rot: [-1.8, 2.2, -0.6, 1.4, -2.6, 0.8, -1.2, 2.7],
-    size: [0.95, 0.88, 1, 0.9, 0.97, 0.86, 0.93, 1]
+    cover: 'IMG_3522',
+    // Made once from these photos: 2.5 seconds each, dissolving into the next (DESIGN.md, Movement).
+    video: 'images/mexico-slideshow.mp4',
+    videoLabel: 'Slideshow video of the Mexico trip: eight photos, 2.5 seconds each, including a river beach, a church dome over red rooftops, a sunset over the sea and a rainbow over palm trees. No sound.'
   },
   {
     id: 'oregon',
     title: 'Oregon',
-    layout: 'scrapbook',
+    layout: 'collage',
     line: 'These were real mountains. Who said America wasn\'t gorgeous?',
     photos: ['IMG_1268', 'IMG_1501', 'IMG_3039', 'IMG_3042', 'IMG_3105', 'IMG_3803', 'IMG_4124'],
-    rot: [1.6, -2.3, 0.7, -1.1, 2.5, -0.4, 1.9],
-    size: [1, 0.9, 0.94, 0.87, 0.96, 0.91, 0.98]
+    // A pile of overlapping prints around a centred title card (DESIGN.md, Pile-of-prints collage).
+    collage: 'images/oregon-collage.jpg',
+    collageTall: true,
+    collageAlt: 'A collage of the Oregon trip: seven overlapping photo prints around a centred card reading Oregon, 2026, These were real mountains. The photos include a snowy mountain, a lake between forested hills, a road through the mountains and a sunset over the water.'
   }
 ];
 
