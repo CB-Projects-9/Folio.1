@@ -251,7 +251,7 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
 }
 .field { margin-bottom: 24px; }
 .field label { display: block; font-size: 14px; margin-bottom: 8px; }
-.field input, .title-input, .caption-input {
+.field input {
   width: 100%;
   min-height: 44px;
   padding: 8px 16px;
@@ -261,7 +261,8 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
   border: 1px solid var(--border);
   border-radius: 4px;
 }
-.field input:focus, .caption-input:focus, .title-input:focus { border-color: var(--terracotta); outline: none; }
+.field input:focus { border-color: var(--terracotta); outline: none; }
+.field input::placeholder { color: var(--soft-brown); opacity: 1; }
 .error {
   margin: 8px 0 0;
   font-size: 13px;
@@ -280,17 +281,8 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
 .toggle { text-align: center; margin: 16px 0 0; }
 .notice { font-size: 13px; color: var(--brown); background: var(--offwhite); border: 1px solid var(--border); padding: 16px; margin: 0 0 24px; }
 
-/* Trip page */
-.title-input {
-  font: 500 28px/1.3 "Lora", serif;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  padding: 8px;
-  background: transparent;
-  border-color: transparent;
-}
-.title-input:hover { border-color: var(--border); }
-.trip-actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-top: 16px; }
+/* Trip page (DESIGN.md, The trip page) */
+.trip-title-field { max-width: 480px; margin-bottom: 16px; }
 
 .dropzone {
   background: var(--sand);
@@ -298,25 +290,31 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
   border-radius: 4px;
   padding: 40px 16px;
   text-align: center;
-  margin: 24px 0 40px;
+  margin: 8px 0 24px;
 }
 .dropzone.over { background: var(--offwhite); border-color: var(--terracotta); }
 .dropzone p { margin: 0 0 16px; }
 
-.scrapbook {
+.continue-row { margin: 0 0 40px; text-align: center; }
+
+/* Equal square tiles; each photo is fitted whole inside, never cropped or tilted. */
+.photo-grid {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 40px 24px;
-  align-items: start;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
 }
-.scrap { justify-self: center; transform: rotate(var(--rot, 0deg)); }
-.scrap .print:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
-.scrap img { width: 100%; height: auto; }
-.scrap .caption-input { margin-top: 8px; font-size: 13px; font-weight: 300; min-height: 40px; padding: 4px 8px; }
-.scrap-tools { display: flex; justify-content: space-between; flex-wrap: wrap; }
+.photo-tile .print {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+.photo-tile img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+.photo-tile .text-btn { font-size: 12px; padding: 0; } /* smaller text, still a 44px tap target */
 
 /* Page head with the title on the left and one button on the right (example and Trips pages) */
 .head-row {
@@ -388,6 +386,7 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
 
 @media (min-width: 640px) {
   .trip-grid { grid-template-columns: repeat(2, 1fr); }
+  .photo-grid { grid-template-columns: repeat(3, 1fr); }
   .choices { grid-template-columns: 1fr 1fr; }
 }
 
@@ -395,7 +394,6 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
   :root { --gutter: 32px; }
   h1 { font-size: 36px; }
   h2 { font-size: 24px; }
-  .title-input { font-size: 36px; }
   .menu-btn { display: none; }
   .menu {
     display: flex;
@@ -407,6 +405,7 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
   }
   .menu .logout { margin-left: 24px; padding-left: 32px; border-left: 1px solid var(--border); }
   .trip-grid { grid-template-columns: repeat(3, 1fr); }
+  .photo-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -37,7 +37,7 @@ Free Google Fonts only: Lora and Poppins.
 
 ## Layout and grid
 - Calm, structured frame across the whole site: one centered content column, maximum width 1100px, with 16px side gutters on phones and 32px on desktop.
-- Looser scrapbook feel only inside the trip, export and example views.
+- Looser scrapbook feel only inside the export and example views.
 - Pacing is balanced: comfortable space between sections, never cramped and never empty.
 - Spacing scale: 8, 16, 24, 40, 64 pixels.
 - Welcome page (index.html) and Trips page scroll. The export flow moves in separate steps. Other pages stay short with minimal scrolling.
@@ -48,7 +48,7 @@ Free Google Fonts only: Lora and Poppins.
 - Photos keep their natural colour. No filters.
 - Every photo sits like a mounted print: thin border in #D8C7AE, a small margin of warm off-white around the image, and a soft, low shadow.
 - Outside the trip, export and example views, photos sit straight.
-- Inside the trip view, photos sit on the page like prints dropped on a table: rotated slightly (between minus 3 and plus 3 degrees), in slightly different sizes. The rotation is set once per photo and does not change on reload.
+- On the trip page (trip.html), photos sit straight on equal tiles (see The trip page).
 - Captions sit below the print in Poppins light, soft brown. Captions are optional, and no empty caption space is shown.
 - Where there is no photo yet, show a plain grey box labelled [ADD: image of ...]. The welcome page and Trips page no longer need one: the welcome collage and the example trips fill those spaces.
 - Every image has alt text.
@@ -118,6 +118,12 @@ This is the front door, so it is kept as short as possible.
 - Example tiles look like normal trip tiles, with one addition: a small "Example" label in Poppins 13px, dark brown on warm off-white with a thin #D8C7AE border and 4px radius, sitting on the top-left corner of the cover photo.
 - The Japan and Oregon tile covers are their whole collage images, shown uncropped (fitted inside the cover area on a cream background), so it reads as the same collage as on the home page.
 - The same tiles appear on the Trips page in place of the empty-state grey box until the visitor creates a trip.
+
+## The trip page (trip.html)
+- One calm column, top to bottom: the "New trip" heading (h1), the Trip title label and text box (placeholder "Where did you go?" in soft brown), the photo count (caption style), the drop zone, then the Continue button, centred under the drop zone (the one primary button on this screen; shown faded and not clickable until a photo is added).
+- Added photos sit in a grid of equal square tiles: three or four across on desktop, two on phones, with 16px between tiles in both directions.
+- Each tile is a warm off-white mount with the thin #D8C7AE border and soft shadow. The photo is fitted whole inside it with a small margin and never cropped, so a tall photo leaves more of the tile showing at the left and right, and a wide photo more at the top and bottom. No tilt.
+- Under each tile, a small Remove text button (12px text, still 44px tall so it is easy to tap).
 
 ## The Trips page (trips.html)
 - Page head: the Trips title (h1) on the left and the New trip button (primary) on the right, centred vertically against the title, in the same layout as the example page head.

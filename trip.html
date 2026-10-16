@@ -34,11 +34,15 @@
     <p class="page-head" id="not-found" hidden>This trip could not be found. <a href="trips.html">See all trips</a></p>
     <div id="trip-view" hidden>
       <div class="page-head">
-        <label class="visually-hidden" for="trip-title">Trip title</label>
-        <input class="title-input" id="trip-title" maxlength="80" autocomplete="off">
-        <p class="caption" id="photo-count"></p>
-        <div class="trip-actions"><a class="btn btn-primary" id="export-link" href="export.html">Make a slideshow or collage</a></div>
+        <h1 id="trip-heading">New trip</h1>
       </div>
+
+      <div class="field trip-title-field">
+        <label for="trip-title">Trip title</label>
+        <input id="trip-title" maxlength="80" autocomplete="off" placeholder="Where did you go?">
+      </div>
+
+      <p class="caption" id="photo-count" aria-live="polite">0 photos</p>
 
       <div class="dropzone" id="dropzone">
         <p>Drop photos here</p>
@@ -48,7 +52,11 @@
         <p class="error" id="add-error" hidden></p>
       </div>
 
-      <ul class="scrapbook" id="scrapbook"></ul>
+      <p class="continue-row">
+        <button class="btn btn-primary" type="button" id="continue" disabled>Continue</button>
+      </p>
+
+      <ul class="photo-grid" id="photo-grid"></ul>
 
       <p class="back-link"><a href="trips.html">Back to trips</a></p>
     </div>

@@ -42,12 +42,20 @@ All pages are plain .html files at the top of the folder.
 - Content: the trip title with a label under it ("Collage Example" for Japan and Oregon, "Slideshow Example" for Mexico), a Start a trip button, then the example's collage or slideshow video, then a Back to home link (to index.html).
 - Gated like every other page.
 
-### trip.html
-- Purpose: one trip, where photos are added and arranged.
-- Content: trip title (editable), a drop zone for photos (drag and drop, plus a file picker button for phones), the photos shown in the scrapbook style described in DESIGN.md, an optional short caption under each photo, and a button to remove a photo.
-- Photos are kept in the order added, and can be reordered.
-- A button leads to export.html for this trip.
-- A Back to trips link (to trips.html) sits at the bottom of the page.
+### trip.html (step one of making a trip)
+- Purpose: the first step of the creation process: name the trip and add its photos. Every New trip and Start a trip button leads here.
+- Content, top to bottom:
+  - Heading: "New trip" for a new trip. When an existing trip is reopened from its tile, the heading is the trip's title instead.
+  - A "Trip title" label with a text box under it. The box starts empty, with the placeholder "Where did you go?".
+  - The number of photos added (for example "3 photos").
+  - The drop zone for photos (drag and drop, plus a Choose photos button for phones).
+  - A Continue button that leads to export.html for this trip. It is disabled until at least one photo has been added.
+  - The added photos, in a grid of equal tiles (DESIGN.md, The trip page), each with a small Remove button.
+  - A Back to trips link (to trips.html) at the bottom.
+- Photos are kept in the order added.
+- A trip is only saved once a photo is added or a title is typed, so opening the page and leaving does not create an empty trip.
+- If the title is left empty, the trip is called "Untitled trip" on its tile.
+- Reordering photos and writing captions are not on this page. They will move to the next step (to be designed with the owner). Captions written before this change are kept and still appear in exports.
 
 ### export.html
 - Purpose: turn one trip into something to keep and share. Moves in separate steps.

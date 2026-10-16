@@ -1,69 +1,72 @@
-// One trip: add, caption, reorder and remove photos (SPEC.md, trip.html).
+// Step one of making a trip: name it and add photos (SPEC.md, trip.html).
 (async function () {
   // Longest side kept in the browser. Provisional until the owner decides (SPEC.md, Open questions).
   var MAX_EDGE = 2000;
+  var UNTITLED = 'Untitled trip';
 
   var user = await Folio.ready;
   await FolioStore.open(user);
 
+  // A new trip is only saved once it has a photo or a title, so leaving straight away creates nothing.
   var id = new URLSearchParams(location.search).get('id');
-  var trip;
-  if (id) {
-    trip = await FolioStore.getTrip(id);
-  } else {
-    trip = await FolioStore.createTrip();
-    history.replaceState(null, '', 'trip.html?id=' + encodeURIComponent(trip.id));
-  }
-  if (!trip) {
+  var trip = id ? await FolioStore.getTrip(id) : null;
+  if (id && !trip) {
     document.getElementById('not-found').hidden = false;
     return;
   }
 
+  var heading = document.getElementById('trip-heading');
   var titleInput = document.getElementById('trip-title');
   var count = document.getElementById('photo-count');
-  var list = document.getElementById('scrapbook');
+  var grid = document.getElementById('photo-grid');
   var fileInput = document.getElementById('file-input');
   var dropzone = document.getElementById('dropzone');
   var adding = document.getElementById('adding');
   var addError = document.getElementById('add-error');
+  var continueBtn = document.getElementById('continue');
   var urls = [];
 
   document.getElementById('trip-view').hidden = false;
-  document.getElementById('export-link').href = 'export.html?id=' + encodeURIComponent(trip.id);
-  titleInput.value = trip.title;
-  document.title = 'Folio · ' + trip.title;
-
-  titleInput.addEventListener('change', function () {
-    trip.title = titleInput.value.trim() || 'Untitled trip';
-    titleInput.value = trip.title;
+  if (trip) {
+    heading.textContent = trip.title;
     document.title = 'Folio · ' + trip.title;
+    if (trip.title !== UNTITLED) titleInput.value = trip.title;
+  } else {
+    document.title = 'Folio · New trip';
+  }
+
+  async function ensureTrip() {
+    if (trip) return trip;
+    trip = await FolioStore.createTrip();
+    history.replaceState(null, '', 'trip.html?id=' + encodeURIComponent(trip.id));
+    return trip;
+  }
+
+  titleInput.addEventListener('input', async function () {
+    var title = titleInput.value.trim();
+    if (!trip && !title) return;
+    await ensureTrip();
+    trip.title = title || UNTITLED;
     FolioStore.saveTrip(trip);
   });
 
-  function button(label, act, disabled) {
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'text-btn';
-    b.textContent = label;
-    b.dataset.act = act;
-    b.disabled = Boolean(disabled);
-    return b;
-  }
+  continueBtn.addEventListener('click', function () {
+    if (trip && trip.photoIds.length) location.href = 'export.html?id=' + encodeURIComponent(trip.id);
+  });
 
-  async function render(focus) {
+  async function render(focusIndex) {
     urls.forEach(URL.revokeObjectURL);
     urls = [];
-    var photos = await FolioStore.photosFor(trip);
+    var photos = trip ? await FolioStore.photosFor(trip) : [];
     var n = photos.length;
     count.textContent = n + (n === 1 ? ' photo' : ' photos');
-    list.replaceChildren();
+    continueBtn.disabled = n === 0;
+    grid.replaceChildren();
 
     photos.forEach(function (photo, i) {
       var li = document.createElement('li');
-      li.className = 'scrap';
+      li.className = 'photo-tile';
       li.dataset.id = photo.id;
-      li.style.setProperty('--rot', photo.rot + 'deg');
-      li.style.width = Math.round(photo.size * 100) + '%';
 
       var fig = document.createElement('figure');
       fig.className = 'print';
@@ -71,61 +74,33 @@
       var url = URL.createObjectURL(photo.blob);
       urls.push(url);
       img.src = url;
-      img.alt = photo.caption || 'Photo ' + (i + 1) + ' from ' + trip.title;
-      img.width = photo.width;
-      img.height = photo.height;
+      img.alt = photo.caption || 'Photo ' + (i + 1) + ' of ' + n;
       fig.append(img);
 
-      var label = document.createElement('label');
-      label.className = 'visually-hidden';
-      label.htmlFor = 'cap-' + photo.id;
-      label.textContent = 'Caption for photo ' + (i + 1);
-      var cap = document.createElement('input');
-      cap.className = 'caption-input';
-      cap.id = 'cap-' + photo.id;
-      cap.placeholder = 'Add a caption';
-      cap.maxLength = 140;
-      cap.value = photo.caption;
-      cap.addEventListener('input', function () {
-        photo.caption = cap.value.trim();
-        img.alt = photo.caption || 'Photo ' + (i + 1) + ' from ' + trip.title;
-        FolioStore.savePhoto(photo);
-      });
+      var remove = document.createElement('button');
+      remove.type = 'button';
+      remove.className = 'text-btn';
+      remove.textContent = 'Remove';
+      remove.setAttribute('aria-label', 'Remove photo ' + (i + 1));
 
-      var tools = document.createElement('div');
-      tools.className = 'scrap-tools';
-      tools.append(
-        button('Move earlier', 'up', i === 0),
-        button('Move later', 'down', i === n - 1),
-        button('Remove', 'remove')
-      );
-
-      li.append(fig, label, cap, tools);
-      list.append(li);
+      li.append(fig, remove);
+      grid.append(li);
     });
 
-    if (focus) {
-      var target = list.querySelector('[data-id="' + focus.id + '"] [data-act="' + focus.act + '"]');
-      if (target && !target.disabled) target.focus();
-      else if (list.querySelector('button:not(:disabled)')) list.querySelector('button:not(:disabled)').focus();
+    // After a removal, keep keyboard focus on the next Remove button (or the drop zone button).
+    if (focusIndex !== undefined) {
+      var buttons = grid.querySelectorAll('.text-btn');
+      (buttons[Math.min(focusIndex, buttons.length - 1)] || document.getElementById('choose')).focus();
     }
   }
 
-  list.addEventListener('click', async function (e) {
-    var b = e.target.closest('button[data-act]');
+  grid.addEventListener('click', async function (e) {
+    var b = e.target.closest('.text-btn');
     if (!b) return;
-    var pid = b.closest('.scrap').dataset.id;
+    var pid = b.closest('.photo-tile').dataset.id;
     var i = trip.photoIds.indexOf(pid);
-    if (b.dataset.act === 'remove') {
-      await FolioStore.deletePhoto(trip, pid);
-      render({ id: trip.photoIds[Math.min(i, trip.photoIds.length - 1)], act: 'remove' });
-      return;
-    }
-    var j = b.dataset.act === 'up' ? i - 1 : i + 1;
-    trip.photoIds.splice(i, 1);
-    trip.photoIds.splice(j, 0, pid);
-    await FolioStore.saveTrip(trip);
-    render({ id: pid, act: b.dataset.act });
+    await FolioStore.deletePhoto(trip, pid);
+    render(i);
   });
 
   // Resize in the browser before saving, to keep storage manageable.
@@ -158,12 +133,14 @@
   async function addFiles(files) {
     var failed = [];
     files = Array.from(files);
+    if (!files.length) return;
     addError.hidden = true;
     for (var k = 0; k < files.length; k++) {
       adding.textContent = 'Adding photo ' + (k + 1) + ' of ' + files.length + '…';
       try {
         if (!files[k].type.startsWith('image/')) throw new Error('not an image');
-        await FolioStore.addPhoto(trip, await resize(files[k]));
+        var image = await resize(files[k]);
+        await FolioStore.addPhoto(await ensureTrip(), image);
       } catch (err) {
         failed.push(files[k].name);
       }

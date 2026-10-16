@@ -61,7 +61,6 @@
       });
     },
 
-    // Rotation and size are set once here, so they never change on reload (DESIGN.md, Image treatment).
     addPhoto: function (trip, image) {
       var photo = {
         id: newId(),
@@ -69,9 +68,7 @@
         blob: image.blob,
         width: image.width,
         height: image.height,
-        caption: '',
-        rot: Math.round((Math.random() * 6 - 3) * 10) / 10,
-        size: Math.round((0.85 + Math.random() * 0.15) * 100) / 100
+        caption: ''
       };
       return req(store('photos', 'readwrite').put(photo)).then(function () {
         trip.photoIds.push(photo.id);
