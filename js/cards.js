@@ -17,7 +17,7 @@ function makeTile(href, cover, title, photoCount, isExample) {
   name.textContent = title;
 
   a.append(cover, name);
-  // photoCount is null when the count is left off (example tiles on the home page).
+  // photoCount is null for example tiles, which never show a count.
   if (photoCount !== null) {
     var count = document.createElement('span');
     count.className = 'trip-count';
@@ -43,7 +43,7 @@ window.tripCard = function (trip, cover) {
   return makeTile('trip.html?id=' + encodeURIComponent(trip.id), pic, trip.title, trip.photoIds.length, false);
 };
 
-window.exampleCard = function (example, showCount) {
+window.exampleCard = function (example) {
   var pic = document.createElement('img');
   if (example.collage) {
     pic.className = 'cover cover-fit';
@@ -54,21 +54,20 @@ window.exampleCard = function (example, showCount) {
     pic.src = exampleImage(example, example.cover || example.photos[0]);
     pic.alt = 'Cover photo for the ' + example.title + ' example';
   }
-  return makeTile('example.html?trip=' + example.id, pic, example.title, showCount ? example.photos.length : null, true);
+  return makeTile('example.html?trip=' + example.id, pic, example.title, null, true);
 };
 
 // Fills the list with the visitor's trips (up to limit, or all when limit is 0).
 // Example trips: on the Trips page they stand in for an empty list; on the home page they
 // always go in their own list (examplesList), below the visitor's trips.
-// exampleCounts: show photo counts on the example tiles (the Trips page does, the home page does not).
 // Returns the number of the visitor's own trips.
-window.showTrips = async function (limit, exampleCounts, examplesList) {
+window.showTrips = async function (limit, examplesList) {
   var trips = await FolioStore.listTrips();
   var list = document.getElementById('trip-list');
   var empty = document.getElementById('trip-empty');
   if (examplesList || !trips.length) {
     FOLIO_EXAMPLES.forEach(function (example) {
-      (examplesList || list).append(exampleCard(example, exampleCounts));
+      (examplesList || list).append(exampleCard(example));
     });
   }
   var shown = limit ? trips.slice(0, limit) : trips;

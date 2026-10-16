@@ -119,6 +119,9 @@ This is the front door, so it is kept as short as possible.
 - The Japan and Oregon tile covers are their whole collage images, shown uncropped (fitted inside the cover area on a cream background), so it reads as the same collage as on the home page.
 - The same tiles appear on the Trips page in place of the empty-state grey box until the visitor creates a trip.
 
+## The Trips page (trips.html)
+- Page head: the Trips title (h1) on the left and the New trip button (primary) on the right, centred vertically against the title, in the same layout as the example page head.
+
 ## The example view (example.html)
 - Page head: on the left, the trip title (h1) with a small label under it in soft brown ("Collage Example" or "Slideshow Example"). On the right, the Start a trip button (the one primary button on this screen), centred vertically against the title and label. On narrow screens it drops below the title only if there is not room beside it.
 - Collage example (Oregon): the pile-of-prints collage shown large, as one mounted print the full width of the content column (up to 640px wide on desktop, because it is tall), centred, so it matches the Oregon tile.

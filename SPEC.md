@@ -31,9 +31,9 @@ All pages are plain .html files at the top of the folder.
 
 ### trips.html
 - Purpose: all of the visitor's trips.
-- Content: trip cards in a grid, each showing the trip title, a cover photo (the first photo by default), and the photo count. A Start a trip button sits at the top.
+- Content: trip cards in a grid, each showing the trip title, a cover photo (the first photo by default), and the photo count. A New trip button (it starts a new trip, like Start a trip on the home page) sits at the top right, centred vertically with the Trips title.
 - Clicking a card opens that trip (trip.html with the trip identified in the address).
-- If the visitor has no trips yet, the three example trips are shown instead (no grey placeholder box), under the line "You have no trips yet. These examples show what Folio can make." Once the visitor creates a trip, the examples and the line are removed from this page.
+- If the visitor has no trips yet, the three example trips are shown instead (no grey placeholder box), under the line "You have no trips yet." Once the visitor creates a trip, the examples and the line are removed from this page.
 
 ### example.html (view-only example trips)
 - Purpose: show a new visitor what Folio can make, before they start their own trip.
@@ -80,7 +80,7 @@ Three built-in, view-only examples made from the owner's photos. They are the sa
 | Mexico | example.html?trip=mexico | Slideshow (video) | Only a four-hour flight from home, and it felt like another world: stunning sunsets, magnificent buildings and unforgettable people. | IMG_3210, IMG_3487, IMG_3507, IMG_3522, IMG_3533, IMG_3540, IMG_3563, IMG_3577 |
 | Oregon | example.html?trip=oregon | Collage (pile of prints) | These were real mountains. Who said America wasn't gorgeous? | IMG_1268, IMG_1501, IMG_3039, IMG_3042, IMG_3105, IMG_3803, IMG_4124 |
 
-- Example cards show the trip title, a cover and a small Example label. On the home page they do not show a photo count; on the Trips page they do. The Mexico cover is IMG_3522 (chosen by the owner). The Oregon cover is its collage image (images/oregon-collage.jpg). The Japan cover is the welcome collage itself (images/welcome-collage.jpg), so the home page collage, the Japan tile and the Japan example page all show the same image.
+- Example cards show the trip title, a cover and a small Example label. They never show a photo count. The Mexico cover is IMG_3522 (chosen by the owner). The Oregon cover is its collage image (images/oregon-collage.jpg). The Japan cover is the welcome collage itself (images/welcome-collage.jpg), so the home page collage, the Japan tile and the Japan example page all show the same image.
 - The Japan example page shows that same collage, large.
 - The Oregon example page shows its pile-of-prints collage (DESIGN.md), large: the seven Oregon photos plus a centred title card reading "Oregon", "2026", "These were real mountains". The year 2026 was given by the owner. The page line above it stays as in the table.
 - The Mexico example page plays a slideshow video file, images/mexico-slideshow.mp4 (MP4, silent, 4:3, about 20 seconds): the eight Mexico photos in order, 2.5 seconds each, each dissolving into the next. It is made once from the owner's photos and is larger than 500 KB (the owner has agreed). It does not play until the visitor presses play.

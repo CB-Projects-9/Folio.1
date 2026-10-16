@@ -318,8 +318,8 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
 .scrap .caption-input { margin-top: 8px; font-size: 13px; font-weight: 300; min-height: 40px; padding: 4px 8px; }
 .scrap-tools { display: flex; justify-content: space-between; flex-wrap: wrap; }
 
-/* Example view: title and label on the left, Start a trip on the right */
-.example-head {
+/* Page head with the title on the left and one button on the right (example and Trips pages) */
+.head-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
