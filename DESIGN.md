@@ -37,25 +37,25 @@ Free Google Fonts only: Lora and Poppins.
 
 ## Layout and grid
 - Calm, structured frame across the whole site: one centered content column, maximum width 1100px, with 16px side gutters on phones and 32px on desktop.
-- Looser scrapbook feel only inside the export and example views.
+- Looser scrapbook feel only inside the example views.
 - Pacing is balanced: comfortable space between sections, never cramped and never empty.
 - Spacing scale: 8, 16, 24, 40, 64 pixels.
-- Welcome page (index.html) and Trips page scroll. The export flow moves in separate steps. Other pages stay short with minimal scrolling.
+- Welcome page (index.html), Trips page and the Edits page scroll. Making a trip moves through separate step pages (Upload, Media type, Edits, Preview, Export). Other pages stay short with minimal scrolling.
 - Trip cards sit in a grid: one column on phones, two on tablets, three on desktop.
 - Everything must work on a phone first.
 
 ## Image treatment
 - Photos keep their natural colour. No filters.
 - Every photo sits like a mounted print: thin border in #D8C7AE, a small margin of warm off-white around the image, and a soft, low shadow.
-- Outside the trip, export and example views, photos sit straight.
-- On the trip page (trip.html), photos sit straight on equal tiles (see The trip page).
+- Outside the example views, photos sit straight.
+- On the Upload and Edits pages, photos sit straight on equal tiles (see The upload page).
 - Captions sit below the print in Poppins light, soft brown. Captions are optional, and no empty caption space is shown.
 - Where there is no photo yet, show a plain grey box labelled [ADD: image of ...]. The welcome page and Trips page no longer need one: the welcome collage and the example trips fill those spaces.
 - Every image has alt text.
 
 ## Movement
 - Subtle only: gentle fades when a page or section appears (about 300ms) and a soft lift on photo hover (about 2px up, slightly deeper shadow).
-- The video preview on export.html may use a slow cross-fade between photos (about 1.2 seconds). Each photo stays on screen for about 4 seconds (provisional, to be confirmed by the owner).
+- A visitor's video uses the duration (1 to 3 seconds per photo) and transition (clean cut, dissolve, or slide right to left) they choose on the Edits page.
 - The Mexico example video: 2.5 seconds per photo, with each photo dissolving into the next over about 1 second (inside its 2.5 seconds). It has no sound and only plays when the visitor presses play.
 - No auto-playing music or video. No heavy animation.
 - Respect the visitor's reduced motion setting by turning movement off.
@@ -101,7 +101,7 @@ This is the front door, so it is kept as short as possible.
   - Row 1: tall photo, small photo, wide photo.
   - Row 2: (tall photo continues), title panel two columns wide, tall photo.
   - Row 3: wide photo, small photo, (tall photo continues).
-- The export collage (export.html) uses the same style, and its grid adapts to the trip:
+- A visitor's collage (built by js/collage.js, for the Export page) uses the same style, and its grid adapts to the trip:
   - 4 columns for 6 or more photos, 3 columns for 3 to 5 photos, 2 columns for 1 or 2 photos.
   - Tall (portrait) photos get tall tiles and wide (landscape) photos get wide tiles where they fit; the rest get single tiles. Photos keep the trip's order, reading left to right, top to bottom.
   - The title panel is two columns wide, in the second row (the first row when there are 3 or fewer photos), as near the middle as the grid allows. It shows the trip title. It also holds a trip line once trips have one (see SPEC.md).
@@ -119,20 +119,37 @@ This is the front door, so it is kept as short as possible.
 - The Japan and Oregon tile covers are their whole collage images, shown uncropped (fitted inside the cover area on a cream background), so it reads as the same collage as on the home page.
 - The same tiles appear on the Trips page in place of the empty-state grey box until the visitor creates a trip.
 
-## The trip page (trip.html)
+## Step pages (making a trip)
+- Every step page (Upload, Media type, Edits, Preview, Export) ends with one row: a Back link on the left and the step links "Upload · Media type · Edits · Preview" on the right, separated by thin middle dots, in Poppins 14px dark brown, underlined on hover.
+- The current step's link is terracotta and not underlined. Links that cannot be used yet are soft brown at half strength and do nothing.
+- On phones the row wraps: Back on its own line, the step links under it.
+- Back and the step links are at least 44px tall for tapping.
+
+## The upload page (upload.html)
 - One calm column, top to bottom: the "New trip" heading (h1), the Trip title label and text box (placeholder "Where did you go?" in soft brown), the photo count (caption style), the drop zone, then the Continue button, centred under the drop zone (the one primary button on this screen; shown faded and not clickable until a photo is added).
 - Added photos sit in a grid of equal square tiles: three or four across on desktop, two on phones, with 16px between tiles in both directions.
 - Each tile is a warm off-white mount with the thin #D8C7AE border and soft shadow. The photo is fitted whole inside it with a small margin and never cropped, so a tall photo leaves more of the tile showing at the left and right, and a wide photo more at the top and bottom. No tilt.
 - Under each tile, a small Remove text button (12px text, still 44px tall so it is easy to tap).
 
-## The choose screen (export.html, first step)
+## The media type page (media.html)
 - Page head: the trip's title (h1), and under it "How would you like to remember this one?" in soft brown, both centred. 64px of space separates this text from the tiles.
-- Under the tiles, a Back link (returns to the trip page).
 - Two equal tiles below, side by side on tablets and desktop, stacked on phones. Each tile is a warm off-white mount with the thin #D8C7AE border and soft shadow, holding a picture of the same shape (the collage's wide shape) and, centred under it, the label in the small heading style (Lora caps 16px): "Video" or "Collage".
 - The whole tile is the button. It lifts slightly on hover and shows the terracotta focus outline when tabbed to.
 - Video picture: a film strip in dark brown (#3B2A21) with cream sprocket holes along the top and bottom and two frames with rounded corners, each holding a Japan photo. The second frame runs off the right edge.
 - Collage picture: the Japan collage from the home page.
-- The step list is hidden on this screen.
+
+## The Edits page (edit.html)
+- Page head on one line: "Edit" (h1) on the left; the trip's title on the right as an h2, in the h2 style (20px on phones, 24px on desktop), centred vertically against "Edit". On narrow screens the h2 drops under "Edit" if there is not room.
+- Four sections, each with a small heading (h3 style, Lora caps 16px) and 64px of space between sections: Order and captions, Cover, Duration, Transition.
+- Order and captions: the photo count (caption style), then the same equal square tiles as the upload page. Each tile can be picked up and dragged to a new place; while dragging, the tile lifts (deeper shadow) and a terracotta line marks where it will land. Under each tile, a caption box (Poppins 13px, light outline, placeholder "Add a caption"). Small "Move earlier" / "Move later" controls are not shown; keyboard users move a focused tile with the arrow keys.
+- Cover: on desktop, the controls on the left and a live preview on the right; stacked on phones. Controls: Title and Details text boxes, then "Background" with five round swatches (cream, sand, clay, terracotta, dark brown) and, under them, the trip's photos as small square thumbnails to choose from. The chosen swatch or photo has a 2px terracotta ring. The preview is a 4:3 card showing the background with the title (Lora caps) and details (Poppins light) centred on it; the text is dark brown on cream, sand and clay, and cream on terracotta, dark brown and photos (photos get a soft dark wash so the text stays readable).
+- Duration: five option buttons in a row, "1s · 1.5s · 2s · 2.5s · 3s", outlined in #D8C7AE; the chosen one is filled terracotta with cream text.
+- Transition: three option buttons in the same style, "Clean cut", "Dissolve", "Slide", each with a short line under it in caption style.
+- The Preview button (primary, the one primary button on this page) is centred under the Transition section, then the Back and step links row.
+- Collage placeholder: the same page head, a short plain line that collage editing is coming soon, then the Back and step links row.
+
+## The Preview and Export pages (preview.html, export.html)
+- Placeholders for now: the page heading (h1), the trip's title in soft brown under it, a short plain line that this step is coming soon, then the Back and step links row.
 
 ## The Trips page (trips.html)
 - Page head: the Trips title (h1) on the left and the New trip button (primary) on the right, centred vertically against the title, in the same layout as the example page head.
@@ -142,7 +159,7 @@ This is the front door, so it is kept as short as possible.
 - Collage example (Oregon): the pile-of-prints collage shown large, as one mounted print the full width of the content column (up to 640px wide on desktop, because it is tall), centred, so it matches the Oregon tile.
 - Video example (Mexico): the video in one mounted print the full width of the content column, with the browser's normal video controls. Before it plays it shows IMG_3522 (the Mexico cover). Frames are 4:3 on a cream background, each photo fitted whole (not cropped) and centred.
 - Collage example (Japan): the welcome collage shown large, as one mounted print the full width of the content column, so it matches the home page and the Japan tile.
-- A Back to home link sits at the bottom of the page and returns to index.html. (A visitor's own trip page, trip.html, has a Back to trips link in the same style.)
+- A Back to home link sits at the bottom of the page and returns to index.html.
 
 ## The about page (about.html)
 - One reading column, about 640px wide, with the four sections in order: How Folio works, Where your photos are kept, Why Folio, Where it is going.

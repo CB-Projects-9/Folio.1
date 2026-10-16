@@ -20,7 +20,7 @@ All pages are plain .html files at the top of the folder.
 
 ### index.html (home)
 - Purpose: a welcome screen that gets the visitor started quickly.
-- Top of the page: a welcome area with a big Start a trip button. The button leads to a new trip (trip.html).
+- Top of the page: a welcome area with a big Start a trip button. The button leads to a new trip (upload.html).
 - Welcome headline (approved by the owner): "For the people back home"
 - Supporting line (approved by the owner): "Too many photos and nowhere to share them. Folio gathers a trip into one place that is easy to share."
 - Welcome photo: a collage of the Japan example trip in the collage style from DESIGN.md (a mosaic of six photos around a panel with the trip name "Japan" and the Japan trip line), saved as images/welcome-collage.jpg. Alt text describes it as an example collage.
@@ -32,7 +32,7 @@ All pages are plain .html files at the top of the folder.
 ### trips.html
 - Purpose: all of the visitor's trips.
 - Content: trip cards in a grid, each showing the trip title, a cover photo (the first photo by default), and the photo count. A New trip button (it starts a new trip, like Start a trip on the home page) sits at the top right, centred vertically with the Trips title.
-- Clicking a card opens that trip (trip.html with the trip identified in the address).
+- Clicking a card opens that trip at its first step (upload.html with the trip identified in the address).
 - If the visitor has no trips yet, the three example trips are shown instead (no grey placeholder box), under the line "You have no trips yet." Once the visitor creates a trip, the examples and the line are removed from this page.
 
 ### example.html (view-only example trips)
@@ -42,34 +42,61 @@ All pages are plain .html files at the top of the folder.
 - Content: the trip title with a label under it ("Collage Example" for Japan and Oregon, "Video Example" for Mexico), a Start a trip button, then the example's collage or video, then a Back to home link (to index.html).
 - Gated like every other page.
 
-### trip.html (step one of making a trip)
-- Purpose: the first step of the creation process: name the trip and add its photos. Every New trip and Start a trip button leads here.
+## Making a trip: the step pages
+Making a trip moves through one page per step. Each page knows which trip it is for from its address (for example edit.html?id=...), so a visitor can jump straight to any step.
+
+| Step | Page | Name in the step links |
+|---|---|---|
+| 1 | upload.html | Upload |
+| 2 | media.html | Media type |
+| 3 | edit.html | Edits |
+| 4 | preview.html | Preview |
+| 5 | export.html | (not in the step links; reached from Preview) |
+
+- Every step page ends with a Back link on the bottom left (to the previous step) and the step links "Upload · Media type · Edits · Preview" on the bottom right, with the current step marked.
+- Step links that cannot be used yet are shown faded and do nothing: Media type, Edits and Preview need at least one photo; Edits and Preview also need a media type to have been chosen.
+- The Edits link opens the Edits page for the media type the visitor chose.
+- The old trip.html and the old multi-step export.html are removed; their parts now live on the pages below.
+
+### upload.html (step 1: Upload)
+- Purpose: name the trip and add its photos. Every New trip and Start a trip button leads here, and a trip's tile reopens it here.
 - Content, top to bottom:
-  - Heading: "New trip" for a new trip. When an existing trip is reopened from its tile, the heading is the trip's title instead.
+  - Heading: "New trip" for a new trip. When an existing trip is reopened, the heading is the trip's title instead.
   - A "Trip title" label with a text box under it. The box starts empty, with the placeholder "Where did you go?".
   - The number of photos added (for example "3 photos").
   - The drop zone for photos (drag and drop, plus a Choose photos button for phones).
-  - A Continue button that leads to export.html for this trip. It is disabled until at least one photo has been added.
-  - The added photos, in a grid of equal tiles (DESIGN.md, The trip page), each with a small Remove button.
-  - A Back to trips link (to trips.html) at the bottom.
-- Photos are kept in the order added.
+  - A Continue button, centred, that leads to media.html for this trip. It is disabled until at least one photo has been added.
+  - The added photos, in a grid of equal tiles (DESIGN.md, The upload page), each with a small Remove button.
+  - Back (to trips.html) and the step links.
+- Photos are kept in the order added (they can be reordered on the Edits page).
 - A trip is only saved once a photo is added or a title is typed, so opening the page and leaving does not create an empty trip.
 - If the title is left empty, the trip is called "Untitled trip" on its tile.
-- Reordering photos and writing captions are not on this page. They will move to the next step (to be designed with the owner). Captions written before this change are kept and still appear in exports.
 
-### export.html
-- Purpose: turn one trip into something to keep and share. Moves in separate steps.
-- Step 1 (the choose screen, rebuilt with the owner):
-  - Heading: the trip's title. Under it: "How would you like to remember this one?" (shown on this screen only).
-  - Two tiles, side by side (stacked on phones): Video and Collage. The Video tile shows a film strip made from two Japan photos (images/film-strip.jpg). The Collage tile shows the Japan collage (images/welcome-collage.jpg). Each tile's label, "Video" or "Collage", is centred under its picture.
-  - Clicking a tile chooses it and goes straight to step 2. There is no separate Next button on this screen.
-  - A Back link under the tiles returns to the trip page (trip.html for this trip).
-  - The step list (Choose, Preview, Download or print) is hidden on this screen and shown on steps 2 and 3.
-- Step 2: preview it.
-- Step 3: download or print.
-- Collage: downloads as an image file (JPEG, 2400 pixels wide), and can be printed. It uses the collage style in DESIGN.md: a mixed-size mosaic with a title panel showing the trip title. A short trip line field on trip.html would be needed to add a line under the title (to be decided with the owner).
-- Video: for now, the preview plays the photos in the browser with a slow cross-fade, and the photos can be printed one per page (the browser print dialog also allows saving as a PDF). Downloading the video as a file is still to be built (see Open questions).
-- Steps 2 and 3 are unchanged for now, apart from the word video; they will be redesigned with the owner later.
+### media.html (step 2: Media type)
+- Heading: the trip's title, and under it "How would you like to remember this one?", both centred.
+- Two tiles, side by side (stacked on phones): Video and Collage. The Video tile shows a film strip made from two Japan photos (images/film-strip.jpg). The Collage tile shows the Japan collage (images/welcome-collage.jpg). Each tile's label, "Video" or "Collage", is centred under its picture.
+- Clicking a tile saves the choice with the trip and goes to edit.html for this trip.
+- Back (to upload.html) and the step links.
+
+### edit.html (step 3: Edits)
+- Head: "Edit" (h1) on the left; the trip's title (h2) on the right, on the same line.
+- For a collage: a placeholder for now, saying collage editing is coming soon, then Back and the step links.
+- For a video, top to bottom:
+  1. Order and captions: the photo count, then all the trip's photos in the same grid of equal tiles as the upload page. Photos can be dragged to a new order (and moved with the keyboard). Each photo has a caption box ("Add a caption") under it, saved as the visitor types.
+  2. Cover (the first frame of the video): a Title box (starts as the trip's title) and a Details box (for example dates or places). Background: one of five palette swatches (cream, sand, clay, terracotta, dark brown) or one of the trip's photos. A small live preview shows the cover; its text is dark on light backgrounds and light on dark ones and photos.
+  3. Duration: how long each photo is shown, one of 1, 1.5, 2, 2.5 or 3 seconds. Starts at 2.5.
+  4. Transition: Clean cut (straight to the next photo), Dissolve (one blends into the next) or Slide (photos slide on and off, right to left). Starts at Dissolve.
+  5. A Preview button that leads to preview.html for this trip.
+  6. Back (to media.html) and the step links.
+- Every choice is saved with the trip in the browser as soon as it is made.
+
+### preview.html (step 4: Preview)
+- A placeholder for now: the "Preview" heading, the trip's title, a short line saying the preview is coming soon, then Back (to edit.html) and the step links. To be designed with the owner next.
+
+### export.html (step 5: Export)
+- The final step, where the finished video or collage will be downloaded or printed. A placeholder for now, to be designed with the owner.
+- Until it is built, the site cannot download or print a collage or a video. The code that builds the mosaic collage (js/collage.js) and plays photos in the browser (js/slideshow.js) is kept for these pages.
+- Collage (when built): an image file (JPEG, 2400 pixels wide) in the collage style in DESIGN.md: a mixed-size mosaic with a title panel showing the trip title.
 - Captions appear only if the visitor wrote one.
 
 ### about.html
@@ -98,8 +125,7 @@ Three built-in, view-only examples made from the owner's photos. They are the sa
 - The Japan example page shows that same collage, large.
 - The Oregon example page shows its pile-of-prints collage (DESIGN.md), large: the seven Oregon photos plus a centred title card reading "Oregon", "2026", "These were real mountains". The year 2026 was given by the owner. The page line above it stays as in the table.
 - The Mexico example page plays a video file, images/mexico-slideshow.mp4 (file name kept) (MP4, silent, 4:3, about 20 seconds): the eight Mexico photos in order, 2.5 seconds each, each dissolving into the next. It is made once from the owner's photos and is larger than 500 KB (the owner has agreed). It does not play until the visitor presses play.
-- The visitor's own video on export.html plays on the page and prints for now; downloading it as a video file is still to be built.
-- The film strip on the choose screen (images/film-strip.jpg) is made once from Japan photos IMG_5577 and IMG_6016.
+- The film strip on the Media type page (images/film-strip.jpg) is made once from Japan photos IMG_5577 and IMG_6016.
 - The photos have no individual captions (none supplied). Alt text names the trip, for example "Photo 3 of 8 from the Mexico example".
 - Welcome collage photos (all from the Japan example): tall IMG_5574 and IMG_5208; wide IMG_6613 and IMG_6569; small IMG_5997 and IMG_4809.
 
@@ -115,7 +141,7 @@ Three built-in, view-only examples made from the owner's photos. They are the sa
 - Only the Supabase project URL and the public (publishable) key are used in the browser code, in js/config.js. They were supplied by the owner and are never replaced with a secret key.
 
 ## How photos and captions are stored
-- Photos, captions, and trip groupings are stored only in the visitor's own browser (IndexedDB), on their own device.
+- Photos, captions, trip groupings and each trip's choices (media type, photo order, cover, duration, transition) are stored only in the visitor's own browser (IndexedDB), on their own device.
 - Nothing about the visitor's photos is sent to Supabase or any server.
 - Each signed-in account uses its own storage area in the browser so two people on one device do not see each other's trips.
 - Photos are resized in the browser when added, to keep storage manageable. The resize size is to be decided with the owner. Until then, the longest side is limited to 2000 pixels (provisional).
@@ -128,7 +154,7 @@ Never invent facts, dimensions, dates, or names that the owner has not given. As
 - Plain HTML, CSS, and JavaScript files only. No frameworks, no npm, no build step.
 - Supabase is loaded from its CDN script tag.
 - index.html sits at the top of the folder.
-- Structure: HTML pages at the top level, a css folder (one shared style.css), a js folder (config.js holds the Supabase project URL and publishable key; auth.js runs the log-in gate and menu; store.js handles browser storage; examples.js lists the example trips; slideshow.js plays a trip's photos as the video preview on export.html; one script per page), and an images folder.
+- Structure: HTML pages at the top level, a css folder (one shared style.css), a js folder (config.js holds the Supabase project URL and publishable key; auth.js runs the log-in gate and menu; store.js handles browser storage; examples.js lists the example trips; steps.js draws the Back link and step links on the step pages; collage.js builds the mosaic collage and slideshow.js plays photos in the browser, both kept for the Preview and Export pages; one script per page, named after its page), and an images folder.
 - It must work on a phone.
 - It is published from GitHub to Vercel.
 - Fonts: Lora and Poppins from Google Fonts, as described in DESIGN.md.
@@ -152,8 +178,8 @@ Never invent facts, dimensions, dates, or names that the owner has not given. As
 - The wording of the How Folio works and Where your photos are kept sections on about.html (plain functional text for now).
 - The Oregon folder includes photos that may be from other places (a city skyline, a glass art exhibit, a harbour with an aircraft carrier). Only the mountain and lake photos are used in the Oregon example. Confirm they are from Oregon.
 - The share image to use when a link is texted.
-- How the video downloads (file format and how it is made). Until built, the video only plays on the page and prints.
-- How long each photo stays on screen in the video (about 4 seconds for now; the Mexico example uses 2.5 seconds).
+- The design of the Preview and Export pages, and the collage editing page.
+- How the video downloads (file format and how it is made).
 - Maximum photo size to keep in the browser.
 
 ## Done when
@@ -164,6 +190,6 @@ Never invent facts, dimensions, dates, or names that the owner has not given. As
 - [ ] Every image has alt text.
 - [ ] The live link opens in a new tab or window.
 - [ ] Photos can be added to a trip and still appear after reloading the page.
-- [ ] A collage can be downloaded and printed.
-- [ ] A video plays and can be printed.
+- [ ] A collage can be downloaded and printed (waiting on the Export page).
+- [ ] A video can be previewed and downloaded (waiting on the Preview and Export pages).
 - [ ] Every page has a title, a one-line description, and a share image.
