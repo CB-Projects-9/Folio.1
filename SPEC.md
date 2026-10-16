@@ -188,8 +188,10 @@ Never invent facts, dimensions, dates, or names that the owner has not given. As
 - Every page has a title, a one-line description, and a share image so the link looks good when texted.
 
 ## Images
-- The owner's own files go in a folder called images (lower case, because Vercel treats Images and images as different folders), with one subfolder per trip: images/japan, images/mexico, images/oregon. These photos are committed to the public GitHub repository, so anyone can see them.
-- The owner compressed every photo to under 500 KB. None carry location (GPS) data.
+- The owner's own files go in a folder called images (lower case, because Vercel treats Images and images as different folders). These files are committed to the public GitHub repository, so anyone can see them.
+- The folder holds only what the site loads: the welcome collage, the Oregon collage, the film strip, the Mexico video, and images/mexico/IMG_3522.jpg (the Mexico cover and video poster).
+- The owner's individual trip photos (Japan, Mexico, Oregon) were used to make those images and were then removed from the project at the owner's request. They remain in the GitHub history (commit 76fd7a3) if an example ever needs to be remade. The photo lists in the Example trips table record which photos each example was made from.
+- The owner compressed every photo to under 500 KB. None carried location (GPS) data.
 - Where the owner has no image yet, use a plain grey box labelled [ADD: image of ...].
 - The owner has photos from several places. They are placed where the owner says, or where the owner has asked Claude to choose (the example trips and the welcome collage).
 - Any image file over 500 KB is reported to the owner.

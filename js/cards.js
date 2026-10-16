@@ -51,7 +51,7 @@ window.exampleCard = function (example) {
     pic.alt = 'Cover for the ' + example.title + ' example: ' + example.collageAlt;
   } else {
     pic.className = 'cover';
-    pic.src = exampleImage(example, example.cover || example.photos[0]);
+    pic.src = exampleImage(example, example.cover);
     pic.alt = 'Cover photo for the ' + example.title + ' example';
   }
   return makeTile('example.html?trip=' + example.id, pic, example.title, null, true);

@@ -5,7 +5,6 @@ window.FOLIO_EXAMPLES = [
     id: 'japan',
     title: 'Japan',
     layout: 'collage',
-    photos: ['IMG_5574', 'IMG_4809', 'IMG_6613', 'IMG_5208', 'IMG_6569', 'IMG_5997'],
     // The same collage as the home page, so the tile, the home page and the example all match.
     collage: 'images/welcome-collage.jpg',
     collageAlt: 'A collage of the Japan trip: six photos around a panel reading Japan, including a golden temple among pine trees, a glass tower under storm clouds, a street lit with neon signs and a room full of glowing lanterns.'
@@ -14,7 +13,6 @@ window.FOLIO_EXAMPLES = [
     id: 'mexico',
     title: 'Mexico',
     layout: 'video',
-    photos: ['IMG_3210', 'IMG_3487', 'IMG_3507', 'IMG_3522', 'IMG_3533', 'IMG_3540', 'IMG_3563', 'IMG_3577'],
     cover: 'IMG_3522',
     // Made once from these photos: 2.5 seconds each, dissolving into the next (DESIGN.md, Movement).
     video: 'images/mexico-slideshow.mp4',
@@ -24,7 +22,6 @@ window.FOLIO_EXAMPLES = [
     id: 'oregon',
     title: 'Oregon',
     layout: 'collage',
-    photos: ['IMG_1268', 'IMG_1501', 'IMG_3039', 'IMG_3042', 'IMG_3105', 'IMG_3803', 'IMG_4124'],
     // A pile of overlapping prints around a centred title card (DESIGN.md, Pile-of-prints collage).
     collage: 'images/oregon-collage.jpg',
     collageTall: true,
