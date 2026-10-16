@@ -1,7 +1,8 @@
 // Shared by the step pages (SPEC.md, Making a trip: the step pages).
 
-// Loads the trip named in the address (?id=...). Resolves to null when there is no id,
-// and shows the page's "not found" message when the id does not match a trip.
+// Loads the trip named in the address (?id=...). Resolves to null when there is no id.
+// When the id does not match a trip, it shows the page's "not found" message and never resolves,
+// so the rest of the page script quietly stops.
 window.loadStepTrip = async function () {
   var user = await Folio.ready;
   await FolioStore.open(user);
@@ -11,7 +12,7 @@ window.loadStepTrip = async function () {
   if (!trip) {
     var missing = document.getElementById('not-found');
     if (missing) missing.hidden = false;
-    throw new Error('trip not found');
+    return new Promise(function () {});
   }
   return trip;
 };

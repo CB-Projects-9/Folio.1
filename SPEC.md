@@ -55,7 +55,7 @@ Making a trip moves through one page per step. Each page knows which trip it is 
 - Every step page ends with a Back link on the bottom left (to the previous step) and the step links "Upload · Media type · Edits · Preview" on the bottom right, with the current step marked.
 - Step links that cannot be used yet are shown faded and do nothing: Media type, Edits and Preview need at least one photo; Edits and Preview also need a media type to have been chosen.
 - The Edits link opens the Edits page for the media type the visitor chose.
-- The old trip.html and export.html are removed. Saving the finished video happens on the Preview page (Export button).
+- The old trip.html and export.html are removed. Saving the finished video or collage happens on the Preview page (Export button).
 
 ### upload.html (step 1: Upload)
 - Purpose: name the trip and add its photos. Every New trip and Start a trip button leads here, and a trip's tile reopens it here.

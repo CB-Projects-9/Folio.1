@@ -236,8 +236,6 @@
   }
 
   window.FolioVideo = {
-    W: W,
-    H: H,
     SWATCHES: SWATCHES,
     defaults: defaults,
     fontsReady: fontsReady,

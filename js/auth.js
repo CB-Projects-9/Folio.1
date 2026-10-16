@@ -61,5 +61,5 @@
     });
   });
 
-  window.Folio = { client: client, configured: configured, ready: ready, logOut: logOut };
+  window.Folio = { client: client, configured: configured, ready: ready };
 })();
