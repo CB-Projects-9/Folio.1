@@ -55,6 +55,7 @@
     });
     // The question and the step list belong to different screens (DESIGN.md, The choose screen).
     document.getElementById('choose-question').hidden = step !== 1;
+    document.getElementById('export-head').classList.toggle('choose-head', step === 1);
     document.querySelector('.steps').hidden = step === 1;
     document.querySelectorAll('[data-step]').forEach(function (li) {
       if (li.dataset.step === String(step)) li.setAttribute('aria-current', 'step');

@@ -63,6 +63,7 @@ All pages are plain .html files at the top of the folder.
   - Heading: the trip's title. Under it: "How would you like to remember this one?" (shown on this screen only).
   - Two tiles, side by side (stacked on phones): Video and Collage. The Video tile shows a film strip made from two Japan photos (images/film-strip.jpg). The Collage tile shows the Japan collage (images/welcome-collage.jpg). Each tile's label, "Video" or "Collage", is centred under its picture.
   - Clicking a tile chooses it and goes straight to step 2. There is no separate Next button on this screen.
+  - A Back link under the tiles returns to the trip page (trip.html for this trip).
   - The step list (Choose, Preview, Download or print) is hidden on this screen and shown on steps 2 and 3.
 - Step 2: preview it.
 - Step 3: download or print.

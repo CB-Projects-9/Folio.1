@@ -126,7 +126,8 @@ This is the front door, so it is kept as short as possible.
 - Under each tile, a small Remove text button (12px text, still 44px tall so it is easy to tap).
 
 ## The choose screen (export.html, first step)
-- Page head: the trip's title (h1), and under it "How would you like to remember this one?" in soft brown.
+- Page head: the trip's title (h1), and under it "How would you like to remember this one?" in soft brown, both centred. 64px of space separates this text from the tiles.
+- Under the tiles, a Back link (returns to the trip page).
 - Two equal tiles below, side by side on tablets and desktop, stacked on phones. Each tile is a warm off-white mount with the thin #D8C7AE border and soft shadow, holding a picture of the same shape (the collage's wide shape) and, centred under it, the label in the small heading style (Lora caps 16px): "Video" or "Collage".
 - The whole tile is the button. It lifts slightly on hover and shows the terracotta focus outline when tabbed to.
 - Video picture: a film strip in dark brown (#3B2A21) with cream sprocket holes along the top and bottom and two frames with rounded corners, each holding a Japan photo. The second frame runs off the right edge.
