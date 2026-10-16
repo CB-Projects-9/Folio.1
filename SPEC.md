@@ -1,7 +1,7 @@
 # SPEC.md
 
 ## What the site is
-Folio is a private travel journal. Each person has their own journal. They create trips, drop in photos, add an optional short caption to any photo, and group photos by trip. Folio can then turn a trip into a slideshow or a collage that can be downloaded, printed, and shared with friends.
+Folio is a private travel journal. Each person has their own journal. They create trips, drop in photos, add an optional short caption to any photo, and group photos by trip. Folio can then turn a trip into a video or a collage that can be downloaded, printed, and shared with friends.
 
 ## Who it is for
 Anyone who travels and wants to turn their photos into a keepsake. Each visitor sees only their own trips.
@@ -39,7 +39,7 @@ All pages are plain .html files at the top of the folder.
 - Purpose: show a new visitor what Folio can make, before they start their own trip.
 - Opened by clicking an example trip card: example.html with the example named in the address (for example, example.html?trip=japan).
 - View only: nothing can be added, edited, reordered, removed or exported.
-- Content: the trip title with a label under it ("Collage Example" for Japan and Oregon, "Slideshow Example" for Mexico), a Start a trip button, then the example's collage or slideshow video, then a Back to home link (to index.html).
+- Content: the trip title with a label under it ("Collage Example" for Japan and Oregon, "Video Example" for Mexico), a Start a trip button, then the example's collage or video, then a Back to home link (to index.html).
 - Gated like every other page.
 
 ### trip.html (step one of making a trip)
@@ -59,11 +59,16 @@ All pages are plain .html files at the top of the folder.
 
 ### export.html
 - Purpose: turn one trip into something to keep and share. Moves in separate steps.
-- Step 1: choose a layout, Slideshow or Collage.
+- Step 1 (the choose screen, rebuilt with the owner):
+  - Heading: the trip's title. Under it: "How would you like to remember this one?" (shown on this screen only).
+  - Two tiles, side by side (stacked on phones): Video and Collage. The Video tile shows a film strip made from two Japan photos (images/film-strip.jpg). The Collage tile shows the Japan collage (images/welcome-collage.jpg). Each tile's label, "Video" or "Collage", is centred under its picture.
+  - Clicking a tile chooses it and goes straight to step 2. There is no separate Next button on this screen.
+  - The step list (Choose, Preview, Download or print) is hidden on this screen and shown on steps 2 and 3.
 - Step 2: preview it.
 - Step 3: download or print.
 - Collage: downloads as an image file (JPEG, 2400 pixels wide), and can be printed. It uses the collage style in DESIGN.md: a mixed-size mosaic with a title panel showing the trip title. A short trip line field on trip.html would be needed to add a line under the title (to be decided with the owner).
-- Slideshow: plays in the browser with a slow cross-fade, and can be printed with one photo per page (the browser print dialog also allows saving as a PDF). A downloadable slideshow file format is to be decided with the owner (see Open questions).
+- Video: for now, the preview plays the photos in the browser with a slow cross-fade, and the photos can be printed one per page (the browser print dialog also allows saving as a PDF). Downloading the video as a file is still to be built (see Open questions).
+- Steps 2 and 3 are unchanged for now, apart from the word video; they will be redesigned with the owner later.
 - Captions appear only if the visitor wrote one.
 
 ### about.html
@@ -72,9 +77,9 @@ All pages are plain .html files at the top of the folder.
 - Sections, in order: How Folio works; Where your photos are kept; Why Folio; Where it is going.
 - Why Folio (approved by the owner, first person, no name):
   "I started taking trips all over the world and came home with thousands of photos. I wanted to share them with my family, but not by sending thousands of single pictures at once.
-  So I made Folio: a place to gather the photos from a trip into one slideshow or collage, and share it with whoever I choose."
+  So I made Folio: a place to gather the photos from a trip into one video or collage, and share it with whoever I choose."
 - Where it is going (approved by the owner):
-  "Choosing which photos to send takes time. The goal is to let you add every photo from a trip, have Folio help pick the best ones, and turn them into a slideshow video or a scrapbook to share. That part is still being built."
+  "Choosing which photos to send takes time. The goal is to let you add every photo from a trip, have Folio help pick the best ones, and turn them into a video or a scrapbook to share. That part is still being built."
 
 ### account.html (removed)
 - Removed at the owner's request. The menu has no Account link. It may come back later if account settings are needed.
@@ -85,14 +90,15 @@ Three built-in, view-only examples made from the owner's photos. They are the sa
 | Example | Address | Layout | Trip line (owner's words, lightly edited; used inside the Japan collage and the Oregon title card, not shown on the example pages) | Photos (in order) |
 |---|---|---|---|---|
 | Japan | example.html?trip=japan | Collage | Five weeks on the other side of the world, and memories that will last forever. | IMG_5574, IMG_4809, IMG_6613, IMG_5208, IMG_6569, IMG_5997 (the six photos in the welcome collage) |
-| Mexico | example.html?trip=mexico | Slideshow (video) | Only a four-hour flight from home, and it felt like another world: stunning sunsets, magnificent buildings and unforgettable people. | IMG_3210, IMG_3487, IMG_3507, IMG_3522, IMG_3533, IMG_3540, IMG_3563, IMG_3577 |
+| Mexico | example.html?trip=mexico | Video | Only a four-hour flight from home, and it felt like another world: stunning sunsets, magnificent buildings and unforgettable people. | IMG_3210, IMG_3487, IMG_3507, IMG_3522, IMG_3533, IMG_3540, IMG_3563, IMG_3577 |
 | Oregon | example.html?trip=oregon | Collage (pile of prints) | These were real mountains. Who said America wasn't gorgeous? | IMG_1268, IMG_1501, IMG_3039, IMG_3042, IMG_3105, IMG_3803, IMG_4124 |
 
 - Example cards show the trip title, a cover and a small Example label. They never show a photo count. The Mexico cover is IMG_3522 (chosen by the owner). The Oregon cover is its collage image (images/oregon-collage.jpg). The Japan cover is the welcome collage itself (images/welcome-collage.jpg), so the home page collage, the Japan tile and the Japan example page all show the same image.
 - The Japan example page shows that same collage, large.
 - The Oregon example page shows its pile-of-prints collage (DESIGN.md), large: the seven Oregon photos plus a centred title card reading "Oregon", "2026", "These were real mountains". The year 2026 was given by the owner. The page line above it stays as in the table.
-- The Mexico example page plays a slideshow video file, images/mexico-slideshow.mp4 (MP4, silent, 4:3, about 20 seconds): the eight Mexico photos in order, 2.5 seconds each, each dissolving into the next. It is made once from the owner's photos and is larger than 500 KB (the owner has agreed). It does not play until the visitor presses play.
-- The visitor's own slideshow on export.html is unchanged for now (plays on the page, prints, no video download).
+- The Mexico example page plays a video file, images/mexico-slideshow.mp4 (file name kept) (MP4, silent, 4:3, about 20 seconds): the eight Mexico photos in order, 2.5 seconds each, each dissolving into the next. It is made once from the owner's photos and is larger than 500 KB (the owner has agreed). It does not play until the visitor presses play.
+- The visitor's own video on export.html plays on the page and prints for now; downloading it as a video file is still to be built.
+- The film strip on the choose screen (images/film-strip.jpg) is made once from Japan photos IMG_5577 and IMG_6016.
 - The photos have no individual captions (none supplied). Alt text names the trip, for example "Photo 3 of 8 from the Mexico example".
 - Welcome collage photos (all from the Japan example): tall IMG_5574 and IMG_5208; wide IMG_6613 and IMG_6569; small IMG_5997 and IMG_4809.
 
@@ -121,7 +127,7 @@ Never invent facts, dimensions, dates, or names that the owner has not given. As
 - Plain HTML, CSS, and JavaScript files only. No frameworks, no npm, no build step.
 - Supabase is loaded from its CDN script tag.
 - index.html sits at the top of the folder.
-- Structure: HTML pages at the top level, a css folder (one shared style.css), a js folder (config.js holds the Supabase project URL and publishable key; auth.js runs the log-in gate and menu; store.js handles browser storage; examples.js lists the example trips; slideshow.js is the slideshow shared by export.html and example.html; one script per page), and an images folder.
+- Structure: HTML pages at the top level, a css folder (one shared style.css), a js folder (config.js holds the Supabase project URL and publishable key; auth.js runs the log-in gate and menu; store.js handles browser storage; examples.js lists the example trips; slideshow.js plays a trip's photos as the video preview on export.html; one script per page), and an images folder.
 - It must work on a phone.
 - It is published from GitHub to Vercel.
 - Fonts: Lora and Poppins from Google Fonts, as described in DESIGN.md.
@@ -145,8 +151,8 @@ Never invent facts, dimensions, dates, or names that the owner has not given. As
 - The wording of the How Folio works and Where your photos are kept sections on about.html (plain functional text for now).
 - The Oregon folder includes photos that may be from other places (a city skyline, a glass art exhibit, a harbour with an aircraft carrier). Only the mountain and lake photos are used in the Oregon example. Confirm they are from Oregon.
 - The share image to use when a link is texted.
-- Whether the slideshow should download as a file (and in what format) or only play and print. Until decided, it only plays and prints.
-- How long each slideshow photo stays on screen (about 4 seconds for now).
+- How the video downloads (file format and how it is made). Until built, the video only plays on the page and prints.
+- How long each photo stays on screen in the video (about 4 seconds for now; the Mexico example uses 2.5 seconds).
 - Maximum photo size to keep in the browser.
 
 ## Done when
@@ -158,5 +164,5 @@ Never invent facts, dimensions, dates, or names that the owner has not given. As
 - [ ] The live link opens in a new tab or window.
 - [ ] Photos can be added to a trip and still appear after reloading the page.
 - [ ] A collage can be downloaded and printed.
-- [ ] A slideshow plays and can be printed.
+- [ ] A video plays and can be printed.
 - [ ] Every page has a title, a one-line description, and a share image.

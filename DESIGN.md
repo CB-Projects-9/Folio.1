@@ -1,7 +1,7 @@
 # DESIGN.md
 
 ## Concept
-Folio is a private travel journal that feels like a well-made photo album. A visitor drops in photos from a trip, and Folio turns them into a keepsake slideshow or collage they can download, print, and share.
+Folio is a private travel journal that feels like a well-made photo album. A visitor drops in photos from a trip, and Folio turns them into a keepsake video or collage they can download, print, and share.
 
 ## References
 No outside references were named. The direction comes from the person's own words: soft, warm, inviting, professional, and photo-first. The borrowed system is the old photo album: mounted prints with soft borders, paper and clay tones, and a quiet interface that lets the pictures lead. No names, logos, text, images, or fonts are copied from anywhere.
@@ -55,8 +55,8 @@ Free Google Fonts only: Lora and Poppins.
 
 ## Movement
 - Subtle only: gentle fades when a page or section appears (about 300ms) and a soft lift on photo hover (about 2px up, slightly deeper shadow).
-- The exported slideshow may use a slow cross-fade between photos (about 1.2 seconds). Each photo stays on screen for about 4 seconds (provisional, to be confirmed by the owner).
-- The Mexico example slideshow is a video: 2.5 seconds per photo, with each photo dissolving into the next over about 1 second (inside its 2.5 seconds). It has no sound and only plays when the visitor presses play.
+- The video preview on export.html may use a slow cross-fade between photos (about 1.2 seconds). Each photo stays on screen for about 4 seconds (provisional, to be confirmed by the owner).
+- The Mexico example video: 2.5 seconds per photo, with each photo dissolving into the next over about 1 second (inside its 2.5 seconds). It has no sound and only plays when the visitor presses play.
 - No auto-playing music or video. No heavy animation.
 - Respect the visitor's reduced motion setting by turning movement off.
 
@@ -125,13 +125,21 @@ This is the front door, so it is kept as short as possible.
 - Each tile is a warm off-white mount with the thin #D8C7AE border and soft shadow. The photo is fitted whole inside it with a small margin and never cropped, so a tall photo leaves more of the tile showing at the left and right, and a wide photo more at the top and bottom. No tilt.
 - Under each tile, a small Remove text button (12px text, still 44px tall so it is easy to tap).
 
+## The choose screen (export.html, first step)
+- Page head: the trip's title (h1), and under it "How would you like to remember this one?" in soft brown.
+- Two equal tiles below, side by side on tablets and desktop, stacked on phones. Each tile is a warm off-white mount with the thin #D8C7AE border and soft shadow, holding a picture of the same shape (the collage's wide shape) and, centred under it, the label in the small heading style (Lora caps 16px): "Video" or "Collage".
+- The whole tile is the button. It lifts slightly on hover and shows the terracotta focus outline when tabbed to.
+- Video picture: a film strip in dark brown (#3B2A21) with cream sprocket holes along the top and bottom and two frames with rounded corners, each holding a Japan photo. The second frame runs off the right edge.
+- Collage picture: the Japan collage from the home page.
+- The step list is hidden on this screen.
+
 ## The Trips page (trips.html)
 - Page head: the Trips title (h1) on the left and the New trip button (primary) on the right, centred vertically against the title, in the same layout as the example page head.
 
 ## The example view (example.html)
-- Page head: on the left, the trip title (h1) with a small label under it in soft brown ("Collage Example" or "Slideshow Example"). On the right, the Start a trip button (the one primary button on this screen), centred vertically against the title and label. On narrow screens it drops below the title only if there is not room beside it.
+- Page head: on the left, the trip title (h1) with a small label under it in soft brown ("Collage Example" or "Video Example"). On the right, the Start a trip button (the one primary button on this screen), centred vertically against the title and label. On narrow screens it drops below the title only if there is not room beside it.
 - Collage example (Oregon): the pile-of-prints collage shown large, as one mounted print the full width of the content column (up to 640px wide on desktop, because it is tall), centred, so it matches the Oregon tile.
-- Slideshow example (Mexico): the slideshow video in one mounted print the full width of the content column, with the browser's normal video controls. Before it plays it shows IMG_3522 (the Mexico cover). Frames are 4:3 on a cream background, each photo fitted whole (not cropped) and centred.
+- Video example (Mexico): the video in one mounted print the full width of the content column, with the browser's normal video controls. Before it plays it shows IMG_3522 (the Mexico cover). Frames are 4:3 on a cream background, each photo fitted whole (not cropped) and centred.
 - Collage example (Japan): the welcome collage shown large, as one mounted print the full width of the content column, so it matches the home page and the Japan tile.
 - A Back to home link sits at the bottom of the page and returns to index.html. (A visitor's own trip page, trip.html, has a Back to trips link in the same style.)
 

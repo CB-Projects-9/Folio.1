@@ -1,4 +1,4 @@
-// View-only example trip: a collage image or a slideshow video (SPEC.md, example.html).
+// View-only example trip: a collage image or a video (SPEC.md, example.html).
 Folio.ready.then(function () {
   var id = new URLSearchParams(location.search).get('trip');
   var example = FOLIO_EXAMPLES.find(function (e) { return e.id === id; });
@@ -9,7 +9,7 @@ Folio.ready.then(function () {
 
   document.title = 'Folio · ' + example.title + ' example';
   document.getElementById('example-title').textContent = example.title;
-  document.getElementById('example-kind').textContent = example.layout === 'video' ? 'Slideshow Example' : 'Collage Example';
+  document.getElementById('example-kind').textContent = example.layout === 'video' ? 'Video Example' : 'Collage Example';
   document.getElementById('example-view').hidden = false;
 
   if (example.layout === 'video') {

@@ -16,7 +16,7 @@
 
   var tripUrl = 'trip.html?id=' + encodeURIComponent(trip.id);
   document.getElementById('trip-name').textContent = trip.title;
-  document.title = 'Folio · Export ' + trip.title;
+  document.title = 'Folio · ' + trip.title;
 
   var photos = await FolioStore.photosFor(trip);
   if (!photos.length) {
@@ -37,8 +37,10 @@
   document.getElementById('export-view').hidden = false;
   document.getElementById('back-link').href = tripUrl;
 
+  // 'video' or 'collage', set by the tile the visitor clicks on the choose screen.
+  var chosen = null;
   function layout() {
-    return document.querySelector('input[name="layout"]:checked').value;
+    return chosen;
   }
 
   function altFor(p, i) {
@@ -51,6 +53,9 @@
     document.querySelectorAll('[data-panel]').forEach(function (s) {
       s.hidden = s.dataset.panel !== String(step);
     });
+    // The question and the step list belong to different screens (DESIGN.md, The choose screen).
+    document.getElementById('choose-question').hidden = step !== 1;
+    document.querySelector('.steps').hidden = step === 1;
     document.querySelectorAll('[data-step]').forEach(function (li) {
       if (li.dataset.step === String(step)) li.setAttribute('aria-current', 'step');
       else li.removeAttribute('aria-current');
@@ -58,10 +63,18 @@
     if (step === 2) await buildPreview();
     if (step === 3) setFinal();
     if (quiet) return;
-    var heading = document.querySelector('[data-panel="' + step + '"] h2');
+    var heading = step === 1 ? document.getElementById('trip-name') : document.querySelector('[data-panel="' + step + '"] h2');
     heading.tabIndex = -1;
     heading.focus();
   }
+
+  document.querySelectorAll('.choose-tile').forEach(function (tile) {
+    tile.addEventListener('click', function () {
+      if (chosen !== tile.dataset.layout) preview.replaceChildren();
+      chosen = tile.dataset.layout;
+      go(2);
+    });
+  });
 
   document.querySelectorAll('[data-go]').forEach(function (b) {
     b.addEventListener('click', function () { go(Number(b.dataset.go)); });
@@ -237,7 +250,7 @@
   }
 
   async function buildPreview() {
-    if (layout() === 'slideshow') {
+    if (layout() === 'video') {
       buildSlideshow();
       return;
     }
@@ -263,7 +276,7 @@
       printCollage.hidden = false;
       finalHelp.textContent = 'Downloads as a JPEG image. You can also print it.';
     } else {
-      mainAction.textContent = 'Print slideshow';
+      mainAction.textContent = 'Print photos';
       printCollage.hidden = true;
       finalHelp.textContent = 'Prints one photo per page. Your browser\'s print window can also save it as a PDF.';
     }
@@ -318,10 +331,6 @@
     }
   });
   printCollage.addEventListener('click', doPrint);
-
-  document.querySelectorAll('input[name="layout"]').forEach(function (r) {
-    r.addEventListener('change', function () { preview.replaceChildren(); });
-  });
 
   go(1, true);
 })();

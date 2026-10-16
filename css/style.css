@@ -339,18 +339,28 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
 /* Export */
 .steps { list-style: none; margin: 0 0 24px; padding: 0; display: flex; gap: 24px; font-size: 13px; color: var(--soft-brown); }
 .steps [aria-current="step"] { color: var(--brown); font-weight: 400; text-decoration: underline; text-underline-offset: 4px; }
-.choices { display: grid; gap: 24px; grid-template-columns: 1fr; margin-bottom: 40px; max-width: 720px; }
-.choice {
+/* Choose screen: two equal tiles, each one a button (DESIGN.md, The choose screen) */
+.choose-grid { display: grid; gap: 24px; grid-template-columns: 1fr; margin-bottom: 24px; }
+.choose-tile {
   display: block;
-  background: var(--offwhite);
-  border: 1px solid var(--border);
-  padding: 24px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--brown);
+  text-align: center;
   cursor: pointer;
-  box-shadow: var(--shadow);
 }
-.choice:has(input:checked) { border-color: var(--terracotta); box-shadow: var(--shadow-lift); }
-.choice input { accent-color: var(--terracotta); margin-right: 8px; }
-.choice .caption { display: block; margin-top: 8px; }
+.choose-tile .print img { width: 100%; height: auto; }
+.choose-tile:hover .print, .choose-tile:focus-visible .print { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+.choose-label {
+  display: block;
+  margin-top: 16px;
+  font: 500 16px "Lora", serif;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
 .step-nav { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-top: 40px; }
 
 .collage-preview { max-width: 880px; }
@@ -387,7 +397,7 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
 @media (min-width: 640px) {
   .trip-grid { grid-template-columns: repeat(2, 1fr); }
   .photo-grid { grid-template-columns: repeat(3, 1fr); }
-  .choices { grid-template-columns: 1fr 1fr; }
+  .choose-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (min-width: 900px) {

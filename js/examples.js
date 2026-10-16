@@ -18,7 +18,7 @@ window.FOLIO_EXAMPLES = [
     cover: 'IMG_3522',
     // Made once from these photos: 2.5 seconds each, dissolving into the next (DESIGN.md, Movement).
     video: 'images/mexico-slideshow.mp4',
-    videoLabel: 'Slideshow video of the Mexico trip: eight photos, 2.5 seconds each, including a river beach, a church dome over red rooftops, a sunset over the sea and a rainbow over palm trees. No sound.'
+    videoLabel: 'Video of the Mexico trip: eight photos, 2.5 seconds each, including a river beach, a church dome over red rooftops, a sunset over the sea and a rainbow over palm trees. No sound.'
   },
   {
     id: 'oregon',
