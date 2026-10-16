@@ -83,7 +83,7 @@
     return text.trim() + '…';
   }
 
-  // Resolves to a JPEG Blob of the whole collage, 2400 pixels wide (SPEC.md, export.html).
+  // Resolves to a JPEG Blob of the whole collage, 2400 pixels wide (DESIGN.md, Collage style).
   window.buildCollage = async function (trip, photos) {
     try {
       await document.fonts.load('500 64px Lora');

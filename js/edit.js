@@ -1,13 +1,7 @@
-// Step 3: Edits (SPEC.md, edit.html). For a video: order and captions, cover, duration, transition.
+// Step 3: Edits (SPEC.md, edit.html).
+// For a video: order and captions, caption style, cover, duration, transition.
 (async function () {
-  // [name, colour, text on it]; text is dark on light swatches and light on dark ones.
-  var SWATCHES = [
-    ['cream', '#F6EFE3', 'dark'],
-    ['sand', '#E4D3BA', 'dark'],
-    ['clay', '#C9A98A', 'dark'],
-    ['terracotta', '#A24B30', 'light'],
-    ['dark brown', '#3B2A21', 'light']
-  ];
+  var SWATCHES = FolioVideo.SWATCHES; // palette name -> colour
   var DURATIONS = [1, 1.5, 2, 2.5, 3];
   var TRANSITIONS = [
     ['cut', 'Clean cut', 'Straight to the next photo.'],
@@ -51,15 +45,15 @@
   });
 
   // Video choices, saved with the trip. Starting values come from SPEC.md.
-  var video = trip.video || {};
-  video.cover = video.cover || {};
-  if (video.cover.title === undefined) video.cover.title = trip.title === 'Untitled trip' ? '' : trip.title;
-  if (video.cover.details === undefined) video.cover.details = '';
-  var bg = video.cover.background;
-  if (!bg || (bg.type === 'photo' && !byId[bg.value])) video.cover.background = { type: 'swatch', value: 'cream' };
-  video.duration = video.duration || 2.5;
-  video.transition = video.transition || 'dissolve';
-  trip.video = video;
+  var video = FolioVideo.defaults(trip, trip.photoIds);
+
+  // The live samples are drawn with the same code that makes the video (js/video.js).
+  var bitmaps = {};
+  function bitmapFor(photo) {
+    if (!bitmaps[photo.id]) bitmaps[photo.id] = createImageBitmap(photo.blob);
+    return bitmaps[photo.id];
+  }
+  var fontsLoaded = FolioVideo.fontsReady();
 
   function save() {
     return FolioStore.saveTrip(trip);
@@ -112,6 +106,7 @@
       photo.caption = cap.value.trim();
       img.alt = photo.caption || 'Photo from ' + trip.title;
       FolioStore.savePhoto(photo);
+      drawCaptionSample();
     });
 
     li.append(fig, label, cap);
@@ -176,18 +171,6 @@
     status.textContent = 'Moved to position ' + (Array.from(grid.children).indexOf(li) + 1) + ' of ' + n + '.';
   });
 
-  // ---- Cover ----
-  var headingInput = document.getElementById('cover-heading');
-  var detailsInput = document.getElementById('cover-details');
-  var preview = document.getElementById('cover-preview');
-  var previewTitle = document.getElementById('cover-preview-title');
-  var previewDetails = document.getElementById('cover-preview-details');
-  var swatchBox = document.getElementById('swatches');
-  var photoBox = document.getElementById('cover-photos');
-
-  headingInput.value = video.cover.title;
-  detailsInput.value = video.cover.details;
-
   function radio(className, label, checked) {
     var b = document.createElement('button');
     b.type = 'button';
@@ -197,6 +180,67 @@
     b.setAttribute('aria-label', label);
     return b;
   }
+
+  // ---- Caption style ----
+  var captionCanvas = document.getElementById('caption-sample');
+  var captionColours = document.getElementById('cap-colours');
+
+  // The first photo with a caption shows how captions will look; otherwise an example on the first photo.
+  async function drawCaptionSample() {
+    var sample = photos.find(function (p) { return p.caption; }) || photos[0];
+    var bitmap = await bitmapFor(sample);
+    await fontsLoaded;
+    FolioVideo.drawPhoto(captionCanvas.getContext('2d'), bitmap, sample.caption || 'Your caption here', video.caption);
+  }
+
+  optionGroup(
+    document.getElementById('cap-vertical'),
+    [{ value: 'top', label: 'Top' }, { value: 'bottom', label: 'Bottom' }],
+    function (v) { return video.caption.vertical === v; },
+    function (v) { video.caption.vertical = v; drawCaptionSample(); }
+  );
+  optionGroup(
+    document.getElementById('cap-horizontal'),
+    [{ value: 'left', label: 'Left' }, { value: 'center', label: 'Centre' }, { value: 'right', label: 'Right' }],
+    function (v) { return video.caption.horizontal === v; },
+    function (v) { video.caption.horizontal = v; drawCaptionSample(); }
+  );
+  optionGroup(
+    document.getElementById('cap-style'),
+    [
+      { value: 'regular', label: 'Regular', className: 'style-regular' },
+      { value: 'bold', label: 'Bold', className: 'style-bold' },
+      { value: 'italic', label: 'Italic', className: 'style-italic' }
+    ],
+    function (v) { return video.caption.style === v; },
+    function (v) { video.caption.style = v; drawCaptionSample(); }
+  );
+
+  Object.keys(SWATCHES).forEach(function (name) {
+    var b = radio('swatch', name + ' caption text', video.caption.colour === name);
+    b.dataset.value = name;
+    b.style.backgroundColor = SWATCHES[name];
+    b.addEventListener('click', function () {
+      video.caption.colour = name;
+      captionColours.querySelectorAll('button').forEach(function (other) {
+        other.setAttribute('aria-checked', String(other === b));
+      });
+      drawCaptionSample();
+      save();
+    });
+    captionColours.append(b);
+  });
+  drawCaptionSample();
+
+  // ---- Cover ----
+  var headingInput = document.getElementById('cover-heading');
+  var detailsInput = document.getElementById('cover-details');
+  var coverCanvas = document.getElementById('cover-sample');
+  var swatchBox = document.getElementById('swatches');
+  var photoBox = document.getElementById('cover-photos');
+
+  headingInput.value = video.cover.title;
+  detailsInput.value = video.cover.details;
 
   function markChecked() {
     var current = video.cover.background;
@@ -208,30 +252,20 @@
     });
   }
 
-  function updateCover() {
-    var current = video.cover.background;
-    preview.classList.remove('text-light', 'with-photo');
-    preview.style.backgroundImage = '';
-    if (current.type === 'photo') {
-      preview.style.backgroundColor = '#3B2A21';
-      preview.style.backgroundImage = 'url("' + urls[current.value] + '")';
-      preview.classList.add('text-light', 'with-photo');
-    } else {
-      var swatch = SWATCHES.find(function (s) { return s[0] === current.value; }) || SWATCHES[0];
-      preview.style.backgroundColor = swatch[1];
-      if (swatch[2] === 'light') preview.classList.add('text-light');
-    }
-    previewTitle.textContent = video.cover.title;
-    previewDetails.textContent = video.cover.details;
+  async function updateCover() {
     markChecked();
+    var current = video.cover.background;
+    var bitmap = current.type === 'photo' ? await bitmapFor(byId[current.value]) : null;
+    await fontsLoaded;
+    FolioVideo.drawCover(coverCanvas.getContext('2d'), video.cover, bitmap);
   }
 
-  SWATCHES.forEach(function (s) {
-    var b = radio('swatch', s[0] + ' background', false);
-    b.dataset.value = s[0];
-    b.style.backgroundColor = s[1];
+  Object.keys(SWATCHES).forEach(function (name) {
+    var b = radio('swatch', name + ' background', false);
+    b.dataset.value = name;
+    b.style.backgroundColor = SWATCHES[name];
     b.addEventListener('click', function () {
-      video.cover.background = { type: 'swatch', value: s[0] };
+      video.cover.background = { type: 'swatch', value: name };
       updateCover();
       save();
     });
@@ -273,7 +307,7 @@
       b.className = 'option';
       b.setAttribute('role', 'radio');
       var name = document.createElement('span');
-      name.className = 'option-name';
+      name.className = 'option-name' + (item.className ? ' ' + item.className : '');
       name.textContent = item.label;
       b.append(name);
       if (item.note) {

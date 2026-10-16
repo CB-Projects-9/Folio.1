@@ -10,7 +10,7 @@
   <!-- Share image (og:image): to be supplied by the owner. See SPEC.md, Open questions. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Poppins:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.0/dist/umd/supabase.js"></script>
   <script src="js/config.js"></script>
@@ -49,6 +49,22 @@
           <p class="visually-hidden" id="order-status" aria-live="polite"></p>
         </section>
 
+        <section class="edit-section" aria-labelledby="caption-title">
+          <h3 id="caption-title">Caption style</h3>
+          <div class="cover-layout">
+            <div class="cover-controls">
+              <p class="option-label" id="position-label">Position</p>
+              <div class="options" id="cap-vertical" role="radiogroup" aria-label="Caption position, top or bottom"></div>
+              <div class="options options-gap" id="cap-horizontal" role="radiogroup" aria-label="Caption position, left, centre or right"></div>
+              <p class="option-label" id="cap-colour-label">Text colour</p>
+              <div class="swatches" id="cap-colours" role="radiogroup" aria-labelledby="cap-colour-label"></div>
+              <p class="option-label" id="cap-style-label">Font style</p>
+              <div class="options" id="cap-style" role="radiogroup" aria-labelledby="cap-style-label"></div>
+            </div>
+            <canvas class="frame-sample" id="caption-sample" width="1280" height="720" aria-hidden="true"></canvas>
+          </div>
+        </section>
+
         <section class="edit-section" aria-labelledby="cover-title">
           <h3 id="cover-title">Cover</h3>
           <div class="cover-layout">
@@ -65,12 +81,7 @@
               <div class="swatches" id="swatches" role="radiogroup" aria-labelledby="bg-label"></div>
               <div class="cover-photos" id="cover-photos" role="radiogroup" aria-label="Or a photo from this trip"></div>
             </div>
-            <div class="cover-preview" id="cover-preview" aria-hidden="true">
-              <div class="cover-text">
-                <span class="cover-preview-title" id="cover-preview-title"></span>
-                <span class="cover-preview-details" id="cover-preview-details"></span>
-              </div>
-            </div>
+            <canvas class="frame-sample" id="cover-sample" width="1280" height="720" aria-hidden="true"></canvas>
           </div>
         </section>
 
@@ -96,6 +107,7 @@
 
   <script src="js/store.js"></script>
   <script src="js/steps.js"></script>
+  <script src="js/video.js"></script>
   <script src="js/edit.js"></script>
 </body>
 </html>

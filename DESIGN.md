@@ -32,6 +32,7 @@ Free Google Fonts only: Lora and Poppins.
   - Small heading (h3): 16px, letter spacing 0.14em.
 - Body text: Poppins, weight 300 or 400, 15px, line height 1.7.
 - Captions and helper text: Poppins, weight 300, 13px, in soft brown.
+- Captions inside a visitor's video use Poppins Regular, Bold (700) or Italic, as the visitor chooses on the Edits page.
 - Buttons and menu links: Poppins, weight 400, 14px. Menu links are not in caps.
 - Volume sits between quiet and medium. Text stays small and light with plenty of space so the photos carry the page.
 
@@ -40,7 +41,7 @@ Free Google Fonts only: Lora and Poppins.
 - Looser scrapbook feel only inside the example views.
 - Pacing is balanced: comfortable space between sections, never cramped and never empty.
 - Spacing scale: 8, 16, 24, 40, 64 pixels.
-- Welcome page (index.html), Trips page and the Edits page scroll. Making a trip moves through separate step pages (Upload, Media type, Edits, Preview, Export). Other pages stay short with minimal scrolling.
+- Welcome page (index.html), Trips page and the Edits page scroll. Making a trip moves through separate step pages (Upload, Media type, Edits, Preview). Other pages stay short with minimal scrolling.
 - Trip cards sit in a grid: one column on phones, two on tablets, three on desktop.
 - Everything must work on a phone first.
 
@@ -101,7 +102,7 @@ This is the front door, so it is kept as short as possible.
   - Row 1: tall photo, small photo, wide photo.
   - Row 2: (tall photo continues), title panel two columns wide, tall photo.
   - Row 3: wide photo, small photo, (tall photo continues).
-- A visitor's collage (built by js/collage.js, for the Export page) uses the same style, and its grid adapts to the trip:
+- A visitor's collage (built by js/collage.js, for the collage pages still to be designed) uses the same style, and its grid adapts to the trip:
   - 4 columns for 6 or more photos, 3 columns for 3 to 5 photos, 2 columns for 1 or 2 photos.
   - Tall (portrait) photos get tall tiles and wide (landscape) photos get wide tiles where they fit; the rest get single tiles. Photos keep the trip's order, reading left to right, top to bottom.
   - The title panel is two columns wide, in the second row (the first row when there are 3 or fewer photos), as near the middle as the grid allows. It shows the trip title. It also holds a trip line once trips have one (see SPEC.md).
@@ -120,7 +121,7 @@ This is the front door, so it is kept as short as possible.
 - The same tiles appear on the Trips page in place of the empty-state grey box until the visitor creates a trip.
 
 ## Step pages (making a trip)
-- Every step page (Upload, Media type, Edits, Preview, Export) ends with one row: a Back link on the left and the step links "Upload · Media type · Edits · Preview" on the right, separated by thin middle dots, in Poppins 14px dark brown, underlined on hover.
+- Every step page (Upload, Media type, Edits, Preview) ends with one row: a Back link on the left and the step links "Upload · Media type · Edits · Preview" on the right, separated by thin middle dots, in Poppins 14px dark brown, underlined on hover.
 - The current step's link is terracotta and not underlined. Links that cannot be used yet are soft brown at half strength and do nothing.
 - On phones the row wraps: Back on its own line, the step links under it.
 - Back and the step links are at least 44px tall for tapping.
@@ -140,16 +141,23 @@ This is the front door, so it is kept as short as possible.
 
 ## The Edits page (edit.html)
 - Page head on one line: "Edit" (h1) on the left; the trip's title on the right as an h2, in the h2 style (20px on phones, 24px on desktop), centred vertically against "Edit". On narrow screens the h2 drops under "Edit" if there is not room.
-- Four sections, each with a small heading (h3 style, Lora caps 16px) and 64px of space between sections: Order and captions, Cover, Duration, Transition.
+- Five sections, each with a small heading (h3 style, Lora caps 16px) and 64px of space between sections: Order and captions, Caption style, Cover, Duration, Transition.
 - Order and captions: the photo count (caption style), then the same equal square tiles as the upload page. Each tile can be picked up and dragged to a new place; while dragging, the tile lifts (deeper shadow) and the other tiles shift to show where it will land. Under each tile, a caption box (Poppins 13px, light outline, placeholder "Add a caption"). Small "Move earlier" / "Move later" controls are not shown; keyboard users move a focused tile with the arrow keys.
-- Cover: on desktop, the controls on the left and a live preview on the right; stacked on phones. Controls: Title and Details text boxes, then "Background" with five round swatches (cream, sand, clay, terracotta, dark brown) and, under them, the trip's photos as small square thumbnails to choose from. The chosen swatch or photo has a 2px terracotta ring. The preview is a 4:3 card showing the background with the title (Lora caps) and details (Poppins light) centred on it; the text is dark brown on cream, sand and clay, and cream on terracotta, dark brown and photos (photos get a soft dark wash so the text stays readable).
+- Caption style: on desktop, the controls on the left and a live sample on the right; stacked on phones. Controls, each with a small label: Position (two rows of option buttons, "Top · Bottom" and "Left · Centre · Right"), Text colour (the same five round swatches as the cover), Font style (option buttons "Regular", "Bold", "Italic", each shown in its own style). The sample is a 16:9 card with a trip photo fitted on cream and the example caption "Your caption here" (or the first caption the visitor wrote) in the chosen spot, colour and style.
+- Captions in the video: Poppins, about 1/20 of the frame height, inset from the photo's edge by about 1/30 of the frame, at most two lines. A soft shadow sits behind the letters: dark brown at half strength behind cream, sand and clay; cream behind terracotta and dark brown.
+- Cover: on desktop, the controls on the left and a live preview on the right; stacked on phones. Controls: Title and Details text boxes, then "Background" with five round swatches (cream, sand, clay, terracotta, dark brown) and, under them, the trip's photos as small square thumbnails to choose from. The chosen swatch or photo has a 2px terracotta ring. The preview is a 16:9 card (the video's shape) showing the background with the title (Lora caps) and details (Poppins light) centred on it; the text is dark brown on cream, sand and clay, and cream on terracotta, dark brown and photos (photos get a soft dark wash so the text stays readable).
 - Duration: five option buttons in a row, "1s · 1.5s · 2s · 2.5s · 3s", outlined in #D8C7AE; the chosen one is filled terracotta with cream text.
 - Transition: three option buttons in the same style, "Clean cut", "Dissolve", "Slide", each with a short line under it in caption style.
 - The Preview button (primary, the one primary button on this page) is centred under the Transition section, then the Back and step links row.
 - Collage placeholder: the same page head, a short plain line that collage editing is coming soon, then the Back and step links row.
 
-## The Preview and Export pages (preview.html, export.html)
-- Placeholders for now: the page heading (h1), the trip's title in soft brown under it, a short plain line that this step is coming soon, then the Back and step links row.
+## The Preview page (preview.html)
+- Page head on one line, like the Edits page: "Preview" (h1) on the left, the trip's title (h2) on the right.
+- One large tile, centred, the full width of the content column: a warm off-white mount with the thin #D8C7AE border and soft shadow, holding the 16:9 video. While the video is being made, the tile shows "Making your video…" and a percentage, centred in soft brown.
+- Controls under the picture, inside the mount, on one row: a round play/pause button on the left (terracotta, cream icon, 44px), then the progress bar filling the rest of the row (a thin #D8C7AE track with a terracotta filled part and a round terracotta handle, at least 44px tall to grab), then the time in caption style ("0:08 / 0:20").
+- The Export button (primary, the one primary button on this page) is centred 40px under the tile, like Continue on the Upload page. It is faded and does nothing until the video is ready.
+- Then the Back and step links row.
+- Collage placeholder: the same page head, a short plain line that the collage preview is coming soon, then the Back and step links row.
 
 ## The Trips page (trips.html)
 - Page head: the Trips title (h1) on the left and the New trip button (primary) on the right, centred vertically against the title, in the same layout as the example page head.

@@ -51,12 +51,11 @@ Making a trip moves through one page per step. Each page knows which trip it is 
 | 2 | media.html | Media type |
 | 3 | edit.html | Edits |
 | 4 | preview.html | Preview |
-| 5 | export.html | (not in the step links; reached from Preview) |
 
 - Every step page ends with a Back link on the bottom left (to the previous step) and the step links "Upload · Media type · Edits · Preview" on the bottom right, with the current step marked.
 - Step links that cannot be used yet are shown faded and do nothing: Media type, Edits and Preview need at least one photo; Edits and Preview also need a media type to have been chosen.
 - The Edits link opens the Edits page for the media type the visitor chose.
-- The old trip.html and the old multi-step export.html are removed; their parts now live on the pages below.
+- The old trip.html and export.html are removed. Saving the finished video happens on the Preview page (Export button).
 
 ### upload.html (step 1: Upload)
 - Purpose: name the trip and add its photos. Every New trip and Start a trip button leads here, and a trip's tile reopens it here.
@@ -83,21 +82,27 @@ Making a trip moves through one page per step. Each page knows which trip it is 
 - For a collage: a placeholder for now, saying collage editing is coming soon, then Back and the step links.
 - For a video, top to bottom:
   1. Order and captions: the photo count, then all the trip's photos in the same grid of equal tiles as the upload page. Photos can be dragged to a new order (and moved with the keyboard). Each photo has a caption box ("Add a caption") under it, saved as the visitor types.
-  2. Cover (the first frame of the video): a Title box (starts as the trip's title) and a Details box (for example dates or places). Background: one of five palette swatches (cream, sand, clay, terracotta, dark brown) or one of the trip's photos. A small live preview shows the cover; its text is dark on light backgrounds and light on dark ones and photos.
-  3. Duration: how long each photo is shown, one of 1, 1.5, 2, 2.5 or 3 seconds. Starts at 2.5.
-  4. Transition: Clean cut (straight to the next photo), Dissolve (one blends into the next) or Slide (photos slide on and off, right to left). Starts at Dissolve.
-  5. A Preview button that leads to preview.html for this trip.
-  6. Back (to media.html) and the step links.
+  2. Caption style (one setting for every caption in the video): Position, top or bottom, and left, centre or right (starts at bottom, centre); Text colour, one of the five palette swatches (starts at cream); Font style, Regular, Bold or Italic, always Poppins (starts at Regular). Captions sit on top of the photo, with a soft shadow behind the letters so they stay readable (dark behind light colours, light behind dark ones). A small live sample shows a trip photo with an example caption.
+  3. Cover (the first frame of the video): a Title box (starts as the trip's title) and a Details box (for example dates or places). Background: one of five palette swatches (cream, sand, clay, terracotta, dark brown) or one of the trip's photos. A small live preview shows the cover; its text is dark on light backgrounds and light on dark ones and photos.
+  4. Duration: how long each photo (and the cover) is shown, one of 1, 1.5, 2, 2.5 or 3 seconds. Starts at 2.5.
+  5. Transition: Clean cut (straight to the next photo), Dissolve (one blends into the next) or Slide (photos slide on and off, right to left). Starts at Dissolve.
+  6. A Preview button that leads to preview.html for this trip.
+  7. Back (to media.html) and the step links.
 - Every choice is saved with the trip in the browser as soon as it is made.
 
 ### preview.html (step 4: Preview)
-- A placeholder for now: the "Preview" heading, the trip's title, a short line saying the preview is coming soon, then Back (to edit.html) and the step links. To be designed with the owner next.
-
-### export.html (step 5: Export)
-- The final step, where the finished video or collage will be downloaded or printed. A placeholder for now, to be designed with the owner.
-- Until it is built, the site cannot download or print a collage or a video. The code that builds the mosaic collage (js/collage.js) and plays photos in the browser (js/slideshow.js) is kept for these pages.
-- Collage (when built): an image file (JPEG, 2400 pixels wide) in the collage style in DESIGN.md: a mixed-size mosaic with a title panel showing the trip title.
-- Captions appear only if the visitor wrote one.
+- Head: "Preview" (h1) on the left; the trip's title (h2) on the right, on the same line.
+- For a video:
+  - The video is made in the visitor's browser from the Edits choices: the cover first, then the photos in their order, each shown for the chosen duration, joined by the chosen transition, with captions in the chosen caption style. Captions appear only on photos that have one.
+  - Format: MP4 (H.264), 1280 x 720 (16:9), silent. Each photo is fitted whole on a cream background (tall photos have cream bands at the sides). The cover fills the frame.
+  - While it is being made, the tile shows "Making your video…" with a percentage. Browsers too old to make video show a plain message instead.
+  - A large centred tile plays the video. Under the picture: a play/pause button on the left, then a progress bar the visitor can drag to move forwards or backwards, then the time (for example 0:08 / 0:20). It never plays on its own.
+  - An Export button, centred under the tile, saves the video as an MP4 file named after the trip (for example summer-road-trip.mp4):
+    - On a computer: the browser's save window, where the visitor chooses where to save it (browsers without a save window put it in Downloads).
+    - On a phone: the phone's share sheet, so the visitor can save it to their photos or send it to Google Photos or another app. Folio itself never uploads anything.
+- For a collage: a placeholder for now, saying the collage preview is coming soon.
+- Back (to edit.html) and the step links.
+- The mosaic collage builder (js/collage.js) is kept for the collage pages, which are to be designed with the owner.
 
 ### about.html
 - Purpose: a short, plain explainer on how Folio works, where photos are stored, and why Folio was made.
@@ -141,7 +146,7 @@ Three built-in, view-only examples made from the owner's photos. They are the sa
 - Only the Supabase project URL and the public (publishable) key are used in the browser code, in js/config.js. They were supplied by the owner and are never replaced with a secret key.
 
 ## How photos and captions are stored
-- Photos, captions, trip groupings and each trip's choices (media type, photo order, cover, duration, transition) are stored only in the visitor's own browser (IndexedDB), on their own device.
+- Photos, captions, trip groupings and each trip's choices (media type, photo order, caption style, cover, duration, transition) are stored only in the visitor's own browser (IndexedDB), on their own device.
 - Nothing about the visitor's photos is sent to Supabase or any server.
 - Each signed-in account uses its own storage area in the browser so two people on one device do not see each other's trips.
 - Photos are resized in the browser when added, to keep storage manageable. The resize size is to be decided with the owner. Until then, the longest side is limited to 2000 pixels (provisional).
@@ -154,7 +159,7 @@ Never invent facts, dimensions, dates, or names that the owner has not given. As
 - Plain HTML, CSS, and JavaScript files only. No frameworks, no npm, no build step.
 - Supabase is loaded from its CDN script tag.
 - index.html sits at the top of the folder.
-- Structure: HTML pages at the top level, a css folder (one shared style.css), a js folder (config.js holds the Supabase project URL and publishable key; auth.js runs the log-in gate and menu; store.js handles browser storage; examples.js lists the example trips; steps.js draws the Back link and step links on the step pages; collage.js builds the mosaic collage and slideshow.js plays photos in the browser, both kept for the Preview and Export pages; one script per page, named after its page), and an images folder.
+- Structure: HTML pages at the top level, a css folder (one shared style.css), a js folder (config.js holds the Supabase project URL and publishable key; auth.js runs the log-in gate and menu; store.js handles browser storage; examples.js lists the example trips; steps.js draws the Back link and step links on the step pages; video.js makes a trip's MP4 video in the browser, using the mp4-muxer library loaded from the jsDelivr CDN (version pinned); collage.js builds the mosaic collage, kept for the collage pages; one script per page, named after its page), and an images folder.
 - It must work on a phone.
 - It is published from GitHub to Vercel.
 - Fonts: Lora and Poppins from Google Fonts, as described in DESIGN.md.
@@ -178,8 +183,7 @@ Never invent facts, dimensions, dates, or names that the owner has not given. As
 - The wording of the How Folio works and Where your photos are kept sections on about.html (plain functional text for now).
 - The Oregon folder includes photos that may be from other places (a city skyline, a glass art exhibit, a harbour with an aircraft carrier). Only the mountain and lake photos are used in the Oregon example. Confirm they are from Oregon.
 - The share image to use when a link is texted.
-- The design of the Preview and Export pages, and the collage editing page.
-- How the video downloads (file format and how it is made).
+- The design of the collage Edits and Preview pages, and how a collage is saved.
 - Maximum photo size to keep in the browser.
 
 ## Done when
@@ -190,6 +194,6 @@ Never invent facts, dimensions, dates, or names that the owner has not given. As
 - [ ] Every image has alt text.
 - [ ] The live link opens in a new tab or window.
 - [ ] Photos can be added to a trip and still appear after reloading the page.
-- [ ] A collage can be downloaded and printed (waiting on the Export page).
-- [ ] A video can be previewed and downloaded (waiting on the Preview and Export pages).
+- [ ] A collage can be downloaded and printed (waiting on the collage pages).
+- [ ] A video can be previewed and saved as an MP4.
 - [ ] Every page has a title, a one-line description, and a share image.

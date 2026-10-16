@@ -17,7 +17,7 @@ window.loadStepTrip = async function () {
 };
 
 // Draws the Back link and the step links into #step-row (DESIGN.md, Step pages).
-// current: 'upload' | 'media' | 'edit' | 'preview' | 'export'.
+// current: 'upload' | 'media' | 'edit' | 'preview'.
 window.renderSteps = function (current, trip, backHref) {
   var row = document.getElementById('step-row');
   var id = trip ? encodeURIComponent(trip.id) : '';

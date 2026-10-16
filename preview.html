@@ -10,7 +10,7 @@
   <!-- Share image (og:image): to be supplied by the owner. See SPEC.md, Open questions. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Poppins:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.0/dist/umd/supabase.js"></script>
   <script src="js/config.js"></script>
@@ -33,17 +33,39 @@
   <main class="wrap">
     <p class="page-head" id="not-found" hidden>This trip could not be found. <a href="trips.html">See all trips</a></p>
     <div id="step-view" hidden>
-      <div class="page-head">
+      <div class="page-head head-row">
         <h1>Preview</h1>
-        <p class="lede" id="trip-name"></p>
+        <h2 id="trip-name" class="trip-name-h2"></h2>
       </div>
-      <p>This step is coming soon.</p>
+
+      <p class="lede" id="collage-soon" hidden>The collage preview is coming soon.</p>
+
+      <div id="video-preview" hidden>
+        <figure class="print player">
+          <div class="player-screen">
+            <video id="video" playsinline preload="auto" aria-label="Your trip video"></video>
+            <p class="player-status" id="player-status" role="status">Making your video…</p>
+          </div>
+          <div class="player-controls">
+            <button class="play-btn" type="button" id="play" aria-label="Play" disabled>&#9654;</button>
+            <input class="scrubber" type="range" id="scrubber" min="0" max="0" step="0.01" value="0" aria-label="Position in the video" disabled>
+            <span class="player-time" id="time">0:00 / 0:00</span>
+          </div>
+        </figure>
+
+        <p class="export-row">
+          <button class="btn btn-primary" type="button" id="export" disabled>Export</button>
+        </p>
+        <p class="error" id="export-error" hidden></p>
+      </div>
+
       <nav class="step-row" id="step-row" aria-label="Step navigation"></nav>
     </div>
   </main>
 
   <script src="js/store.js"></script>
   <script src="js/steps.js"></script>
+  <script src="js/video.js"></script>
   <script src="js/preview.js"></script>
 </body>
 </html>
