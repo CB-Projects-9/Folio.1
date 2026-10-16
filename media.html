@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Folio · Media type</title>
+  <meta name="description" content="Choose a video or a collage for your trip.">
+  <meta property="og:title" content="Folio · Media type">
+  <meta property="og:description" content="Choose a video or a collage for your trip.">
+  <!-- Share image (og:image): to be supplied by the owner. See SPEC.md, Open questions. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.0/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+</head>
+<body>
+  <header class="bar">
+    <nav class="bar-inner" aria-label="Main">
+      <a class="wordmark" href="index.html">FOLIO</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+      <ul id="menu" class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="trips.html" aria-current="page">Trips</a></li>
+        <li><a href="about.html">About</a></li>
+        <li class="logout"><a href="login.html" data-logout>Log out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <p class="page-head" id="not-found" hidden>This trip could not be found. <a href="trips.html">See all trips</a></p>
+    <div id="step-view" hidden>
+      <div class="page-head choose-head">
+        <h1 id="trip-name">Your trip</h1>
+        <p class="lede">How would you like to remember this one?</p>
+      </div>
+
+      <div class="choose-grid">
+        <button class="choose-tile" type="button" data-media="video">
+          <span class="print"><img src="images/film-strip.jpg" width="1760" height="964" alt="A film strip holding two photos from Japan: a street of shop signs and a train platform."></span>
+          <span class="choose-label">Video</span>
+        </button>
+        <button class="choose-tile" type="button" data-media="collage">
+          <span class="print"><img src="images/welcome-collage.jpg" width="1760" height="964" alt="A collage of six photos from Japan around a panel reading Japan."></span>
+          <span class="choose-label">Collage</span>
+        </button>
+      </div>
+
+      <nav class="step-row" id="step-row" aria-label="Step navigation"></nav>
+    </div>
+  </main>
+
+  <script src="js/store.js"></script>
+  <script src="js/steps.js"></script>
+  <script src="js/media.js"></script>
+</body>
+</html>

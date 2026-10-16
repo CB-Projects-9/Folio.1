@@ -189,8 +189,6 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
   text-underline-offset: 4px;
 }
 
-.empty { max-width: 420px; }
-.empty p { margin: 0 0 16px; }
 
 /* Trip tiles */
 .trip-grid {
@@ -336,10 +334,7 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
   text-underline-offset: 4px;
 }
 
-/* Export */
-.steps { list-style: none; margin: 0 0 24px; padding: 0; display: flex; gap: 24px; font-size: 13px; color: var(--soft-brown); }
-.steps [aria-current="step"] { color: var(--brown); font-weight: 400; text-decoration: underline; text-underline-offset: 4px; }
-/* Choose screen: centred heading, then two equal tiles, each one a button (DESIGN.md, The choose screen) */
+/* Media type page: centred heading, then two equal tiles, each one a button (DESIGN.md, The media type page) */
 .choose-head { text-align: center; padding-bottom: 64px; }
 .choose-grid { display: grid; gap: 24px; grid-template-columns: 1fr; margin-bottom: 24px; }
 .choose-tile {
@@ -362,9 +357,114 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
   text-transform: uppercase;
   letter-spacing: 0.14em;
 }
-.step-nav { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-top: 40px; }
+/* Step row: Back on the left, step links on the right (DESIGN.md, Step pages) */
+.step-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 24px;
+  margin-top: 64px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+}
+.step-row a, .step-row span { display: inline-flex; align-items: center; min-height: 44px; }
+.step-row a { color: var(--brown); text-decoration: none; }
+.step-row a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.step-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; }
+.step-links li + li::before { content: "·"; color: var(--soft-brown); margin: 0 12px; display: inline-flex; align-items: center; min-height: 44px; }
+.step-links li { display: flex; }
+.step-current { color: var(--terracotta); }
+.step-off { color: var(--soft-brown); opacity: 0.5; }
 
-.collage-preview { max-width: 880px; }
+/* Edits page (DESIGN.md, The Edits page) */
+.trip-name-h2 { color: var(--brown); overflow-wrap: anywhere; }
+.edit-section + .edit-section { margin-top: 64px; }
+#video-edit > .continue-row { margin: 64px 0 0; }
+.edit-section h3 { margin-bottom: 8px; }
+.edit-section .helper { margin: 0 0 16px; }
+.edit-section > .caption { margin: 0; }
+
+.sortable .print { cursor: grab; touch-action: none; user-select: none; }
+.sortable .photo-tile.dragging .print { cursor: grabbing; transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+.caption-input {
+  width: 100%;
+  min-height: 44px;
+  margin-top: 8px;
+  padding: 8px;
+  font: 300 13px "Poppins", sans-serif;
+  color: var(--brown);
+  background: var(--offwhite);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.caption-input::placeholder { color: var(--soft-brown); opacity: 1; }
+.caption-input:focus { border-color: var(--terracotta); outline: none; }
+
+.cover-layout { display: grid; gap: 24px; grid-template-columns: 1fr; align-items: start; margin-top: 16px; }
+.cover-controls .field { margin-bottom: 16px; }
+.option-label { font-size: 14px; margin: 8px 0; }
+.swatches, .cover-photos { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.swatch {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+.cover-photo {
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--offwhite);
+}
+.cover-photo img { width: 100%; height: 100%; object-fit: cover; }
+.swatch[aria-checked="true"], .cover-photo[aria-checked="true"] { outline: 2px solid var(--terracotta); outline-offset: 2px; }
+
+.cover-preview {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  background-size: cover;
+  background-position: center;
+  color: var(--brown);
+  text-align: center;
+}
+.cover-preview.with-photo::before { content: ""; position: absolute; inset: 0; background: rgba(59, 42, 33, 0.45); }
+.cover-preview.text-light { color: var(--cream); }
+.cover-text { position: relative; display: flex; flex-direction: column; gap: 8px; }
+.cover-preview-title { font: 500 24px/1.3 "Lora", serif; text-transform: uppercase; letter-spacing: 0.12em; overflow-wrap: anywhere; }
+.cover-preview-details { font: 300 15px "Poppins", sans-serif; }
+
+.options { display: flex; flex-wrap: wrap; gap: 8px; }
+.option {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 44px;
+  padding: 8px 16px;
+  font: 400 14px "Poppins", sans-serif;
+  color: var(--brown);
+  background: var(--offwhite);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+}
+.option-note { font-size: 13px; font-weight: 300; color: var(--soft-brown); }
+.option[aria-checked="true"] { background: var(--terracotta); border-color: var(--terracotta); color: var(--cream); }
+.option[aria-checked="true"] .option-note { color: var(--cream); }
+
 .slideshow {
   position: relative;
   max-width: 880px;
@@ -391,14 +491,13 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
 .slide figcaption { margin-top: 8px; }
 .slide-controls { display: flex; gap: 16px; align-items: center; margin-top: 16px; flex-wrap: wrap; }
 
-.print-only { display: none; }
-
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 
 @media (min-width: 640px) {
   .trip-grid { grid-template-columns: repeat(2, 1fr); }
   .photo-grid { grid-template-columns: repeat(3, 1fr); }
   .choose-grid { grid-template-columns: 1fr 1fr; }
+  .cover-layout { grid-template-columns: 1fr 1fr; }
 }
 
 @media (min-width: 900px) {
@@ -423,17 +522,3 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 
-@media print {
-  body { background: #fff; }
-  .bar, .no-print, .steps, .step-nav, .slide-controls, .page-head { display: none !important; }
-  main { animation: none; padding: 0; }
-  .print-only { display: block; }
-  .print-page {
-    break-after: page;
-    page-break-after: always;
-    text-align: center;
-    margin: 0;
-  }
-  .print-page img { max-width: 100%; max-height: 90vh; margin: 0 auto; }
-  .print-collage { max-width: 100%; margin: 0 auto; }
-}

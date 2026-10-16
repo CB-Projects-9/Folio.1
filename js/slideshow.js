@@ -1,5 +1,5 @@
-// A slideshow with a slow cross-fade (DESIGN.md, Movement). Used by export.html and example.html.
-// It never starts on its own: the visitor presses Play.
+// Plays photos one at a time with a slow cross-fade (DESIGN.md, Movement).
+// Not used by any page yet: kept for the Preview page. It never starts on its own; the visitor presses Play.
 // slides: [{ src, alt, caption }]. Returns { stop } so a page can pause it when leaving the view.
 window.SLIDE_SECONDS = 4; // provisional, see DESIGN.md, Movement
 

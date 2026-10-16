@@ -40,7 +40,7 @@ window.tripCard = function (trip, cover) {
     pic.className = 'ph';
     pic.textContent = 'No photos yet';
   }
-  return makeTile('trip.html?id=' + encodeURIComponent(trip.id), pic, trip.title, trip.photoIds.length, false);
+  return makeTile('upload.html?id=' + encodeURIComponent(trip.id), pic, trip.title, trip.photoIds.length, false);
 };
 
 window.exampleCard = function (example) {

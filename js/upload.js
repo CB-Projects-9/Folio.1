@@ -1,19 +1,11 @@
-// Step one of making a trip: name it and add photos (SPEC.md, trip.html).
+// Step 1 of making a trip: name it and add photos (SPEC.md, upload.html).
 (async function () {
   // Longest side kept in the browser. Provisional until the owner decides (SPEC.md, Open questions).
   var MAX_EDGE = 2000;
   var UNTITLED = 'Untitled trip';
 
-  var user = await Folio.ready;
-  await FolioStore.open(user);
-
   // A new trip is only saved once it has a photo or a title, so leaving straight away creates nothing.
-  var id = new URLSearchParams(location.search).get('id');
-  var trip = id ? await FolioStore.getTrip(id) : null;
-  if (id && !trip) {
-    document.getElementById('not-found').hidden = false;
-    return;
-  }
+  var trip = await loadStepTrip();
 
   var heading = document.getElementById('trip-heading');
   var titleInput = document.getElementById('trip-title');
@@ -38,7 +30,7 @@
   async function ensureTrip() {
     if (trip) return trip;
     trip = await FolioStore.createTrip();
-    history.replaceState(null, '', 'trip.html?id=' + encodeURIComponent(trip.id));
+    history.replaceState(null, '', 'upload.html?id=' + encodeURIComponent(trip.id));
     return trip;
   }
 
@@ -51,7 +43,7 @@
   });
 
   continueBtn.addEventListener('click', function () {
-    if (trip && trip.photoIds.length) location.href = 'export.html?id=' + encodeURIComponent(trip.id);
+    if (trip && trip.photoIds.length) location.href = 'media.html?id=' + encodeURIComponent(trip.id);
   });
 
   async function render(focusIndex) {
@@ -61,6 +53,7 @@
     var n = photos.length;
     count.textContent = n + (n === 1 ? ' photo' : ' photos');
     continueBtn.disabled = n === 0;
+    renderSteps('upload', trip, 'trips.html');
     grid.replaceChildren();
 
     photos.forEach(function (photo, i) {

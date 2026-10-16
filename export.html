@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Folio · Export</title>
-  <meta name="description" content="Turn a trip into a video or collage to keep and share.">
+  <meta name="description" content="Download or print your video or collage.">
   <meta property="og:title" content="Folio · Export">
-  <meta property="og:description" content="Turn a trip into a video or collage to keep and share.">
+  <meta property="og:description" content="Download or print your video or collage.">
   <!-- Share image (og:image): to be supplied by the owner. See SPEC.md, Open questions. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,60 +31,19 @@
   </header>
 
   <main class="wrap">
-    <div class="page-head" id="export-head">
-      <h1 id="trip-name">Your trip</h1>
-      <p class="lede" id="choose-question">How would you like to remember this one?</p>
+    <p class="page-head" id="not-found" hidden>This trip could not be found. <a href="trips.html">See all trips</a></p>
+    <div id="step-view" hidden>
+      <div class="page-head">
+        <h1>Export</h1>
+        <p class="lede" id="trip-name"></p>
+      </div>
+      <p>This step is coming soon.</p>
+      <nav class="step-row" id="step-row" aria-label="Step navigation"></nav>
     </div>
-    <p class="no-print" id="problem" hidden></p>
-
-    <div id="export-view" hidden>
-      <ol class="steps" hidden>
-        <li data-step="1">1. Choose</li>
-        <li data-step="2">2. Preview</li>
-        <li data-step="3">3. Download or print</li>
-      </ol>
-
-      <section class="no-print" data-panel="1" aria-labelledby="choose-question">
-        <div class="choose-grid">
-          <button class="choose-tile" type="button" data-layout="video">
-            <span class="print"><img src="images/film-strip.jpg" width="1760" height="964" alt="A film strip holding two photos from Japan: a street of shop signs and a train platform."></span>
-            <span class="choose-label">Video</span>
-          </button>
-          <button class="choose-tile" type="button" data-layout="collage">
-            <span class="print"><img src="images/welcome-collage.jpg" width="1760" height="964" alt="A collage of six photos from Japan around a panel reading Japan."></span>
-            <span class="choose-label">Collage</span>
-          </button>
-        </div>
-        <div class="step-nav">
-          <a class="text-btn" id="back-link" href="trips.html">Back</a>
-        </div>
-      </section>
-
-      <section class="no-print" data-panel="2" aria-labelledby="preview-title" hidden>
-        <h2 id="preview-title" style="margin-bottom:24px">Preview</h2>
-        <div id="preview"></div>
-        <div class="step-nav">
-          <button class="btn btn-primary" type="button" data-go="3">Next</button>
-          <button class="btn btn-secondary" type="button" data-go="1">Back</button>
-        </div>
-      </section>
-
-      <section class="no-print" data-panel="3" aria-labelledby="final-title" hidden>
-        <h2 id="final-title">Download or print</h2>
-        <p class="helper" id="final-help"></p>
-        <div class="step-nav">
-          <button class="btn btn-primary" type="button" id="main-action"></button>
-          <button class="btn btn-secondary" type="button" id="print-collage" hidden>Print</button>
-          <button class="btn btn-secondary" type="button" data-go="2">Back</button>
-        </div>
-      </section>
-    </div>
-
-    <div class="print-only" id="print-area"></div>
   </main>
 
   <script src="js/store.js"></script>
-  <script src="js/slideshow.js"></script>
+  <script src="js/steps.js"></script>
   <script src="js/export.js"></script>
 </body>
 </html>

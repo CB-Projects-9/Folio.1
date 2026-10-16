@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Folio · Edit</title>
+  <meta name="description" content="Arrange your photos and set up your video.">
+  <meta property="og:title" content="Folio · Edit">
+  <meta property="og:description" content="Arrange your photos and set up your video.">
+  <!-- Share image (og:image): to be supplied by the owner. See SPEC.md, Open questions. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.0/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+</head>
+<body>
+  <header class="bar">
+    <nav class="bar-inner" aria-label="Main">
+      <a class="wordmark" href="index.html">FOLIO</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+      <ul id="menu" class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="trips.html" aria-current="page">Trips</a></li>
+        <li><a href="about.html">About</a></li>
+        <li class="logout"><a href="login.html" data-logout>Log out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <p class="page-head" id="not-found" hidden>This trip could not be found. <a href="trips.html">See all trips</a></p>
+    <div id="step-view" hidden>
+      <div class="page-head head-row">
+        <h1>Edit</h1>
+        <h2 id="trip-name" class="trip-name-h2"></h2>
+      </div>
+
+      <p class="lede" id="collage-soon" hidden>Collage editing is coming soon.</p>
+
+      <div id="video-edit" hidden>
+        <section class="edit-section" aria-labelledby="order-title">
+          <h3 id="order-title">Order and captions</h3>
+          <p class="caption" id="photo-count"></p>
+          <p class="helper">Drag a photo to move it. With a keyboard, select a photo and use the arrow keys.</p>
+          <ul class="photo-grid sortable" id="photo-grid"></ul>
+          <p class="visually-hidden" id="order-status" aria-live="polite"></p>
+        </section>
+
+        <section class="edit-section" aria-labelledby="cover-title">
+          <h3 id="cover-title">Cover</h3>
+          <div class="cover-layout">
+            <div class="cover-controls">
+              <div class="field">
+                <label for="cover-heading">Title</label>
+                <input id="cover-heading" maxlength="60" autocomplete="off">
+              </div>
+              <div class="field">
+                <label for="cover-details">Details</label>
+                <input id="cover-details" maxlength="80" autocomplete="off" placeholder="Dates, places, people">
+              </div>
+              <p class="option-label" id="bg-label">Background</p>
+              <div class="swatches" id="swatches" role="radiogroup" aria-labelledby="bg-label"></div>
+              <div class="cover-photos" id="cover-photos" role="radiogroup" aria-label="Or a photo from this trip"></div>
+            </div>
+            <div class="cover-preview" id="cover-preview" aria-hidden="true">
+              <div class="cover-text">
+                <span class="cover-preview-title" id="cover-preview-title"></span>
+                <span class="cover-preview-details" id="cover-preview-details"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="edit-section" aria-labelledby="duration-title">
+          <h3 id="duration-title">Duration</h3>
+          <p class="helper">How long each photo is shown.</p>
+          <div class="options" id="durations" role="radiogroup" aria-labelledby="duration-title"></div>
+        </section>
+
+        <section class="edit-section" aria-labelledby="transition-title">
+          <h3 id="transition-title">Transition</h3>
+          <div class="options" id="transitions" role="radiogroup" aria-labelledby="transition-title"></div>
+        </section>
+
+        <p class="continue-row">
+          <a class="btn btn-primary" id="preview-btn" href="preview.html">Preview</a>
+        </p>
+      </div>
+
+      <nav class="step-row" id="step-row" aria-label="Step navigation"></nav>
+    </div>
+  </main>
+
+  <script src="js/store.js"></script>
+  <script src="js/steps.js"></script>
+  <script src="js/edit.js"></script>
+</body>
+</html>

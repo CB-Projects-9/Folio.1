@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Folio · Trip</title>
-  <meta name="description" content="Add photos and captions to a trip.">
-  <meta property="og:title" content="Folio · Trip">
-  <meta property="og:description" content="Add photos and captions to a trip.">
+  <title>Folio · Upload</title>
+  <meta name="description" content="Name a trip and add its photos.">
+  <meta property="og:title" content="Folio · Upload">
+  <meta property="og:description" content="Name a trip and add its photos.">
   <!-- Share image (og:image): to be supplied by the owner. See SPEC.md, Open questions. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,11 +58,12 @@
 
       <ul class="photo-grid" id="photo-grid"></ul>
 
-      <p class="back-link"><a href="trips.html">Back to trips</a></p>
+      <nav class="step-row" id="step-row" aria-label="Step navigation"></nav>
     </div>
   </main>
 
   <script src="js/store.js"></script>
-  <script src="js/trip.js"></script>
+  <script src="js/steps.js"></script>
+  <script src="js/upload.js"></script>
 </body>
 </html>
