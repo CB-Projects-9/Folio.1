@@ -66,25 +66,30 @@
     var w = bitmap.width * s, h = bitmap.height * s;
     var x = (W - w) / 2, y = (H - h) / 2;
     ctx.drawImage(bitmap, x, y, w, h);
-    if (!caption) return;
+    if (caption) drawCaption(ctx, caption, { x: x, y: y, w: w, h: h }, style, Math.round(H / 20), Math.round(H / 30), true);
+  }
 
-    var size = Math.round(H / 20);
-    var inset = Math.round(H / 30);
+  // A caption inside rect (DESIGN.md, The Edits page): placed by style.vertical and style.horizontal,
+  // in the visitor's colour and Regular, Bold or Italic Poppins, at most two lines.
+  // shadow: a soft shadow behind the letters, for captions laid over photos.
+  function drawCaption(ctx, caption, rect, style, size, inset, shadow) {
     var weight = style.style === 'bold' ? '700' : '400';
     var italic = style.style === 'italic' ? 'italic ' : '';
     ctx.save();
     ctx.font = italic + weight + ' ' + size + 'px Poppins, sans-serif';
-    var lines = wrap(ctx, caption, w - inset * 2);
+    var lines = wrap(ctx, caption, rect.w - inset * 2);
     var lineH = Math.round(size * 1.3);
+    var x = rect.x, y = rect.y, w = rect.w, h = rect.h;
     var tx = style.horizontal === 'left' ? x + inset : style.horizontal === 'right' ? x + w - inset : x + w / 2;
     ctx.textAlign = style.horizontal === 'left' ? 'left' : style.horizontal === 'right' ? 'right' : 'center';
     var firstBaseline = style.vertical === 'top'
       ? y + inset + size
       : y + h - inset - (lines.length - 1) * lineH - Math.round(size * 0.25);
     ctx.fillStyle = SWATCHES[style.colour] || CREAM;
-    // Soft shadow so the caption stays readable on busy photos (DESIGN.md, The Edits page).
-    ctx.shadowColor = isLightText(style.colour) ? 'rgba(246, 239, 227, 0.85)' : 'rgba(59, 42, 33, 0.5)';
-    ctx.shadowBlur = Math.round(size * 0.35);
+    if (shadow) {
+      ctx.shadowColor = isLightText(style.colour) ? 'rgba(246, 239, 227, 0.85)' : 'rgba(59, 42, 33, 0.5)';
+      ctx.shadowBlur = Math.round(size * 0.35);
+    }
     lines.forEach(function (line, i) { ctx.fillText(line, tx, firstBaseline + i * lineH); });
     ctx.restore();
   }
@@ -237,6 +242,8 @@
     defaults: defaults,
     fontsReady: fontsReady,
     drawPhoto: drawPhoto,
+    drawCaption: drawCaption,
+    wrap: wrap,
     drawCover: drawCover,
     make: make
   };

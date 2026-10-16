@@ -38,7 +38,33 @@
         <h2 id="trip-name" class="trip-name-h2"></h2>
       </div>
 
-      <p class="lede" id="collage-soon" hidden>The collage preview is coming soon.</p>
+      <div id="collage-preview" hidden>
+        <figure class="print pages-tile">
+          <div class="spread" id="spread"></div>
+          <p class="player-status" id="collage-status" role="status">Making your collage…</p>
+        </figure>
+
+        <div class="pages-row">
+          <div class="pager" id="pager" hidden>
+            <button class="btn btn-secondary pager-btn" type="button" id="prev-pages" aria-label="Previous pages">&#8249;</button>
+            <span class="caption" id="pages-label" aria-live="polite"></span>
+            <button class="btn btn-secondary pager-btn" type="button" id="next-pages" aria-label="Next pages">&#8250;</button>
+          </div>
+          <div class="regen">
+            <button class="btn btn-secondary" type="button" id="regenerate" disabled>Regenerate</button>
+            <span class="caption" id="layout-label" aria-live="polite"></span>
+          </div>
+        </div>
+
+        <div class="save-as">
+          <p class="option-label" id="format-label">Save as</p>
+          <div class="options" id="formats" role="radiogroup" aria-labelledby="format-label"></div>
+        </div>
+        <p class="export-row">
+          <button class="btn btn-primary" type="button" id="collage-export" disabled>Export</button>
+        </p>
+        <p class="error" id="collage-export-error" hidden></p>
+      </div>
 
       <div id="video-preview" hidden>
         <figure class="print player">
@@ -66,6 +92,8 @@
   <script src="js/store.js"></script>
   <script src="js/steps.js"></script>
   <script src="js/video.js"></script>
+  <script src="js/collage.js"></script>
+  <script src="js/pdf.js"></script>
   <script src="js/preview.js"></script>
 </body>
 </html>

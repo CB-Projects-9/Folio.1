@@ -381,7 +381,7 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
 /* Edits page (DESIGN.md, The Edits page) */
 .trip-name-h2 { color: var(--brown); overflow-wrap: anywhere; }
 .edit-section + .edit-section { margin-top: 64px; }
-#video-edit > .continue-row { margin: 64px 0 0; }
+#edit-form > .continue-row { margin: 64px 0 0; }
 .edit-section h3 { margin-bottom: 8px; }
 .edit-section .helper { margin: 0 0 16px; }
 .edit-section > .caption { margin: 0; }
@@ -493,6 +493,37 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
 .player-time { flex: none; font-size: 13px; font-weight: 300; color: var(--soft-brown); font-variant-numeric: tabular-nums; }
 .export-row { text-align: center; margin: 40px 0 0; }
 
+/* Collage Edits (DESIGN.md, The Edits page: collage) */
+.style-grid { display: grid; gap: 16px; grid-template-columns: 1fr; margin: 16px 0 24px; }
+.style-tile {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  background: var(--offwhite);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  font: inherit;
+  color: var(--brown);
+  text-align: center;
+  cursor: pointer;
+}
+.style-tile[aria-checked="true"] { outline: 2px solid var(--terracotta); outline-offset: 2px; }
+.style-pic { display: block; width: 100%; height: 220px; object-fit: contain; background: var(--cream); }
+.style-tile .choose-label { margin-top: 8px; }
+.pages-field { max-width: 220px; margin-top: 16px; }
+.option:disabled, .swatch:disabled { opacity: 0.4; cursor: default; }
+
+/* Collage Preview (DESIGN.md, The Preview page: collage) */
+.pages-tile { position: relative; min-height: 320px; padding: 16px; }
+.spread { display: grid; gap: 24px; grid-template-columns: minmax(0, 480px); justify-content: center; align-items: start; }
+.spread.two { grid-template-columns: repeat(2, minmax(0, 480px)); }
+.page-img { width: 100%; height: auto; border: 1px solid var(--border); box-shadow: var(--shadow); }
+.pages-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: 16px; }
+.pager, .regen { display: flex; align-items: center; gap: 16px; }
+.pager-btn { min-width: 44px; padding: 0 16px; font-size: 20px; }
+.save-as { text-align: center; margin-top: 40px; }
+.save-as .options { justify-content: center; }
+
 
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 
@@ -500,6 +531,7 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
   .trip-grid { grid-template-columns: repeat(2, 1fr); }
   .photo-grid { grid-template-columns: repeat(3, 1fr); }
   .choose-grid { grid-template-columns: 1fr 1fr; }
+  .style-grid { grid-template-columns: repeat(3, 1fr); }
   .cover-layout { grid-template-columns: 1fr 1fr; }
 }
 

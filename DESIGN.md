@@ -5,7 +5,7 @@ Folio is a private travel journal that feels like a well-made photo album. A vis
 
 ## References
 No outside references were named. The direction comes from the person's own words: soft, warm, inviting, professional, and photo-first. The borrowed system is the old photo album: mounted prints with soft borders, paper and clay tones, and a quiet interface that lets the pictures lead. No names, logos, text, images, or fonts are copied from anywhere.
-- Pile-of-prints collage (Oregon example): the owner shared a photo of overlapping instant-film prints as a layout reference. Only the general idea is borrowed (bordered prints piled and overlapping, some running off the edges). None of its photos, people or styling are copied.
+- Polaroid pile and the pile-of-prints collage (Oregon example): the owner shared a photo of overlapping instant-film prints as a layout reference. Only the general idea is borrowed (bordered prints piled and overlapping, some running off the edges). None of its photos, people or styling are copied.
 - Collage layout: the owner shared a printed family photo-collage card as a layout reference. Only the general idea is borrowed (a tight mosaic of straight photos in mixed sizes around a plain panel for the title). None of its text, photos, fonts or ornaments are copied.
 
 ## Mood
@@ -94,7 +94,7 @@ This is the front door, so it is kept as short as possible.
 - Each trip is an off-white tile: thin #D8C7AE border, 8px margin around the cover photo, soft low shadow, then the trip title (small heading style) and photo count (caption style) below. Tiles lift slightly on hover.
 - The See all link sits at the bottom right of the Recent trips section, in dark brown, underlined. It shows only when the visitor has their own trips.
 
-## Collage style
+## Collage style (Mosaic)
 - A tight mosaic, like a printed photo card: photos sit straight (no rotation, no individual mounts or shadows), edge to edge in a grid, separated by thin cream (#F6EFE3) gutters, with a matching cream border around the whole collage.
 - Photos come in mixed sizes: some tall (two rows high), some wide (two columns wide), some small (one cell). Each photo fills its tile and is cropped from the centre.
 - One tile, near the middle, is a plain warm off-white (#FBF7F0) panel with no photo. It holds the trip name in Lora caps with wide letter spacing (dark brown), a short thin clay (#C9A98A) rule, and the trip's line below in Poppins light (soft brown), all centred. If there is no line, the panel shows the trip name only.
@@ -102,18 +102,26 @@ This is the front door, so it is kept as short as possible.
   - Row 1: tall photo, small photo, wide photo.
   - Row 2: (tall photo continues), title panel two columns wide, tall photo.
   - Row 3: wide photo, small photo, (tall photo continues).
-- A visitor's collage (built by js/collage.js, for the collage pages still to be designed) uses the same style, and its grid adapts to the trip:
+- A visitor's Mosaic pages (built by js/collage.js) use the same style, and the grid adapts to the photos on each page:
   - 4 columns for 6 or more photos, 3 columns for 3 to 5 photos, 2 columns for 1 or 2 photos.
   - Tall (portrait) photos get tall tiles and wide (landscape) photos get wide tiles where they fit; the rest get single tiles. Photos keep the trip's order, reading left to right, top to bottom.
-  - The title panel is two columns wide, in the second row (the first row when there are 3 or fewer photos), as near the middle as the grid allows. It shows the trip title. It also holds a trip line once trips have one (see SPEC.md).
+  - The title card panel is two columns wide, in the second row (the first row when there are 3 or fewer photos), as near the middle as the grid allows, on the pages the visitor chose. It shows the title card's title and details in the card colour.
   - Any gap left in the grid is filled by stretching a neighbouring photo, so there are no empty holes.
-  - A photo's caption, if written, sits in a thin warm off-white strip along the bottom of its tile, in Poppins light, soft brown, on one line (shortened with "…" if too long).
+  - Captions sit on top of the photo, like the video, in the visitor's caption style (position, colour, Regular, Bold or Italic Poppins) with the same soft shadow behind the letters.
+  - Regenerate (five layouts) changes which photos are big or small and where they sit. Mosaic photos stay straight and never overlap.
 
 ## Pile-of-prints collage (Oregon example)
 - A tall (2:3) image covered edge to edge with overlapping photo prints on a cream (#F6EFE3) background, like prints piled on a table. Some prints run off the edges.
 - Each print has an even warm off-white (#FBF7F0) border, a thin #D8C7AE outline and a soft shadow. Photos fill their print and are cropped from the centre.
 - Prints are large (seven photos fill the whole image) and tilted slightly, between minus 3 and plus 3 degrees, set once and never changed.
 - A title card sits in the centre, on top of the pile, and is the largest card so it does not get lost. It is a plain off-white print with no photo and three centred lines stacked vertically: OREGON (Lora caps, wide letter spacing, largest), 2026 (Poppins, dark brown, wide letter spacing), a short clay rule, then "These were real mountains" (Poppins light, soft brown).
+
+## Collage styles for a visitor's collage
+- Pages are 8.5 x 11 inches, portrait or landscape, drawn at 300 dots per inch. Each style has five layouts (Regenerate), made the same way every time so a chosen layout looks the same on every visit.
+- Mosaic: see Collage style (Mosaic) above.
+- Polaroid pile: overlapping instant-film prints on a cream page, covering it edge to edge, some running off the edges. Each print has an even warm off-white (#FBF7F0) border with a deeper strip along the bottom (about a fifth of the print's height), a thin #D8C7AE outline and a soft shadow. Photos are square, cropped from the centre. Prints tilt between minus 3 and plus 3 degrees. Captions sit in the bottom strip, centred, in the visitor's colour and font style (no shadow needed). Regenerate changes size, position, tilt and which print sits on top.
+- Scrapbook: a sand (#E4D3BA) page with prints laid loosely, with room around them. Each print has an off-white border and a thin outline, and two short strips of translucent "tape" (warm off-white at about 70% strength) across opposite corners. Photos keep their own shape. Prints tilt gently (minus 3 to plus 3 degrees) and overlap only a little. Captions sit on the page just above or below their print, aligned left, centre or right, in the visitor's colour and font style; with "Follow the photo's tilt" on they turn with the print. Regenerate changes size, position, tilt and which print sits on top.
+- Title card in each style: Mosaic, a plain panel two cells wide; Polaroid pile, a larger Polaroid with no photo, placed near the middle and on top; Scrapbook, a paper card with tape, placed near the top. The card is the visitor's chosen colour, with the title in Lora caps with wide letter spacing, a short clay rule (cream on dark cards), and the details in Poppins light.
 
 ## Example trips
 - Example tiles look like normal trip tiles, with one addition: a small "Example" label in Poppins 13px, dark brown on warm off-white with a thin #D8C7AE border and 4px radius, sitting on the top-left corner of the cover photo.
@@ -149,7 +157,10 @@ This is the front door, so it is kept as short as possible.
 - Duration: five option buttons in a row, "1s · 1.5s · 2s · 2.5s · 3s", outlined in #D8C7AE; the chosen one is filled terracotta with cream text.
 - Transition: three option buttons in the same style, "Clean cut", "Dissolve", "Slide", each with a short line under it in caption style.
 - The Preview button (primary, the one primary button on this page) is centred under the Transition section, then the Back and step links row.
-- Collage placeholder: the same page head, a short plain line that collage editing is coming soon, then the Back and step links row.
+- For a collage, the sections are: Order and captions, Collage style, Caption style, Title card, then the Preview button.
+- Collage style section: three equal style tiles in a row (stacked on phones), each a small picture of the style with its name under it in the small heading style ("Mosaic", "Polaroid pile", "Scrapbook"); the chosen tile has a 2px terracotta ring. Under them, "Page" with option buttons "Portrait" and "Landscape" (8.5 × 11 in shown in caption style), and "Number of pages" with a small number box (placeholder such as "1–4" in soft brown) and a caption-style note if the number is outside the range.
+- Caption style section for a collage: the same controls as the video. For Polaroid pile the position buttons are shown at half strength and do nothing, with a caption-style note "Captions sit in the white strip of each Polaroid." For Scrapbook, an extra option button "Follow the photo's tilt" (on or off) appears under the position buttons. Cream, sand and clay swatches are at half strength and do nothing for Polaroid pile and Scrapbook. The live sample shows one photo (or print) in the chosen style with an example caption.
+- Title card section: Title and Details boxes, card colour swatches, and "Page" option buttons: "First page only", "Every page", "Page" with a small number box. A small live sample of the card sits beside the controls on desktop.
 
 ## The Preview page (preview.html)
 - Page head on one line, like the Edits page: "Preview" (h1) on the left, the trip's title (h2) on the right.
@@ -157,7 +168,9 @@ This is the front door, so it is kept as short as possible.
 - Controls under the picture, inside the mount, on one row: a round play/pause button on the left (terracotta, cream icon, 44px), then the progress bar filling the rest of the row (a thin #D8C7AE track with a terracotta filled part and a round terracotta handle, at least 44px tall to grab), then the time in caption style ("0:08 / 0:20").
 - The Export button (primary, the one primary button on this page) is centred 40px under the tile, like Continue on the Upload page. It is faded and does nothing until the video is ready.
 - Then the Back and step links row.
-- Collage placeholder: the same page head, a short plain line that the collage preview is coming soon, then the Back and step links row.
+- For a collage: the same page head and one large tile (warm off-white mount) showing the pages. On tablets and desktop two pages sit side by side with 24px between them, each with the thin #D8C7AE outline and soft shadow, like an open album; on phones one page at a time. While the pages are being made, the tile shows "Making your collage…" centred in soft brown.
+- Under the tile, one row: Previous and Next arrow buttons (secondary style, "‹" and "›", 44px) with "Pages 1–2 of 4" between them, shown only when there is more than one view to flip through; and the Regenerate button (secondary) with "Layout 2 of 5" in caption style beside it.
+- Under that, centred: "Save as" with three option buttons "PDF", "JPEG", "PNG", then the Export button (primary, the one primary button on this page), 40px under the tile row like Continue on the Upload page.
 
 ## The Trips page (trips.html)
 - Page head: the Trips title (h1) on the left and the New trip button (primary) on the right, centred vertically against the title, in the same layout as the example page head.

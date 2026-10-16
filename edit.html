@@ -38,15 +38,25 @@
         <h2 id="trip-name" class="trip-name-h2"></h2>
       </div>
 
-      <p class="lede" id="collage-soon" hidden>Collage editing is coming soon.</p>
-
-      <div id="video-edit" hidden>
+      <div id="edit-form" hidden>
         <section class="edit-section" aria-labelledby="order-title">
           <h3 id="order-title">Order and captions</h3>
           <p class="caption" id="photo-count"></p>
           <p class="helper">Drag a photo to move it. With a keyboard, select a photo and use the arrow keys.</p>
           <ul class="photo-grid sortable" id="photo-grid"></ul>
           <p class="visually-hidden" id="order-status" aria-live="polite"></p>
+        </section>
+
+        <section class="edit-section collage-only" aria-labelledby="style-title" hidden>
+          <h3 id="style-title">Collage style</h3>
+          <div class="style-grid" id="style-tiles" role="radiogroup" aria-labelledby="style-title"></div>
+          <p class="option-label" id="orient-label">Page <span class="caption">8.5 × 11 in</span></p>
+          <div class="options" id="orientation" role="radiogroup" aria-labelledby="orient-label"></div>
+          <div class="field pages-field">
+            <label for="page-count">Number of pages</label>
+            <input id="page-count" type="number" inputmode="numeric" min="1" step="1" autocomplete="off" aria-describedby="pages-note">
+            <p class="error" id="pages-note" hidden></p>
+          </div>
         </section>
 
         <section class="edit-section" aria-labelledby="caption-title">
@@ -56,6 +66,8 @@
               <p class="option-label" id="position-label">Position</p>
               <div class="options" id="cap-vertical" role="radiogroup" aria-label="Caption position, top or bottom"></div>
               <div class="options options-gap" id="cap-horizontal" role="radiogroup" aria-label="Caption position, left, centre or right"></div>
+              <p class="caption" id="cap-position-note" hidden>Captions sit in the white strip of each Polaroid.</p>
+              <div class="options options-gap" id="cap-tilt" hidden></div>
               <p class="option-label" id="cap-colour-label">Text colour</p>
               <div class="swatches" id="cap-colours" role="radiogroup" aria-labelledby="cap-colour-label"></div>
               <p class="option-label" id="cap-style-label">Font style</p>
@@ -65,7 +77,7 @@
           </div>
         </section>
 
-        <section class="edit-section" aria-labelledby="cover-title">
+        <section class="edit-section video-only" aria-labelledby="cover-title" hidden>
           <h3 id="cover-title">Cover</h3>
           <div class="cover-layout">
             <div class="cover-controls">
@@ -85,15 +97,40 @@
           </div>
         </section>
 
-        <section class="edit-section" aria-labelledby="duration-title">
+        <section class="edit-section video-only" aria-labelledby="duration-title" hidden>
           <h3 id="duration-title">Duration</h3>
           <p class="helper">How long each photo is shown.</p>
           <div class="options" id="durations" role="radiogroup" aria-labelledby="duration-title"></div>
         </section>
 
-        <section class="edit-section" aria-labelledby="transition-title">
+        <section class="edit-section video-only" aria-labelledby="transition-title" hidden>
           <h3 id="transition-title">Transition</h3>
           <div class="options" id="transitions" role="radiogroup" aria-labelledby="transition-title"></div>
+        </section>
+
+        <section class="edit-section collage-only" aria-labelledby="card-title" hidden>
+          <h3 id="card-title">Title card</h3>
+          <div class="cover-layout">
+            <div class="cover-controls">
+              <div class="field">
+                <label for="card-heading">Title</label>
+                <input id="card-heading" maxlength="60" autocomplete="off">
+              </div>
+              <div class="field">
+                <label for="card-details">Details</label>
+                <input id="card-details" maxlength="80" autocomplete="off" placeholder="Dates, places, people">
+              </div>
+              <p class="option-label" id="card-colour-label">Card colour</p>
+              <div class="swatches" id="card-colours" role="radiogroup" aria-labelledby="card-colour-label"></div>
+              <p class="option-label" id="card-place-label">Page</p>
+              <div class="options" id="card-place" role="radiogroup" aria-labelledby="card-place-label"></div>
+              <div class="field pages-field" id="card-page-field" hidden>
+                <label for="card-page">Page number</label>
+                <input id="card-page" type="number" inputmode="numeric" min="1" step="1" autocomplete="off">
+              </div>
+            </div>
+            <canvas class="frame-sample" id="card-sample" width="1280" height="720" aria-hidden="true"></canvas>
+          </div>
         </section>
 
         <p class="continue-row">
@@ -108,6 +145,7 @@
   <script src="js/store.js"></script>
   <script src="js/steps.js"></script>
   <script src="js/video.js"></script>
+  <script src="js/collage.js"></script>
   <script src="js/edit.js"></script>
 </body>
 </html>

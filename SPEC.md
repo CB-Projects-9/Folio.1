@@ -79,7 +79,21 @@ Making a trip moves through one page per step. Each page knows which trip it is 
 
 ### edit.html (step 3: Edits)
 - Head: "Edit" (h1) on the left; the trip's title (h2) on the right, on the same line.
-- For a collage: a placeholder for now, saying collage editing is coming soon, then Back and the step links.
+- For a collage, top to bottom:
+  1. Order and captions: the same as for a video (photo count, drag to reorder, a caption box under each photo). The order is the order photos fill the pages.
+  2. Collage style:
+     - Style: three tiles to choose from, Mosaic, Polaroid pile and Scrapbook (DESIGN.md, Collage styles). Starts at Mosaic.
+     - Page: Portrait or Landscape, always 8.5 x 11 inches. Starts at Portrait.
+     - Number of pages: a number box whose light grey placeholder shows the allowed range (for example "1–4"). Allowed: 1 up to the number of photos. Left empty, Folio uses enough pages for about 12 photos each. A number outside the range shows a short note under the box and is not used.
+  3. Caption style: the same controls as for a video (position, text colour, Regular, Bold or Italic Poppins), adapted to the style:
+     - Mosaic: captions sit on top of the photo; all position buttons work.
+     - Polaroid pile: captions sit in the white strip at the bottom of each Polaroid; the position buttons are shown faded and do nothing.
+     - Scrapbook: captions sit outside the photo, on the page just above or below the print (Top = above, Bottom = below), aligned left, centre or right. An extra on/off button, "Follow the photo's tilt", appears only for this style (starts off).
+     - In Polaroid pile and Scrapbook the cream, sand and clay text colours are faded and cannot be chosen, because captions sit on light paper where they would be too faint to read; if one of them was chosen, dark brown is used instead.
+  4. Title card: a Title box (starts as the trip's title), a Details box, a card colour (one of the five palette swatches; text is dark on cream, sand and clay and light on terracotta and dark brown; no photo background), and which page it goes on: "First page only" (the starting choice), "Every page" or "Page [number]".
+  5. A Preview button that leads to preview.html for this trip.
+  6. Back (to media.html) and the step links.
+- Sharing photos across pages: the title card counts as one spot on each page it is on, like a photo. All spots are shared out as evenly as possible, in order, and when they do not divide evenly the earlier pages get one more. Example: 23 photos and the title card on the first page, over 3 pages, gives 24 spots, 8 per page: page 1 holds the title card and 7 photos, pages 2 and 3 hold 8 photos each.
 - For a video, top to bottom:
   1. Order and captions: the photo count, then all the trip's photos in the same grid of equal tiles as the upload page. Photos can be dragged to a new order (and moved with the keyboard). Each photo has a caption box ("Add a caption") under it, saved as the visitor types.
   2. Caption style (one setting for every caption in the video): Position, top or bottom, and left, centre or right (starts at bottom, centre); Text colour, one of the five palette swatches (starts at cream); Font style, Regular, Bold or Italic, always Poppins (starts at Regular). Captions sit on top of the photo, with a soft shadow behind the letters so they stay readable (dark behind light colours, light behind dark ones). A small live sample shows a trip photo with an example caption.
@@ -100,9 +114,18 @@ Making a trip moves through one page per step. Each page knows which trip it is 
   - An Export button, centred under the tile, saves the video as an MP4 file named after the trip (for example summer-road-trip.mp4):
     - On a computer: the browser's save window, where the visitor chooses where to save it (browsers without a save window put it in Downloads).
     - On a phone: the phone's share sheet, so the visitor can save it to their photos or send it to Google Photos or another app. Folio itself never uploads anything.
-- For a collage: a placeholder for now, saying the collage preview is coming soon.
+- For a collage:
+  - The pages are made in the visitor's browser from the Edits choices, in the chosen style, page shape and number of pages, at print quality (8.5 x 11 inches at 300 dots per inch: 2550 x 3300 pixels portrait, 3300 x 2550 landscape). While they are being made the tile shows "Making your collage…".
+  - A large tile shows the pages two at a time, side by side, like an open album (one at a time on phones). With three or more pages (two or more on phones), Previous and Next arrow buttons under the tile flip through them, with a line such as "Pages 1–2 of 4".
+  - A Regenerate button under the tile changes the layout of the chosen style: each press moves to the next of five layouts and then starts again, changing photo size, position, tilt and which photo sits in front, as far as the style allows. The current layout is saved with the trip and shown as "Layout 2 of 5".
+  - Export: three option buttons choose the format, PDF (the starting choice), JPEG or PNG, then the Export button saves:
+    - PDF: one file with one collage page per PDF page, named after the trip (for example summer-road-trip.pdf).
+    - JPEG or PNG: one image per collage page (summer-road-trip-1.jpg, summer-road-trip-2.jpg and so on).
+    - On a computer: the browser's save window for a single file; for several images, browsers that can choose a folder ask for one folder once, others save them to Downloads.
+    - On a phone: the phone's share sheet with the file or images, so the visitor can save them to their photos or another app.
+  - The PDF is written by Folio's own code (no extra library).
 - Back (to edit.html) and the step links.
-- The mosaic collage builder (js/collage.js) is kept for the collage pages, which are to be designed with the owner.
+
 
 ### about.html
 - Purpose: a short, plain explainer on how Folio works, where photos are stored, and why Folio was made.
@@ -146,7 +169,7 @@ Three built-in, view-only examples made from the owner's photos. They are the sa
 - Only the Supabase project URL and the public (publishable) key are used in the browser code, in js/config.js. They were supplied by the owner and are never replaced with a secret key.
 
 ## How photos and captions are stored
-- Photos, captions, trip groupings and each trip's choices (media type, photo order, caption style, cover, duration, transition) are stored only in the visitor's own browser (IndexedDB), on their own device.
+- Photos, captions, trip groupings and each trip's choices (media type, photo order, caption style, video cover, duration, transition, collage style, page shape, number of pages, title card and layout) are stored only in the visitor's own browser (IndexedDB), on their own device.
 - Nothing about the visitor's photos is sent to Supabase or any server.
 - Each signed-in account uses its own storage area in the browser so two people on one device do not see each other's trips.
 - Photos are resized in the browser when added, to keep storage manageable. The resize size is to be decided with the owner. Until then, the longest side is limited to 2000 pixels (provisional).
@@ -159,7 +182,7 @@ Never invent facts, dimensions, dates, or names that the owner has not given. As
 - Plain HTML, CSS, and JavaScript files only. No frameworks, no npm, no build step.
 - Supabase is loaded from its CDN script tag.
 - index.html sits at the top of the folder.
-- Structure: HTML pages at the top level, a css folder (one shared style.css), a js folder (config.js holds the Supabase project URL and publishable key; auth.js runs the log-in gate and menu; store.js handles browser storage; examples.js lists the example trips; steps.js draws the Back link and step links on the step pages; video.js makes a trip's MP4 video in the browser, using the mp4-muxer library loaded from the jsDelivr CDN (version pinned); collage.js builds the mosaic collage, kept for the collage pages; one script per page, named after its page), and an images folder.
+- Structure: HTML pages at the top level, a css folder (one shared style.css), a js folder (config.js holds the Supabase project URL and publishable key; auth.js runs the log-in gate and menu; store.js handles browser storage; examples.js lists the example trips; steps.js draws the Back link and step links on the step pages; video.js makes a trip's MP4 video in the browser, using the mp4-muxer library loaded from the jsDelivr CDN (version pinned); collage.js lays out and draws collage pages in the three styles; pdf.js writes a PDF from page images; one script per page, named after its page), and an images folder.
 - It must work on a phone.
 - It is published from GitHub to Vercel.
 - Fonts: Lora and Poppins from Google Fonts, as described in DESIGN.md.
@@ -183,7 +206,6 @@ Never invent facts, dimensions, dates, or names that the owner has not given. As
 - The wording of the How Folio works and Where your photos are kept sections on about.html (plain functional text for now).
 - The Oregon folder includes photos that may be from other places (a city skyline, a glass art exhibit, a harbour with an aircraft carrier). Only the mountain and lake photos are used in the Oregon example. Confirm they are from Oregon.
 - The share image to use when a link is texted.
-- The design of the collage Edits and Preview pages, and how a collage is saved.
 - Maximum photo size to keep in the browser.
 
 ## Done when
@@ -194,6 +216,6 @@ Never invent facts, dimensions, dates, or names that the owner has not given. As
 - [ ] Every image has alt text.
 - [ ] The live link opens in a new tab or window.
 - [ ] Photos can be added to a trip and still appear after reloading the page.
-- [ ] A collage can be downloaded and printed (waiting on the collage pages).
+- [ ] A collage can be previewed and saved as a PDF, JPEG or PNG.
 - [ ] A video can be previewed and saved as an MP4.
 - [ ] Every page has a title, a one-line description, and a share image.
