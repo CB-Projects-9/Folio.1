@@ -22,7 +22,7 @@ All pages are plain .html files at the top of the folder.
 - Purpose: a welcome screen that gets the visitor started quickly.
 - Top of the page: a welcome area with a big Start a trip button. The button leads to a new trip (trip.html).
 - Welcome headline (approved by the owner): "For the people back home"
-- Supporting line (approved by the owner): "Too many photos and nowhere to share them. Folio gathers a trip into one slideshow or collage that is easy to send."
+- Supporting line (approved by the owner): "Too many photos and nowhere to share them. Folio gathers a trip into one place that is easy to share."
 - Welcome photo: a collage of the Japan example trip in the collage style from DESIGN.md (a mosaic of six photos around a panel with the trip name "Japan" and the Japan trip line), saved as images/welcome-collage.jpg. Alt text describes it as an example collage.
 - Further down, as the visitor scrolls:
   - If the visitor has no trips yet: the three example trips (see Example trips), each marked Example.
@@ -38,7 +38,7 @@ All pages are plain .html files at the top of the folder.
 - Purpose: show a new visitor what Folio can make, before they start their own trip.
 - Opened by clicking an example trip card: example.html with the example named in the address (for example, example.html?trip=japan).
 - View only: nothing can be added, edited, reordered, removed or exported.
-- Content: the trip title, the trip's line (see Example trips), a short note "This is an example. Start a trip to make your own." with a Start a trip button, then the photos in that example's layout.
+- Content: the trip title with a label under it ("Collage Example" for Japan and Oregon, "Slideshow Example" for Mexico), a Start a trip button, then the example's collage or slideshow video, then a Back to home link (to index.html).
 - Gated like every other page.
 
 ### trip.html
@@ -46,6 +46,7 @@ All pages are plain .html files at the top of the folder.
 - Content: trip title (editable), a drop zone for photos (drag and drop, plus a file picker button for phones), the photos shown in the scrapbook style described in DESIGN.md, an optional short caption under each photo, and a button to remove a photo.
 - Photos are kept in the order added, and can be reordered.
 - A button leads to export.html for this trip.
+- A Back to trips link (to trips.html) sits at the bottom of the page.
 
 ### export.html
 - Purpose: turn one trip into something to keep and share. Moves in separate steps.
@@ -72,13 +73,13 @@ All pages are plain .html files at the top of the folder.
 ## Example trips
 Three built-in, view-only examples made from the owner's photos. They are the same for every visitor, are not stored in the visitor's browser, and do not count as the visitor's trips. The owner asked Claude to choose the photos.
 
-| Example | Address | Layout | Trip line (owner's words, lightly edited) | Photos (in order) |
+| Example | Address | Layout | Trip line (owner's words, lightly edited; used inside the Japan collage and the Oregon title card, not shown on the example pages) | Photos (in order) |
 |---|---|---|---|---|
 | Japan | example.html?trip=japan | Collage | Five weeks on the other side of the world, and memories that will last forever. | IMG_5574, IMG_4809, IMG_6613, IMG_5208, IMG_6569, IMG_5997 (the six photos in the welcome collage) |
 | Mexico | example.html?trip=mexico | Slideshow (video) | Only a four-hour flight from home, and it felt like another world: stunning sunsets, magnificent buildings and unforgettable people. | IMG_3210, IMG_3487, IMG_3507, IMG_3522, IMG_3533, IMG_3540, IMG_3563, IMG_3577 |
 | Oregon | example.html?trip=oregon | Collage (pile of prints) | These were real mountains. Who said America wasn't gorgeous? | IMG_1268, IMG_1501, IMG_3039, IMG_3042, IMG_3105, IMG_3803, IMG_4124 |
 
-- Example cards show the trip title, a cover, the photo count, and a small Example label. The Mexico cover is IMG_3522 (chosen by the owner). The Oregon cover is its collage image (images/oregon-collage.jpg). The Japan cover is the welcome collage itself (images/welcome-collage.jpg), so the home page collage, the Japan tile and the Japan example page all show the same image.
+- Example cards show the trip title, a cover and a small Example label. On the home page they do not show a photo count; on the Trips page they do. The Mexico cover is IMG_3522 (chosen by the owner). The Oregon cover is its collage image (images/oregon-collage.jpg). The Japan cover is the welcome collage itself (images/welcome-collage.jpg), so the home page collage, the Japan tile and the Japan example page all show the same image.
 - The Japan example page shows that same collage, large.
 - The Oregon example page shows its pile-of-prints collage (DESIGN.md), large: the seven Oregon photos plus a centred title card reading "Oregon", "2026", "These were real mountains". The year 2026 was given by the owner. The page line above it stays as in the table.
 - The Mexico example page plays a slideshow video file, images/mexico-slideshow.mp4 (MP4, silent, 4:3, about 20 seconds): the eight Mexico photos in order, 2.5 seconds each, each dissolving into the next. It is made once from the owner's photos and is larger than 500 KB (the owner has agreed). It does not play until the visitor presses play.

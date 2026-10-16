@@ -9,7 +9,7 @@ Folio.ready.then(function () {
 
   document.title = 'Folio · ' + example.title + ' example';
   document.getElementById('example-title').textContent = example.title;
-  document.getElementById('example-line').textContent = example.line;
+  document.getElementById('example-kind').textContent = example.layout === 'video' ? 'Slideshow Example' : 'Collage Example';
   document.getElementById('example-view').hidden = false;
 
   if (example.layout === 'video') {

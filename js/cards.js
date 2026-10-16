@@ -16,11 +16,14 @@ function makeTile(href, cover, title, photoCount, isExample) {
   name.className = 'trip-title';
   name.textContent = title;
 
-  var count = document.createElement('span');
-  count.className = 'trip-count';
-  count.textContent = photoCount + (photoCount === 1 ? ' photo' : ' photos');
-
-  a.append(cover, name, count);
+  a.append(cover, name);
+  // photoCount is null when the count is left off (example tiles on the home page).
+  if (photoCount !== null) {
+    var count = document.createElement('span');
+    count.className = 'trip-count';
+    count.textContent = photoCount + (photoCount === 1 ? ' photo' : ' photos');
+    a.append(count);
+  }
   li.append(a);
   return li;
 }
@@ -40,7 +43,7 @@ window.tripCard = function (trip, cover) {
   return makeTile('trip.html?id=' + encodeURIComponent(trip.id), pic, trip.title, trip.photoIds.length, false);
 };
 
-window.exampleCard = function (example) {
+window.exampleCard = function (example, showCount) {
   var pic = document.createElement('img');
   if (example.collage) {
     pic.className = 'cover cover-fit';
@@ -51,17 +54,18 @@ window.exampleCard = function (example) {
     pic.src = exampleImage(example, example.cover || example.photos[0]);
     pic.alt = 'Cover photo for the ' + example.title + ' example';
   }
-  return makeTile('example.html?trip=' + example.id, pic, example.title, example.photos.length, true);
+  return makeTile('example.html?trip=' + example.id, pic, example.title, showCount ? example.photos.length : null, true);
 };
 
 // Fills the list with the visitor's trips, or with the example trips while they have none.
+// exampleCounts: show photo counts on the example tiles (the Trips page does, the home page does not).
 // Returns the number of the visitor's own trips.
-window.showTrips = async function (limit) {
+window.showTrips = async function (limit, exampleCounts) {
   var trips = await FolioStore.listTrips();
   var list = document.getElementById('trip-list');
   var empty = document.getElementById('trip-empty');
   if (!trips.length) {
-    FOLIO_EXAMPLES.forEach(function (example) { list.append(exampleCard(example)); });
+    FOLIO_EXAMPLES.forEach(function (example) { list.append(exampleCard(example, exampleCounts)); });
     if (empty) empty.hidden = false;
     return 0;
   }

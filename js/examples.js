@@ -5,7 +5,6 @@ window.FOLIO_EXAMPLES = [
     id: 'japan',
     title: 'Japan',
     layout: 'collage',
-    line: 'Five weeks on the other side of the world, and memories that will last forever.',
     photos: ['IMG_5574', 'IMG_4809', 'IMG_6613', 'IMG_5208', 'IMG_6569', 'IMG_5997'],
     // The same collage as the home page, so the tile, the home page and the example all match.
     collage: 'images/welcome-collage.jpg',
@@ -15,7 +14,6 @@ window.FOLIO_EXAMPLES = [
     id: 'mexico',
     title: 'Mexico',
     layout: 'video',
-    line: 'Only a four-hour flight from home, and it felt like another world: stunning sunsets, magnificent buildings and unforgettable people.',
     photos: ['IMG_3210', 'IMG_3487', 'IMG_3507', 'IMG_3522', 'IMG_3533', 'IMG_3540', 'IMG_3563', 'IMG_3577'],
     cover: 'IMG_3522',
     // Made once from these photos: 2.5 seconds each, dissolving into the next (DESIGN.md, Movement).
@@ -26,7 +24,6 @@ window.FOLIO_EXAMPLES = [
     id: 'oregon',
     title: 'Oregon',
     layout: 'collage',
-    line: 'These were real mountains. Who said America wasn\'t gorgeous?',
     photos: ['IMG_1268', 'IMG_1501', 'IMG_3039', 'IMG_3042', 'IMG_3105', 'IMG_3803', 'IMG_4124'],
     // A pile of overlapping prints around a centred title card (DESIGN.md, Pile-of-prints collage).
     collage: 'images/oregon-collage.jpg',

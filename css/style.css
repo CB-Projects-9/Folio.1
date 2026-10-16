@@ -315,19 +315,14 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
 .scrap .caption-input { margin-top: 8px; font-size: 13px; font-weight: 300; min-height: 40px; padding: 4px 8px; }
 .scrap-tools { display: flex; justify-content: space-between; flex-wrap: wrap; }
 
-/* Example view */
-.example-note {
+/* Example view: title and label on the left, Start a trip on the right */
+.example-head {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
   gap: 16px 24px;
-  margin-top: 24px;
-  padding: 16px 24px;
-  background: var(--offwhite);
-  border: 1px solid var(--border);
-  border-radius: 4px;
 }
-.example-note p { margin: 0; }
 #example-collage.collage-tall { max-width: 640px; margin: 0 auto; }
 #example-video video { display: block; width: 100%; height: auto; background: var(--cream); }
 .back-link { margin: 40px 0 0; }

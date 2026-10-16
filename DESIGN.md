@@ -119,11 +119,11 @@ This is the front door, so it is kept as short as possible.
 - The same tiles appear on the Trips page in place of the empty-state grey box until the visitor creates a trip.
 
 ## The example view (example.html)
-- Page head: the trip title (h1), the trip line below it in soft brown, then a quiet note in a warm off-white box with a thin border: "This is an example. Start a trip to make your own." with the Start a trip button (the one primary button on this screen).
+- Page head: on the left, the trip title (h1) with a small label under it in soft brown ("Collage Example" or "Slideshow Example"). On the right, the Start a trip button (the one primary button on this screen), centred vertically against the title and label. On narrow screens it drops below the title only if there is not room beside it.
 - Collage example (Oregon): the pile-of-prints collage shown large, as one mounted print the full width of the content column (up to 640px wide on desktop, because it is tall), centred, so it matches the Oregon tile.
 - Slideshow example (Mexico): the slideshow video in one mounted print the full width of the content column, with the browser's normal video controls. Before it plays it shows IMG_3522 (the Mexico cover). Frames are 4:3 on a cream background, each photo fitted whole (not cropped) and centred.
 - Collage example (Japan): the welcome collage shown large, as one mounted print the full width of the content column, so it matches the home page and the Japan tile.
-- A Back to trips link sits at the bottom of the page.
+- A Back to home link sits at the bottom of the page and returns to index.html. (A visitor's own trip page, trip.html, has a Back to trips link in the same style.)
 
 ## The about page (about.html)
 - One reading column, about 640px wide, with the four sections in order: How Folio works, Where your photos are kept, Why Folio, Where it is going.
