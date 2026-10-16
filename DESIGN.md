@@ -87,10 +87,11 @@ This is the front door, so it is kept as short as possible.
 
 ## The welcome page (index.html)
 - Welcome area: the headline "For the people back home", the supporting line, and the Start a trip button are stacked in the centre of the column, with comfortable space above (64px).
+- The supporting line is centred and balanced, so it breaks into two lines of about equal length rather than one long line and one short one.
 - Below it, one wide mounted print (up to 880px wide), centred, holding the welcome collage. The print takes the collage's own shape. The collage follows the Collage style below and shows the Japan example trip.
-- Trips sit on a full-width sand band (#E4D3BA) with 64px of space above and below. The section heading is on the left: "Example trips" while the visitor has no trips, "Recent trips" once they do.
+- Trips sit on one full-width sand band (#E4D3BA) with 64px of space above and below. Inside it, "Recent trips" comes first (only once the visitor has trips), then 64px of space, then "Example trips", which is always there. Each section heading is on the left.
 - Each trip is an off-white tile: thin #D8C7AE border, 8px margin around the cover photo, soft low shadow, then the trip title (small heading style) and photo count (caption style) below. Tiles lift slightly on hover.
-- The See all link sits at the bottom right of the band, in dark brown, underlined. It shows only when the visitor has their own trips.
+- The See all link sits at the bottom right of the Recent trips section, in dark brown, underlined. It shows only when the visitor has their own trips.
 
 ## Collage style
 - A tight mosaic, like a printed photo card: photos sit straight (no rotation, no individual mounts or shadows), edge to edge in a grid, separated by thin cream (#F6EFE3) gutters, with a matching cream border around the whole collage.

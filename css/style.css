@@ -171,11 +171,14 @@ main { animation: fade 300ms ease-out; padding-bottom: 64px; }
   margin: 0 auto;
 }
 .lede { color: var(--soft-brown); margin: 16px 0 24px; }
+/* Break the supporting line into lines of about equal length (DESIGN.md, The welcome page). */
+.welcome .lede { text-wrap: balance; }
 .print-wide { margin: 0 auto 64px; max-width: 880px; }
 .print-wide img { width: 100%; height: auto; }
 
 .recent { background: var(--sand); padding: 64px 0; margin-bottom: -64px; }
 .recent h2 { margin-bottom: 24px; }
+.trip-section:not([hidden]) + .trip-section { margin-top: 64px; }
 .see-all { text-align: right; margin: 24px 0 0; }
 .see-all a {
   display: inline-flex;

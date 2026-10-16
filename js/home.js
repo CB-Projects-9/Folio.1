@@ -1,8 +1,7 @@
-// Welcome page: the visitor's most recent trips, or the example trips while they have none.
+// Welcome page: the visitor's most recent trips (once they have some), then the example trips, always.
 Folio.ready
   .then(FolioStore.open)
-  .then(function () { return showTrips(3); })
+  .then(function () { return showTrips(3, false, document.getElementById('example-list')); })
   .then(function (total) {
-    document.getElementById('recent-title').textContent = total ? 'Recent trips' : 'Example trips';
-    document.getElementById('see-all').hidden = total === 0;
+    document.getElementById('recent-section').hidden = total === 0;
   });

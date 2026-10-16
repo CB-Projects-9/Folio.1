@@ -43,13 +43,19 @@
       </figure>
     </div>
 
-    <section class="recent" aria-labelledby="recent-title">
+    <div class="recent">
       <div class="wrap">
-        <h2 id="recent-title">Recent trips</h2>
-        <ul class="trip-grid" id="trip-list"></ul>
-        <p class="see-all" id="see-all" hidden><a href="trips.html">See all</a></p>
+        <section class="trip-section" id="recent-section" aria-labelledby="recent-title" hidden>
+          <h2 id="recent-title">Recent trips</h2>
+          <ul class="trip-grid" id="trip-list"></ul>
+          <p class="see-all"><a href="trips.html">See all</a></p>
+        </section>
+        <section class="trip-section" aria-labelledby="examples-title">
+          <h2 id="examples-title">Example trips</h2>
+          <ul class="trip-grid" id="example-list"></ul>
+        </section>
       </div>
-    </section>
+    </div>
   </main>
 
   <script src="js/store.js"></script>

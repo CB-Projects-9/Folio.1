@@ -25,8 +25,9 @@ All pages are plain .html files at the top of the folder.
 - Supporting line (approved by the owner): "Too many photos and nowhere to share them. Folio gathers a trip into one place that is easy to share."
 - Welcome photo: a collage of the Japan example trip in the collage style from DESIGN.md (a mosaic of six photos around a panel with the trip name "Japan" and the Japan trip line), saved as images/welcome-collage.jpg. Alt text describes it as an example collage.
 - Further down, as the visitor scrolls:
-  - If the visitor has no trips yet: the three example trips (see Example trips), each marked Example.
-  - Once the visitor has at least one trip: their most recent trips (up to three) instead, with a See all link to trips.html. The examples are no longer shown.
+  - Once the visitor has at least one trip: a Recent trips section with their most recent trips (up to three) and a See all link to trips.html.
+  - Always, below that: an Example trips section with the three example trips (see Example trips), each marked Example. On the home page the examples never disappear.
+  - If the visitor has no trips yet, only the Example trips section is shown (no empty Recent trips heading).
 
 ### trips.html
 - Purpose: all of the visitor's trips.
