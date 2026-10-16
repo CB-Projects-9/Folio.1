@@ -130,12 +130,11 @@ Making a trip moves through one page per step. Each page knows which trip it is 
 ### about.html
 - Purpose: a short, plain explainer on how Folio works, where photos are stored, and why Folio was made.
 - Content must say that photos and captions are saved only in the visitor's own browser on their own device, that they are not uploaded anywhere, that clearing browser data erases them, and that downloading an export is the way to keep a backup.
-- Sections, in order: How Folio works; Where your photos are kept; Why Folio; Where it is going.
-- Why Folio (approved by the owner, first person, no name):
-  "I started taking trips all over the world and came home with thousands of photos. I wanted to share them with my family, but not by sending thousands of single pictures at once.
-  So I made Folio: a place to gather the photos from a trip into one video or collage, and share it with whoever I choose."
-- Where it is going (approved by the owner):
-  "Choosing which photos to send takes time. The goal is to let you add every photo from a trip, have Folio help pick the best ones, and turn them into a video or a scrapbook to share. That part is still being built."
+- Sections, in order, with the owner's wording:
+  - How: "Start a trip, add photos, and add captions. When you are ready, turn the trip into a video or a collage to share with family and friends."
+  - Why (first person, no name): "I started taking trips all over the world and came home with thousands of photos. I wanted to share them with my family, but not by sending thousands of single pictures at once. So I made Folio: a place to gather the photos from a trip into one video or collage, and share it."
+  - Where: "Your photos and captions are saved only in this browser, on this device. They are not uploaded anywhere. If you clear this browser's data, your photos and captions are erased. To keep a backup, download or print an export of each trip. Your trips do not appear on your other devices or browsers."
+  - Coming Soon: "Choosing which photos to send takes time. The goal is to let you add every photo from a trip, have Folio help pick the best ones, and turn them into a video or collage."
 
 ### account.html (removed)
 - Removed at the owner's request. The menu has no Account link. It may come back later if account settings are needed.
@@ -203,7 +202,6 @@ Never invent facts, dimensions, dates, or names that the owner has not given. As
 - Sharing links to a visitor's journal (sharing happens by downloading or printing an export).
 
 ## Open questions for the owner
-- The wording of the How Folio works and Where your photos are kept sections on about.html (plain functional text for now).
 - The Oregon folder includes photos that may be from other places (a city skyline, a glass art exhibit, a harbour with an aircraft carrier). Only the mountain and lake photos are used in the Oregon example. Confirm they are from Oregon.
 - The share image to use when a link is texted.
 - Maximum photo size to keep in the browser.

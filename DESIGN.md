@@ -183,9 +183,9 @@ This is the front door, so it is kept as short as possible.
 - A Back to home link sits at the bottom of the page and returns to index.html.
 
 ## The about page (about.html)
-- One reading column, about 640px wide, with the four sections in order: How Folio works, Where your photos are kept, Why Folio, Where it is going.
+- One reading column, about 640px wide, with the four sections in order: How, Why, Where, Coming Soon. Each section is one heading and one paragraph.
 - Section headings use the h2 style. Body text in Poppins 15px.
-- Why Folio is written in the first person, in the owner's own words, with no name.
+- Why is written in the first person, in the owner's own words, with no name.
 
 ## Never rules
 1. Never cover the page with pop-ups, cookie banners, or overlays.
